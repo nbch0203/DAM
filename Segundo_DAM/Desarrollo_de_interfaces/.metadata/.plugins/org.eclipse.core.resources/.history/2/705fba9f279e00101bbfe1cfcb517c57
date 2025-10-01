@@ -1,0 +1,16 @@
+package controlador;
+
+import vista.Interfaz;
+
+public class Controlador {
+
+	private Interfaz vista;
+
+	public Controlador(Interfaz vista) {
+		super();
+		this.vista = vista;
+	}
+	
+	
+
+}

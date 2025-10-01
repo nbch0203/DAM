@@ -1,0 +1,33 @@
+package ejercicio_1;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.InputStreamReader;
+
+public class Ejercicio {
+
+	public static void main(String[] args) {
+		try {
+			File directorio = new File(".//bin/ejercicio_1/Main");
+
+			ProcessBuilder pb = new ProcessBuilder("java", "Main", "3", "7");
+			pb.directory(directorio);
+			pb.redirectErrorStream(true);
+
+			Process proceso = pb.start();
+
+			BufferedReader br = new BufferedReader(new InputStreamReader(proceso.getInputStream()));
+
+			String linea;
+			while ((linea = br.readLine()) != null) {
+				System.out.println("Resultado del proceso: " + linea);
+			}
+			proceso.waitFor();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+	}
+
+}

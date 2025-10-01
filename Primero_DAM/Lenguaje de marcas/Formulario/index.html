@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
+  </head>
+  <body>
+    <form class="formulario" onsubmit="return validar()">
+      <label for="nombre">Nombre: </label>
+      <input type="text" name="nombre" id="nombre" placeholder="Nombre" />
+      <br />
+      <br />
+      <label for="apellido">Apellidos: </label>
+      <input type="text" name="apellidos" id="apellidos" placeholder="Apellidos" />
+      <br>
+      <br>
+      <label for="telefono">Numero de telefono: </label>
+      <input type="tel" name="telefono" id="telefono" placeholder="Numero de telefono">
+      <br><br>
+      <label for="email">Correo Electronico: </label>
+      <input type="email" name="email" id="email" placeholder="Correo Electronico">
+      <br><br>
+      <label for="check">Acepte las condiciones</label>
+      <input type="checkbox" name="condiciones" id="Acepto">
+      <br><br>
+      <label for="provincia">Provincia de nacimiento: </label>
+    <select name="provinciaNacimiento" id="provinciaNacimiento">
+        <option value="--">-------------</option>
+        <option value="Madrid">Madrid</option>
+        <option value="Barcelona">Barcelona</option>
+        <option value="Valencia">Valencia</option>
+        <option value="Sevilla">Sevilla</option>
+        <option value="Zaragoza">Zaragoza</option>
+        <option value="Malaga">Malaga</option>
+    </select>
+    <br><br>
+      <button>registrese</button>
+    </form>
+  </body>
+</html>

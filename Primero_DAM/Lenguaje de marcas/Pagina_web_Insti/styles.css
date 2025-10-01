@@ -1,0 +1,270 @@
+/* General Reset */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  color: #333;
+  line-height: 1.6;
+}
+
+/* Header Styles */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #ffffff;
+  color: white;
+  padding: 10px 20px;
+}
+
+.header .logo img {
+  height: 50px;
+}
+
+.navbar ul {
+  list-style: none;
+  display: flex;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar ul li {
+  margin: 0 10px;
+}
+
+.navbar ul li a {
+  color: rgb(0, 0, 0);
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.navbar ul li a:hover {
+  text-decoration: underline;
+}
+
+/* Welcome Section */
+.welcome {
+  text-align: center;
+  background: linear-gradient(
+      to bottom,
+      rgba(0, 39, 77, 0.8),
+      rgba(0, 39, 77, 0.8)
+    ),
+    url("https://site.educa.madrid.org/ies.villaverde.madrid//wp-content/uploads/ies.villaverde.madrid/2023/01/BIENVENIDA_CONTENEDOR.png");
+  background-size: cover;
+  background-position: center;
+  color: white;
+  padding: 60px 10px;
+}
+
+.welcome h1 {
+  position: absolute;
+  top: 250%;
+  left: 50%;
+  text-align: center;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 2.5em;
+  text-transform: uppercase;
+}
+
+.welcome p {
+  font-size: 1.5em;
+  color: #ddd;
+  text-align: center;
+}
+
+/* Info Cards Section */
+.info-cards {
+  display: flex;
+  justify-content: space-around;
+  padding: 40px;
+  background: #00274d;
+  color: white;
+}
+
+.card {
+  background: #004080;
+  border: none;
+  border-radius: 8px;
+  padding: 20px;
+  text-align: center;
+  width: 30%;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s;
+}
+
+.card:hover {
+  transform: scale(1.05);
+}
+
+.card h2 {
+  font-size: 1.5em;
+  color: #ffd700;
+  margin-bottom: 10px;
+}
+
+.card p {
+  font-size: 1em;
+  color: #fff;
+  margin-bottom: 20px;
+}
+
+.card button {
+  background: #ffd700;
+  border: none;
+  color: #00274d;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.card button:hover {
+  background: #ffc107;
+}
+
+/* Statistics Section */
+.statistics {
+  display: flex;
+  justify-content: space-around;
+  padding: 40px;
+  background: #f4f4f4;
+  color: #333;
+  text-align: center;
+}
+
+.statistics .stat {
+  font-size: 2em;
+  font-weight: bold;
+}
+
+.statistics .label {
+  margin-top: 5px;
+  font-size: 1em;
+}
+
+/* Collaborators Section */
+.collaborators {
+  text-align: center;
+  padding: 40px;
+  background: #fff;
+}
+
+.collaborators img {
+  max-width: 150px;
+  margin: 0 20px;
+  transition: transform 0.3s;
+}
+
+.collaborators img:hover {
+  transform: scale(1.1);
+}
+
+/* Footer Styles */
+.footer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #00274d;
+  color: white;
+  padding: 20px 0;
+  font-size: 0.9em;
+}
+
+.footer .links {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.footer .links a {
+  margin: 0 10px;
+  color: white;
+  text-decoration: none;
+}
+
+.footer .links a:hover {
+  text-decoration: underline;
+}
+
+.footer p {
+  margin: 5px 0;
+}
+.principal {
+  width: 100%;
+}
+
+/* Info Cards Section */
+.info-cards {
+  display: flex;
+  justify-content: space-around;
+  padding: 40px;
+  background: #00274d;
+  color: white;
+}
+
+.card {
+  background: #004080;
+  border: none;
+  border-radius: 8px;
+  padding: 20px;
+  text-align: center;
+  width: 30%;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s;
+}
+
+.card:hover {
+  transform: scale(1.05);
+}
+
+.card h2 {
+  font-size: 1.5em;
+  color: #ffd700;
+  margin-bottom: 10px;
+}
+
+.card p {
+  font-size: 1em;
+  color: #fff;
+  margin-bottom: 20px;
+}
+
+.card button {
+  background: #ffd700;
+  border: none;
+  color: #00274d;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.card button:hover {
+  background: #ffc107;
+}
+
+/* Footer */
+.footer {
+  background-color: #003366;
+  color: white;
+  text-align: center;
+  padding: 10px;
+  font-size: 0.9em;
+}
+
+.foot {
+  display: flex;
+  padding: 50px 0px;
+  padding-left: 30px;
+  padding-right: 30px;
+  margin: 0 --20px;
+  text-align: left;
+}
+
+.footdiv {
+  font-size: 17px;
+  padding: 0px 20px;
+}

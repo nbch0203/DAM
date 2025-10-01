@@ -1,0 +1,16 @@
+<oposicion>
+	<alumno nif="55555m">
+		<pruebafisica>6.7</pruebafisica>
+		<psicotecnico>5.3</psicotecnico>
+		<examen>4</examen>
+		<examen>9</examen>
+		<examen>5</examen>
+	</alumno>
+	<alumno nif="44444m">
+		<pruebafisica>4.7</pruebafisica>
+		<psicotecnico>6.3</psicotecnico>
+		<examen>6</examen>
+		<examen>5</examen>
+		<examen>4</examen>
+	</alumno>
+</oposicion>

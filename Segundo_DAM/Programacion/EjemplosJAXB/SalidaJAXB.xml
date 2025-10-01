@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Libros>
+    <Libro publicado_en="1985-11-26">
+        <Titulo>Titulo JAXB</Titulo>
+        <Autor>Autor JAXB</Autor>
+    </Libro>
+    <Libro publicado_en="2020-10-03">
+        <Titulo>Titulo JAXB 2</Titulo>
+        <Autor>Autor JAXB 2</Autor>
+    </Libro>
+</Libros>

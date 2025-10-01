@@ -1,0 +1,20 @@
+package ejercicio_1;
+
+public class Main {
+
+	public static void main(String[] args) {
+	if (args.length<2) {
+		System.out.println("Debes pasar dos numeros enteros");
+		return;
+	}
+	try {
+		int num1= Integer.parseInt(args[0]);
+		int num2= Integer.parseInt(args[1]);
+
+	} catch (Exception e) {
+		// TODO: handle exception
+	}
+
+	}
+
+}

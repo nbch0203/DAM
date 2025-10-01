@@ -1,0 +1,23 @@
+package ejercicio_7;
+
+import java.io.File;
+
+public class Lanzador {
+	public static void main(String[] args) {
+
+		try {
+
+			File directorio = new File(".//bin");
+			File archivo = new File("suma.txt");
+			ProcessBuilder pb = new ProcessBuilder("java", "ejercicio_7.Main", args[0], args[1]);
+
+			pb.directory(directorio);
+
+			Process proceso = pb.start();
+
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+	}
+
+}

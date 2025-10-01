@@ -1,0 +1,17 @@
+package ejercicio_2;
+
+public class LeerNombre {
+	public static void main(String[] args) {
+		
+		if (args.length<1) {
+			System.exit(2);
+			
+		}System.exit(1);
+
+		String nombre = args[0].toString();
+		
+		System.out.println(nombre);
+
+	}
+
+}

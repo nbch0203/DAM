@@ -1,0 +1,40 @@
+</html><!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Películas App</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <main class="contenedor">
+        <section class="formulario">
+            <h2>Registrar Nueva Película</h2>
+            <form id="formularioPelicula">
+              <input type="number" id="id_pelicula" name="id_pelicula" required />
+                <input type="text" id="titulo" placeholder="Título" />
+                <select id="genero" name="genero" required>
+                  <option value="">Selecciona un género</option>
+                  <option value="Acción">Acción</option>
+                  <option value="Comedia">Comedia</option>
+                  <option value="Drama">Drama</option>
+                  <option value="Ciencia ficción">Ciencia ficción</option>
+                  <option value="Terror">Terror</option>
+                </select>
+                <input type="text" id="director" placeholder="Director" />
+                <input type="text" id="año" placeholder="Año de estreno" />
+                <button type="button" onclick="enviarDatos()">Guardar</button>
+            </form>
+            <div id="mensaje"></div>
+            <button onclick="cargarPeliculas()">Mostrar Películas</button>
+        </section>
+
+        <section class="tabla">
+            <h2>Películas Registradas</h2>
+            <div id="tablaPeliculas"></div>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+

@@ -1,0 +1,175 @@
+1º obtener la cantidad de veces que se han vendido los productos
+
+select producto.nombre,sum(detalles_pedido.cantidad) 
+
+from producto join detalles_pedido 
+
+on producto.producto_id = detalles_pedido.producto_id
+
+group by producto_id
+
+-----------------------------------------------------------------------------------------
+
+2ºObtener el total de ventas por cliente (solo aquellos que ha realizado más de 3 pedidos).
+
+
+Select Clientes.cliente_nombre,count(pedidos.pedidos.id)
+
+from clientes join pedidos on cliente.cliente_id =pedidos.cliente_id 
+
+group by clientes.cliente_id having pedidos.pedidos > 3
+
+-----------------------------------------------------------------------------------------
+
+3. Obtener el total de ingresos por cada categoría de producto.
+
+
+select productos.categoria, sum(detalles_pedidos.cantidad * detalles_pedido.precio_untario) 
+
+from productos join detalles_pedidos
+
+on productos.producto_id = detalles_pedidos.producto.id
+
+join pedidos on detalles_pedidos_id = peiddos.pedidos_id
+
+group by producto.categoria
+
+where estado != "cancelado"
+
+------------------------------------------------------------------------------------------
+
+4. Obtener los productos que han recibido más de 5 comentarios
+
+select producto.productos_nombre , count (comentarios.comentario)
+
+from productos join comentarios 
+
+on productos.productos_id = comentarios.producto_id
+
+group by productos.nombre
+
+having count (comentarios.comentario) > 5
+
+-------------------------------------------------------------------------------------------
+
+5. Obtener los 2 clientes que más han gastado en total (por la suma de todos sus
+pedidos)
+
+select cliente.cliente_nombre , sum(pedidos.total)
+
+from clienes join pedidos 
+
+on clientes.clientes_id = pedidos.clente_id
+
+group by clientes.cliente_id
+
+order by gastos desc 
+
+limit 2;
+
+-------------------------------------------------------------------------------------------
+
+6. Obtener los productos que no han sido comprados en ningún pedido.
+
+select productos.producto_nombre 
+
+from productos join 
+
+-------------------------------------------------------------------------------------------
+
+7. Obtener el cliente que ha realizado el pedido con el total más alto.
+
+
+Select clientes.nombre,cantidad as total from clientes
+
+join pagos on cliente.cliente_id= pagos.cliente_id
+
+order by desc
+
+limit 1;
+
+-------------------------------------------------------------------------------------------
+
+8. Obtener los productos más comprados por cada cliente (por cantidad total en sus
+pedidos).
+
+Select clientes.nombre, productos.nombre, sum(detalles_pedido.cantidad) from clientes
+
+join pedidos on clientes.cliente_id = pedidos.cliente_id
+
+join detalles_pedido on pedidos.pedido_id = detalles_pedido.pedido_id
+
+join producto on detalle_pedidos.producto_id = productos.producto_id
+
+group by cliente.nombre , producto.id_producto
+
+having(
+
+order by sum (detalles_pedido.cantidad) desc
+
+
+
+)
+
+
+-------------------------------------------------------------------------------------------
+
+9. Obtener el número de productos vendidos por cada pedido.
+
+Select producto.nombre, sum(producto.id_producto) from producto
+
+join detalle_pedido on producto.id_producto = detalle_pedido.id_pedido_Detalle
+
+group by detalle_pedido.id_pedido_Detalle;
+
+-------------------------------------------------------------------------------------------
+
+10. Obtener el ingreso total generado por cada método de pago.
+
+Select pago.metodo_pago, sum(cantidad) from pago
+
+group by pago.metodo_pago;
+
+-------------------------------------------------------------------------------------------
+
+11. Obtener el nombre del producto más vendido.
+
+Select producto.nombre, sum(cantidad) from producto
+
+join detalle_pedido on producto.id_producto = detalle_pedido.id_producto_Detalle
+
+group by producto.id_producto
+
+order by sum(cantidad) desc
+
+limit 1;
+
+------------------------------------------------------------------------------------------
+
+12. Obtener los clientes que han gastado más que el promedio total de gastos de todos los clientes.
+
+Select cliente.nombre , 
+
+-------------------------------------------------------------------------------------------
+
+13. Obtener los nombres de los clientes que han realizado pedidos con un total superior a 500.
+
+Select cliente.nombre, sum(total) as ftotal From cliente
+
+join pedido on cliente.id_cliente = pedido.id_cliente_pedido
+
+group by cliente.id_cliente
+
+having ftotal > 500;
+
+-------------------------------------------------------------------------------------------
+
+
+14. Obtener los productos con un precio mayor al promedio de los precios de todos los productos.
+
+------------------------------------------------------------------------------------------
+15. Obtener los clientes que han realizado el pedido más caro.
+
+
+------------------------------------------------------------------------------------------
+

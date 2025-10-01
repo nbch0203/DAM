@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tabla de Imágenes</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }
+
+        header {
+            background-color: blue; /* Color verde para el encabezado */
+            padding: 10px 0;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        nav ul li {
+            margin: 0 15px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: white; /* Enlaces blancos */
+            font-weight: bold;
+        }
+
+        nav ul li a:hover {
+            text-decoration: underline;
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 30px;
+            color: #333333; /* Color oscuro para el texto principal */
+        }
+
+        table {
+            width: 60%;
+            margin: 20px auto;
+            border-collapse: collapse;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        td {
+            padding: 10px;
+            text-align: center;
+            background-color: #ffffff;
+            border: 1px solid #ccc;
+        }
+
+        td img {
+            width: 300px;
+            height: auto;
+            border-radius: 8px;
+            transition: transform 0.3s ease;
+        }
+
+        td img:hover {
+            transform: scale(1.1);
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            color: #4CAF50; /* Color verde para el pie */
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="formulario.html">Formulario</a></li>
+                <li><a href="tabla.html">Tabla de imágenes</a></li>
+                <li><a href="videos.html">Videos</a></li>
+            </ul>
+        </nav>
+    </header>
+    <h1>Tabla de Imágenes</h1>
+    <table>
+        <tr>
+            <td><img src="https://i.blogs.es/0ca9a6/aa/1366_2000.jpeg" alt="Imagen 1"></td>
+            <td><img src="https://www.educaciontrespuntocero.com/wp-content/uploads/2020/04/mejores-bancos-de-imagenes-gratis.jpg" alt="Imagen 2"></td>
+            <td><img src="https://i.blogs.es/ceda9c/dalle/450_1000.jpg" alt="Imagen 3"></td>
+            <td><img src="https://media.es.wired.com/photos/6501e7429fa9000811a95fe8/16:9/w_2560%2Cc_limit/Adobe%2520Firefly.jpeg" alt="Imagen 4"></td>
+        </tr>
+    </table>
+    <div class="footer">
+        <p>&copy; 2024 Mi Sitio Web</p>
+    </div>
+</body>
+</html>

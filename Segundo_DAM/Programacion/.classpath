@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path="Examen_Bucles/src"/>
+	<classpathentry kind="src" path="Examen_Estructuras_De_Control/src"/>
+	<classpathentry kind="src" path="Examen_Herencia_Interfaces/src"/>
+	<classpathentry kind="src" path="Examen_POO/src"/>
+	<classpathentry kind="src" path="Practica_Bucles/src"/>
+	<classpathentry kind="src" path="Practica_Estructura_De_Control/src"/>
+	<classpathentry kind="src" path="Practica_Herencia_Interfaces/src"/>
+	<classpathentry kind="src" path="Practica_POO/src"/>
+	<classpathentry kind="src" path="RepasoJava/src"/>
+	<classpathentry kind="src" path="Tema1/src"/>
+	<classpathentry kind="src" path="Tema2/src"/>
+	<classpathentry kind="src" path="Tema3/src"/>
+	<classpathentry kind="src" path="Tema4/src"/>
+	<classpathentry kind="src" path="Tema5/src"/>
+	<classpathentry kind="src" path="Tema 6/src"/>
+	<classpathentry kind="src" path="VerificacionArchivoyConvertirloaPDF/src"/>
+	<classpathentry kind="output" path="Examen_Bucles/bin"/>
+</classpath>

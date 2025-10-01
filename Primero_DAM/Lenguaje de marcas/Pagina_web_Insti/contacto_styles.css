@@ -1,0 +1,146 @@
+/* General Reset */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  color: #333;
+  line-height: 1.6;
+}
+
+/* Header Styles */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #ffffff; /* Updated background color */
+  padding: 20px; /* Increased padding */
+}
+
+.header .logo img {
+  height: 50px;
+}
+
+.navbar ul {
+  list-style: none;
+  display: flex;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar ul li {
+  margin: 0 15px; /* Increased margin */
+}
+
+.navbar ul li a {
+  color: rgb(0, 0, 0);
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.navbar ul li a:hover {
+  text-decoration: underline;
+}
+
+/* Body */
+.contacto {
+  background-color: #f9f9f9;
+  padding-left: 30%;
+  padding-top: 2%;
+  padding-bottom: 2%;
+  margin: 0 0 15px;
+  text-transform: uppercase;
+  font-size: calc(var(--total-h-size) * 7 / 8);
+}
+.cuerpo {
+  width: 30%;
+  padding-left: 30%;
+  background-color: #ffffff;
+  padding-bottom: 10%;
+}
+.informacion {
+  background-color: #abb8c3;
+  padding: 20px; /* Increased padding */
+  border-radius: 5px; /* Rounded corners */
+  margin-top: 20px; /* Added margin for spacing */
+}
+
+.buzon {
+  background-color: #7bdcb5; /* Suggestion box color */
+  padding: 20px; /* Increased padding */
+  border-radius: 5px; /* Rounded corners */
+  margin-top: 20px; /* Added margin for spacing */
+}
+
+.buzon label {
+  display: block; /* Ensure labels are on separate lines */
+  margin-bottom: 5px; /* Space between label and input */
+}
+
+.buzon input,
+.buzon textarea {
+  width: 100%; /* Full width */
+  padding: 10px; /* Padding for inputs */
+  margin-bottom: 15px; /* Space between inputs */
+  border: 1px solid #ccc; /* Border style */
+  border-radius: 4px; /* Rounded corners */
+}
+
+/* Footer Styles */
+.footer {
+  background-color: #292727;
+  color: white;
+  font-size: 0.9em;
+  padding: 40px 0px;
+  padding-bottom: 100px;
+}
+
+.foot {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  padding: 0 50px;
+  text-align: left;
+}
+
+.footdiv {
+  flex: 1 1 20%;
+  margin: 0 5px;
+  font-size: 14px;
+}
+
+.footdiv h3 {
+  font-size: 1.2em;
+  margin-bottom: 10px;
+  color: #ffffff; /* Highlight titles in gold */
+}
+
+.footdiv p,
+.footdiv a {
+  margin: 5px 0;
+  color: white;
+  text-decoration: none;
+}
+
+.footdiv a:hover {
+  text-decoration: underline;
+}
+
+.footer-bottom {
+  padding-top: 50px;
+  text-align: center;
+  margin-top: 20px;
+  font-size: 0.8em;
+  color: #aaa;
+}
+
+/* Links (icons or sections) */
+.footer .social-links {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.footer .social-links a {
+  margin: 0 5px;
+  color: white;
+  font-size: 1.2em;
+}

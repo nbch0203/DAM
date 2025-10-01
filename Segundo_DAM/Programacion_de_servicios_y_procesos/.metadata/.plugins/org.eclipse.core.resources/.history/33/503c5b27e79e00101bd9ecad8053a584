@@ -1,0 +1,25 @@
+package ejercicio_7;
+
+import java.io.File;
+
+public class Main {
+	public static void main(String[] args) {
+		File f = new File("programa1.txt");
+		
+		
+		int n1 = Integer.parseInt(args[0]);
+		int n2 = Integer.parseInt(args[1]);
+
+		if (n1 < 0 || n2 < 0) {
+			for (int i=n1; i < n2; i++) {
+				System.out.println(i);
+
+			}
+			System.exit(0);
+
+		} else
+			System.exit(1);
+
+	}
+
+}

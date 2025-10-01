@@ -1,0 +1,36 @@
+package ejercicio_2;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
+public class Lanzador {
+
+	public static void main(String[] args) {
+
+		try {
+			File directorio = new File(".//bin");
+
+			ProcessBuilder pb = new ProcessBuilder("java", "ejercicio_2.LeerNombre", args[0]);
+
+			pb.directory(directorio);
+
+			Process proceso = pb.start();
+
+			BufferedReader br = new BufferedReader(new InputStreamReader(proceso.getInputStream()));
+
+			String linea;
+			while ((linea = br.readLine()) != null) {
+				System.out.println("el nombre es " + linea);
+			}
+			int salida = proceso.waitFor();
+			System.out.println("El programa ha finalizadp: " + proceso.waitFor());
+		} catch (IOException | InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+}

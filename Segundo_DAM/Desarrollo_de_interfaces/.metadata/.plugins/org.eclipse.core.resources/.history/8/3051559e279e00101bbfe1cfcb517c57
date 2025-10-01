@@ -1,0 +1,11 @@
+package controlador;
+
+import vista.Interfaz;
+
+public class Controlador {
+
+	private Interfaz vista;
+	
+	
+
+}
