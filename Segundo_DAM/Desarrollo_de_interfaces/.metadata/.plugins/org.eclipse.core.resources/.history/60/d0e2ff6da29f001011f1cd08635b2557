@@ -1,0 +1,213 @@
+package ejercicio_3;
+
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+import javax.swing.JComboBox;
+import javax.swing.JSpinner;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.border.MatteBorder;
+import java.awt.Color;
+import javax.swing.JRadioButton;
+import javax.swing.JCheckBox;
+import javax.swing.border.TitledBorder;
+import javax.swing.JScrollPane;
+import javax.swing.JList;
+import javax.swing.AbstractListModel;
+import javax.swing.JSlider;
+import java.awt.FlowLayout;
+import java.awt.Component;
+import java.awt.BorderLayout;
+import javax.swing.BoxLayout;
+import java.awt.GridLayout;
+import java.awt.CardLayout;
+import java.awt.GridBagLayout;
+import java.awt.GridBagConstraints;
+import javax.swing.SpringLayout;
+import com.jgoodies.forms.layout.FormLayout;
+import com.jgoodies.forms.layout.ColumnSpec;
+import com.jgoodies.forms.layout.RowSpec;
+import com.jgoodies.forms.layout.FormSpecs;
+import net.miginfocom.swing.MigLayout;
+import javax.swing.JButton;
+import javax.swing.SpinnerNumberModel;
+import java.awt.Rectangle;
+import javax.swing.JSeparator;
+
+public class Vista extends JFrame {
+
+	private static final long serialVersionUID = 1L;
+	private JPanel contentPane;
+	private JTextField profes;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					Vista frame = new Vista();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public Vista() {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 380, 452);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+
+		JPanel panel = new JPanel();
+		panel.setToolTipText("Sexo");
+		panel.setBounds(10, 10, 346, 395);
+		contentPane.add(panel);
+		panel.setLayout(null);
+
+		JLabel lblNewLabel = new JLabel("Profesión:");
+		lblNewLabel.setBounds(10, 10, 77, 12);
+		panel.add(lblNewLabel);
+
+		profes = new JTextField();
+		profes.setBounds(83, 7, 253, 18);
+		panel.add(profes);
+		profes.setColumns(10);
+
+		JLabel lblNewLabel_1 = new JLabel("Nº Hermanos:");
+		lblNewLabel_1.setBounds(10, 44, 77, 12);
+		panel.add(lblNewLabel_1);
+
+		JSpinner spinner = new JSpinner();
+		spinner.setModel(new SpinnerNumberModel(0, null, 5, 1));
+		spinner.setBounds(108, 41, 29, 20);
+		panel.add(spinner);
+
+		JLabel lblNewLabel_2 = new JLabel("Edad:");
+		lblNewLabel_2.setBounds(159, 44, 38, 12);
+		panel.add(lblNewLabel_2);
+
+		JComboBox comboBox = new JComboBox();
+		comboBox.setModel(new DefaultComboBoxModel(new String[] { "Menor de edad", "Entre 18 y 30" }));
+		comboBox.setBounds(207, 40, 129, 20);
+		panel.add(comboBox);
+
+		JPanel panel_1 = new JPanel();
+		panel_1.setToolTipText("");
+		panel_1.setBorder(new TitledBorder(null, "Sexo", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panel_1.setBounds(10, 66, 326, 52);
+		panel.add(panel_1);
+
+		JRadioButton hombre = new JRadioButton("Hombre");
+		panel_1.add(hombre);
+
+		JRadioButton mujer = new JRadioButton("Mujer");
+		panel_1.add(mujer);
+
+		JCheckBox chckbxNewCheckBox = new JCheckBox("¿Práctica algún deporte?");
+		chckbxNewCheckBox.setBounds(10, 134, 187, 20);
+		panel.add(chckbxNewCheckBox);
+
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBorder(new TitledBorder(null, "\u00BFCual?", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		scrollPane.setBounds(210, 128, 126, 41);
+		panel.add(scrollPane);
+
+		JList list = new JList();
+		scrollPane.setViewportView(list);
+		list.setModel(new AbstractListModel() {
+			String[] values = new String[] { "Tenis ", "Fútbol", "Beisbol" };
+
+			public int getSize() {
+				return values.length;
+			}
+
+			public Object getElementAt(int index) {
+				return values[index];
+			}
+		});
+
+		JPanel panel_2 = new JPanel();
+		panel_2.setBorder(new MatteBorder(2, 0, 0, 0, (Color) new Color(192, 192, 192)));
+		panel_2.setBounds(10, 176, 326, 178);
+		panel.add(panel_2);
+		panel_2.setLayout(null);
+
+		JLabel lblNewLabel_5 = new JLabel("Marque del 1 al 10 su grado de afición a :\r\n\r\n");
+		lblNewLabel_5.setBounds(7, 9, 238, 15);
+		panel_2.add(lblNewLabel_5);
+
+		JLabel lblNewLabel_3 = new JLabel("Compras:");
+		lblNewLabel_3.setBounds(30, 30, 60, 15);
+		panel_2.add(lblNewLabel_3);
+
+		JSlider slider = new JSlider(JSlider.HORIZONTAL, 0, 10, 5);
+		slider.setBounds(100, 29, 191, 44);
+		lblNewLabel_3.setLabelFor(slider);
+		slider.setDoubleBuffered(true);
+		slider.setPaintTicks(true);
+		slider.setPaintLabels(true);
+		slider.setAutoscrolls(true);
+		slider.setMinorTickSpacing(1);
+		slider.setMajorTickSpacing(1);
+		slider.setValue(5);
+		slider.setMinimum(1);
+		slider.setMaximum(10);
+		panel_2.add(slider);
+
+		JLabel lblNewLabel_4 = new JLabel("Ver televisión:");
+		lblNewLabel_4.setBounds(7, 88, 83, 13);
+		panel_2.add(lblNewLabel_4);
+
+		JSlider slider_1 = new JSlider();
+		slider_1.setBounds(100, 80, 191, 44);
+		slider_1.setMajorTickSpacing(1);
+		slider_1.setMaximum(10);
+		slider_1.setPaintLabels(true);
+		slider_1.setPaintTicks(true);
+		slider_1.setValue(5);
+		slider_1.setMinimum(1);
+		slider_1.setMinorTickSpacing(1);
+		panel_2.add(slider_1);
+
+		JLabel lblNewLabel_3_1 = new JLabel("Ir al cine:");
+		lblNewLabel_3_1.setBounds(28, 131, 62, 13);
+		panel_2.add(lblNewLabel_3_1);
+
+		JSlider slider_2 = new JSlider();
+		slider_2.setBounds(100, 131, 191, 44);
+		slider_2.setValue(5);
+		slider_2.setPaintTicks(true);
+		slider_2.setPaintLabels(true);
+		slider_2.setMinimum(1);
+		slider_2.setMinorTickSpacing(1);
+		slider_2.setMaximum(10);
+		slider_2.setMajorTickSpacing(1);
+		panel_2.add(slider_2);
+
+		JButton btnNewButton = new JButton("Cancelar");
+		btnNewButton.setBounds(191, 364, 84, 20);
+		panel.add(btnNewButton);
+
+		JButton btnNewButton_1 = new JButton("Aceptar");
+		btnNewButton_1.setBounds(82, 364, 84, 20);
+		panel.add(btnNewButton_1);
+
+		if (hombre.isSelected() && mujer.isSelected()) {
+
+		}
+
+	}
+}
