@@ -1,0 +1,5 @@
+Cuchara -> 10 unidades
+Plato -> 8 unidades
+Tenedor -> 20 unidades
+Cuchillo -> 15 unidades
+Vaso -> 12 unidades
