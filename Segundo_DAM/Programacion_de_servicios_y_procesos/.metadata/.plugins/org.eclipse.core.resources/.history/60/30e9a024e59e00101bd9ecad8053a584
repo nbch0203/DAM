@@ -1,8 +1,0 @@
-package ejercicio_7;
-
-public class Lanzador {
-	public static void main(String[] args) {
-		ProcessBuilder pb = new ProcessBuilder("java", "ejercicio_7.Main");
-	}
-
-}
