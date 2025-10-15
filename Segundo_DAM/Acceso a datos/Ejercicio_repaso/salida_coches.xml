@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Concesionario nombre="asda" ubicacion="asdasdasd">
+    <Vehiculo precio="15000.0" ano="1999" marca="Mercedes" modelo="patata" vendedor="Antonio"/>
+</Concesionario>

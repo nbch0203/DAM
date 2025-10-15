@@ -12,14 +12,15 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JTextPane;
+import javax.swing.JPasswordField;
 
 public class Vista extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private JTextField contrasena;
-	private JTextField repetir_contra;
 	private JTextPane textPane;
+	private JPasswordField passwordField;
+	private JPasswordField passwordField_1;
 
 	/**
 	 * Launch the application.
@@ -65,52 +66,53 @@ public class Vista extends JFrame {
 		lblNewLabel.setBounds(178, 95, 105, 12);
 		panel.add(lblNewLabel);
 
-		contrasena = new JTextField();
-		contrasena.setBounds(163, 67, 120, 18);
-		panel.add(contrasena);
-		contrasena.setColumns(10);
-
-		repetir_contra = new JTextField();
-		repetir_contra.setBounds(163, 117, 120, 18);
-		panel.add(repetir_contra);
-		repetir_contra.setColumns(10);
-
 		JButton anadir = new JButton("Añadir contacto");
 		anadir.setBounds(163, 153, 106, 29);
 		panel.add(anadir);
-		anadir.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
-				String aux = contrasena.getText();
-				String aux2 = repetir_contra.getText();
-
-				if (aux.equals(aux2) && aux.length() > 8 && aux2.length() > 8) {
-					textPane.setText("CORRECTO");
-					textPane.setForeground(Color.green);
-				}
-				if (aux.length() < 8 || aux2.length() < 8) {
-					textPane.setText("ERROR:<El tamaño de la contraseña es menor de 8>");
-					textPane.setForeground(Color.red);
-				}
-				if (aux.contains("") || aux2.contains("")) {
-					textPane.setText("ERROR:<La contraseña esta en blanco>");
-					textPane.setForeground(Color.red);
-
-				}
-				if (!aux.equals(aux2)) {
-					textPane.setText("ERROR:<Las contraseñas no coinciden>");
-					textPane.setForeground(Color.red);
-				}
-				contrasena.getText();
-			}
-		});
 
 		textPane = new JTextPane();
 		textPane.setBounds(115, 192, 203, 41);
 		panel.add(textPane);
 
-	}
+		passwordField = new JPasswordField();
+		passwordField.setBounds(157, 53, 126, 18);
+		panel.add(passwordField);
 
+		passwordField_1 = new JPasswordField();
+		passwordField_1.setBounds(157, 117, 126, 18);
+		panel.add(passwordField_1);
+
+		anadir.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				String aux = passwordField.getText();
+				String aux2 = passwordField_1.getText();
+				int numaux = 0;
+				if (aux.equals(aux2) && aux.length() > 8 && aux2.length() > 8) {
+					if (aux.contentEquals(aux2)) {
+						textPane.setText("CORRECTO");
+						textPane.setForeground(Color.green);
+					}
+
+				} else if (aux.isEmpty() || aux2.isEmpty()) {
+					if (aux.isEmpty()) {
+						numaux = 1;
+					} else
+						numaux = 2;
+					textPane.setText("ERROR:<La contraseña " + numaux + " esta en blanco>");
+					textPane.setForeground(Color.red);
+				} else if (aux.length() < 8 || aux2.length() < 8) {
+					textPane.setText("ERROR:<El tamaño de la contraseña es menor de 8>");
+					textPane.setForeground(Color.red);
+				} else if (!aux.equals(aux2)) {
+					textPane.setText("ERROR:<Las contraseñas no coinciden>");
+					textPane.setForeground(Color.red);
+				}
+			}
+
+		});
+
+	}
 }

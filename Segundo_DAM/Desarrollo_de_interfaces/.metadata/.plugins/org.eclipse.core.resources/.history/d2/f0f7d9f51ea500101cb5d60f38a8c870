@@ -1,0 +1,165 @@
+package boletin_2_ejercicio_3;
+
+import java.awt.EventQueue;
+import javax.swing.JFrame;
+import javax.swing.JSpinner;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.SpinnerNumberModel;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.awt.Font;
+
+public class Ejercicio_3 {
+
+    private JFrame frame;
+    private JSpinner spinnerCompuerta1;
+    private JSpinner spinnerCompuerta2;
+    private JSpinner spinnerCompuerta3;
+    private JLabel lblCaudalTotal;
+    private JLabel lblNivelCaudal;
+
+    /**
+     * Launch the application.
+     */
+    public static void main(String[] args) {
+        EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                try {
+                    Ejercicio_3 window = new Ejercicio_3();
+                    window.frame.setVisible(true);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+
+    /**
+     * Create the application.
+     */
+    public Ejercicio_3() {
+        initialize();
+    }
+
+    /**
+     * Initialize the contents of the frame.
+     */
+    private void initialize() {
+        frame = new JFrame();
+        frame.setBounds(100, 100, 450, 500);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.getContentPane().setLayout(null);
+        frame.setTitle("Control de Embalse");
+
+        // Título
+        JLabel lblTitulo = new JLabel("Gestión de Caudal de Embalse");
+        lblTitulo.setFont(new Font("Tahoma", Font.BOLD, 16));
+        lblTitulo.setBounds(80, 20, 300, 25);
+        frame.getContentPane().add(lblTitulo);
+
+        // Compuerta 1
+        JLabel lblCompuerta1 = new JLabel("Compuerta 1");
+        lblCompuerta1.setFont(new Font("Tahoma", Font.PLAIN, 13));
+        lblCompuerta1.setBounds(50, 100, 180, 25);
+        frame.getContentPane().add(lblCompuerta1);
+
+        spinnerCompuerta1 = new JSpinner();
+        spinnerCompuerta1.setModel(new SpinnerNumberModel(0, 0, 100, 10));
+        spinnerCompuerta1.setFont(new Font("Tahoma", Font.PLAIN, 13));
+        spinnerCompuerta1.setBounds(250, 100, 100, 25);
+        frame.getContentPane().add(spinnerCompuerta1);
+
+        // Compuerta 2
+        JLabel lblCompuerta2 = new JLabel("Compuerta 2");
+        lblCompuerta2.setFont(new Font("Tahoma", Font.PLAIN, 13));
+        lblCompuerta2.setBounds(50, 150, 180, 25);
+        frame.getContentPane().add(lblCompuerta2);
+
+        spinnerCompuerta2 = new JSpinner();
+        spinnerCompuerta2.setModel(new SpinnerNumberModel(0, 0, 100, 10));
+        spinnerCompuerta2.setFont(new Font("Tahoma", Font.PLAIN, 13));
+        spinnerCompuerta2.setBounds(250, 150, 100, 25);
+        frame.getContentPane().add(spinnerCompuerta2);
+
+        // Compuerta 3
+        JLabel lblCompuerta3 = new JLabel("Compuerta 3");
+        lblCompuerta3.setFont(new Font("Tahoma", Font.PLAIN, 13));
+        lblCompuerta3.setBounds(50, 200, 180, 25);
+        frame.getContentPane().add(lblCompuerta3);
+
+        spinnerCompuerta3 = new JSpinner();
+        spinnerCompuerta3.setModel(new SpinnerNumberModel(0, 0, 100, 10));
+        spinnerCompuerta3.setFont(new Font("Tahoma", Font.PLAIN, 13));
+        spinnerCompuerta3.setBounds(250, 200, 100, 25);
+        frame.getContentPane().add(spinnerCompuerta3);
+
+        // Botón Actualizar Caudal
+        JButton btnActualizar = new JButton("Actualizar Caudal");
+        btnActualizar.setFont(new Font("Tahoma", Font.BOLD, 14));
+        btnActualizar.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                actualizarCaudal();
+            }
+        });
+        btnActualizar.setBounds(100, 260, 220, 40);
+        frame.getContentPane().add(btnActualizar);
+
+        // Separador visual
+        JLabel lblSeparador = new JLabel("─────────────────────────────────");
+        lblSeparador.setFont(new Font("Tahoma", Font.PLAIN, 12));
+        lblSeparador.setBounds(50, 310, 350, 20);
+        frame.getContentPane().add(lblSeparador);
+
+        // Caudal Total
+        JLabel lblTextoCaudal = new JLabel("Caudal Total:");
+        lblTextoCaudal.setFont(new Font("Tahoma", Font.BOLD, 13));
+        lblTextoCaudal.setBounds(50, 340, 120, 25);
+        frame.getContentPane().add(lblTextoCaudal);
+
+        lblCaudalTotal = new JLabel("0 m³/seg");
+        lblCaudalTotal.setFont(new Font("Tahoma", Font.BOLD, 16));
+        lblCaudalTotal.setBounds(180, 340, 200, 25);
+        frame.getContentPane().add(lblCaudalTotal);
+
+        // Nivel de Caudal
+        JLabel lblTextoNivel = new JLabel("Nivel de Caudal:");
+        lblTextoNivel.setFont(new Font("Tahoma", Font.BOLD, 13));
+        lblTextoNivel.setBounds(50, 380, 120, 25);
+        frame.getContentPane().add(lblTextoNivel);
+
+        lblNivelCaudal = new JLabel("");
+        lblNivelCaudal.setFont(new Font("Tahoma", Font.BOLD, 16));
+        lblNivelCaudal.setBounds(180, 380, 200, 25);
+        frame.getContentPane().add(lblNivelCaudal);
+    }
+
+    /**
+     * Método que actualiza el caudal total y determina el nivel
+     */
+    private void actualizarCaudal() {
+        // Obtener valores de los spinners
+        int caudal1 = (Integer) spinnerCompuerta1.getValue();
+        int caudal2 = (Integer) spinnerCompuerta2.getValue();
+        int caudal3 = (Integer) spinnerCompuerta3.getValue();
+        
+        // Calcular caudal total
+        int caudalTotal = caudal1 + caudal2 + caudal3;
+        
+        // Mostrar caudal total
+        lblCaudalTotal.setText("Se ha actualizado");
+        
+        // Determinar nivel de caudal
+        String nivel;
+        if (caudalTotal >= 0 && caudalTotal <= 100) {
+            nivel = "Bajo";
+        } else if (caudalTotal > 100 && caudalTotal <= 200) {
+            nivel = "Medio";
+        } else {
+            nivel = "Alto";
+        }
+        
+        // Mostrar nivel
+        lblNivelCaudal.setText(nivel);
+    }
+}
