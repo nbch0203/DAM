@@ -134,6 +134,21 @@ Programación concurrente, paralela y distribuida. Hilos, sincronización y comu
 
 ---
 
+### ☁️ AWS (Amazon Web Services)
+![AWS Cloud](https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800&h=400&fit=crop)
+
+Introducción a servicios cloud y computación en la nube con AWS. Despliegue de aplicaciones y gestión de infraestructura.
+
+**Contenidos principales:**
+- Introducción a cloud computing
+- EC2: máquinas virtuales en la nube
+- S3: almacenamiento de objetos
+- RDS: bases de datos gestionadas
+- Lambda: computación serverless
+- IAM: gestión de identidades y accesos
+
+---
+
 ## 📂 Estructura del Repositorio
 
 ```
