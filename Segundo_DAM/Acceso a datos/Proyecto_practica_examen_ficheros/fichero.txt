@@ -1,6 +1,0 @@
-Alumno [ getNombre()=asd, getEdad()=2, getNotas()=3.0]
-Alumno [ getNombre()=asd, getEdad()=2, getNotas()=3.0]
-Alumno [ getNombre()=asd, getEdad()=2, getNotas()=3.0]
-Alumno [ getNombre()=asd, getEdad()=2, getNotas()=3.0]
-Alumno [ getNombre()=asd, getEdad()=2, getNotas()=3.0]
-Alumno [ getNombre()=asd, getEdad()=2, getNotas()=3.0]

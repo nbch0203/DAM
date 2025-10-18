@@ -1,1 +1,0 @@
-Nombre=nixon, articulos=[Hamburguesa, precio=11.1, Patatas, precio=13.3]

@@ -38,5 +38,7 @@ public class Boletin6 {
 		
 		
 	        }
+	        
+	      
 	    }
 	    }
