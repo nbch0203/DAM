@@ -7,9 +7,9 @@
 		<item key="height" value="373"/>
 	</section>
 	<section name="org.eclipse.wb.internal.swing.model.property.editor.border.BorderDialog">
-		<item key="x" value="2193"/>
-		<item key="y" value="115"/>
-		<item key="width" value="478"/>
+		<item key="x" value="1067"/>
+		<item key="y" value="485"/>
+		<item key="width" value="482"/>
 		<item key="height" value="489"/>
 	</section>
 	<section name="org.eclipse.wb.internal.core.utils.ui.dialogs.StringsDialog">

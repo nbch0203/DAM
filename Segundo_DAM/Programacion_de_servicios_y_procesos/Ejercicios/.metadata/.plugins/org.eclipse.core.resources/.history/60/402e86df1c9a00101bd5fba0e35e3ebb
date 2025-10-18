@@ -1,9 +1,0 @@
-package ejercicio_1;
-
-public class Ejercicio {
-	try {
-		ProcessBuilder ob = new ProcessBuilder("java","Main","3","7");
-		
-	}
-
-}

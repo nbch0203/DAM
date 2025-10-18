@@ -1,5 +1,4 @@
 package boletin_2_ejercicio_2;
-
 import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JRadioButton;
@@ -11,9 +10,9 @@ import javax.swing.DefaultComboBoxModel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Font;
+import java.awt.Color;
 
 public class Ejercicio_2 {
-
     private JFrame frame;
     private JRadioButton radio1;
     private JRadioButton radio2;
@@ -21,8 +20,9 @@ public class Ejercicio_2 {
     private JComboBox<String> comboEuros;
     private JComboBox<String> comboCentimos;
     private JLabel lblResultado;
+    private JLabel lblDiferencia;
     private final ButtonGroup buttonGroup = new ButtonGroup();
-
+    
     /**
      * Launch the application.
      */
@@ -38,79 +38,75 @@ public class Ejercicio_2 {
             }
         });
     }
-
+    
     /**
      * Create the application.
      */
     public Ejercicio_2() {
         initialize();
     }
-
+    
     /**
      * Initialize the contents of the frame.
      */
     private void initialize() {
         frame = new JFrame();
-        frame.setBounds(100, 100, 588, 450);
+        frame.setBounds(100, 100, 588, 500);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.getContentPane().setLayout(null);
         frame.setTitle("Máquina Expendedora");
-
-        // JLabel título
+        
         JLabel lblTitulo = new JLabel("Seleccione una bebida:");
         lblTitulo.setFont(new Font("Tahoma", Font.BOLD, 14));
         lblTitulo.setBounds(30, 20, 200, 25);
         frame.getContentPane().add(lblTitulo);
-
-        // Radio Button 1 - Bebida A (0.80 euros)
+        
         radio1 = new JRadioButton("Bebida A - 0.80 €");
         radio1.setSelected(true);
         radio1.setFont(new Font("Tahoma", Font.PLAIN, 12));
         buttonGroup.add(radio1);
         radio1.setBounds(50, 60, 200, 30);
         frame.getContentPane().add(radio1);
-
-        // Radio Button 2 - Bebida B (1.20 euros)
+        
         radio2 = new JRadioButton("Bebida B - 1.20 €");
         radio2.setFont(new Font("Tahoma", Font.PLAIN, 12));
         buttonGroup.add(radio2);
         radio2.setBounds(50, 100, 200, 30);
         frame.getContentPane().add(radio2);
-
-        // Radio Button 3 - Bebida C (3.10 euros)
+        
         radio3 = new JRadioButton("Bebida C - 3.10 €");
         radio3.setFont(new Font("Tahoma", Font.PLAIN, 12));
         buttonGroup.add(radio3);
         radio3.setBounds(50, 140, 200, 30);
         frame.getContentPane().add(radio3);
-
-        // Label para Euros
+        
         JLabel lblEuros = new JLabel("Euros:");
         lblEuros.setFont(new Font("Tahoma", Font.PLAIN, 12));
         lblEuros.setBounds(285, 63, 80, 25);
         frame.getContentPane().add(lblEuros);
-
-        // ComboBox para Euros
+        
         comboEuros = new JComboBox<String>();
         comboEuros.setModel(new DefaultComboBoxModel<String>(new String[] {"0", "1", "2", "3", "4", "5"}));
         comboEuros.setFont(new Font("Tahoma", Font.PLAIN, 12));
         comboEuros.setBounds(391, 63, 80, 25);
         frame.getContentPane().add(comboEuros);
-
-        // Label para Céntimos
+        
         JLabel lblCentimos = new JLabel("Céntimos:");
         lblCentimos.setFont(new Font("Tahoma", Font.PLAIN, 12));
         lblCentimos.setBounds(285, 115, 80, 25);
         frame.getContentPane().add(lblCentimos);
-
-        // ComboBox para Céntimos
+        
         comboCentimos = new JComboBox<String>();
         comboCentimos.setModel(new DefaultComboBoxModel<String>(new String[] {"0", "10", "20", "30", "40", "50", "60", "70", "80", "90"}));
         comboCentimos.setFont(new Font("Tahoma", Font.PLAIN, 12));
         comboCentimos.setBounds(391, 115, 80, 25);
+        comboCentimos.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                procesarExtraccion();
+            }
+        });
         frame.getContentPane().add(comboCentimos);
-
-        // Botón Extraer
+        
         JButton btnExtraer = new JButton("Extraer");
         btnExtraer.setFont(new Font("Tahoma", Font.BOLD, 14));
         btnExtraer.addActionListener(new ActionListener() {
@@ -120,19 +116,24 @@ public class Ejercicio_2 {
         });
         btnExtraer.setBounds(201, 245, 170, 35);
         frame.getContentPane().add(btnExtraer);
-
-        // Label de Resultado
+        
         JLabel lblTextoResultado = new JLabel("Resultado:");
         lblTextoResultado.setFont(new Font("Tahoma", Font.BOLD, 12));
         lblTextoResultado.setBounds(201, 309, 80, 25);
         frame.getContentPane().add(lblTextoResultado);
-
+        
         lblResultado = new JLabel("");
         lblResultado.setFont(new Font("Tahoma", Font.BOLD, 16));
-        lblResultado.setBounds(140, 345, 200, 25);
+        lblResultado.setBounds(50, 345, 500, 25);
         frame.getContentPane().add(lblResultado);
+        
+        // Label para mostrar la diferencia de dinero
+        lblDiferencia = new JLabel("");
+        lblDiferencia.setFont(new Font("Tahoma", Font.PLAIN, 14));
+        lblDiferencia.setBounds(50, 375, 500, 25);
+        frame.getContentPane().add(lblDiferencia);
     }
-
+    
     /**
      * Método que procesa la extracción de la bebida
      */
@@ -146,23 +147,44 @@ public class Ejercicio_2 {
         
         // Determinar qué bebida está seleccionada y su precio
         int precioBebida = 0;
+        String nombreBebida = "";
         
         if (radio1.isSelected()) {
-            // Bebida A: 0.80 euros = 80 céntimos
             precioBebida = 80;
+            nombreBebida = "Bebida A";
         } else if (radio2.isSelected()) {
-            // Bebida B: 1.20 euros = 120 céntimos
             precioBebida = 120;
+            nombreBebida = "Bebida B";
         } else if (radio3.isSelected()) {
-            // Bebida C: 3.10 euros = 310 céntimos
             precioBebida = 310;
+            nombreBebida = "Bebida C";
         }
         
+        
+        // Calcular la diferencia
+        int diferencia = totalCentimos - precioBebida;
+        
+        
         // Comparar y mostrar resultado
-        if (totalCentimos >= precioBebida) {
-            lblResultado.setText("Correcto");
+        if (diferencia >= 0) {
+            lblResultado.setText("Puede extraer " + nombreBebida);
+            lblResultado.setForeground(new Color(0, 128, 0));
+            
+            if (diferencia > 0) {
+                double cambioEuros = diferencia / 100.0;
+                lblDiferencia.setText(String.format("Le sobran %.2f €", cambioEuros));
+                lblDiferencia.setForeground(new Color(0, 100, 200));
+            } else {
+                lblDiferencia.setText("Cantidad exacta");
+                lblDiferencia.setForeground(new Color(0, 100, 200));
+            }
         } else {
-            lblResultado.setText("Incorrecto");
+            lblResultado.setText("Dinero insuficiente");
+            lblResultado.setForeground(Color.RED);
+            
+            double faltaEuros = Math.abs(diferencia) / 100.0;
+            lblDiferencia.setText(String.format("Le faltan %.2f €", faltaEuros));
+            lblDiferencia.setForeground(Color.RED);
         }
     }
 }

@@ -1,3 +1,2 @@
-2025/09/25-16:45:25.073 4094 Reusing MANIFEST D:\Clases\2ºDAM\Programacion de servicios y procesos\Ejercicios\.metadata\.plugins\org.eclipse.swt\EBWebView\Default\Local Storage\leveldb/MANIFEST-000001
-2025/09/25-16:45:25.078 4094 Recovering log #3
-2025/09/25-16:45:25.080 4094 Reusing old log D:\Clases\2ºDAM\Programacion de servicios y procesos\Ejercicios\.metadata\.plugins\org.eclipse.swt\EBWebView\Default\Local Storage\leveldb/000003.log 
+2025/10/15-12:07:26.272 c94 Creating DB D:\DAM\Segundo_DAM\Programacion_de_servicios_y_procesos\Ejercicios\.metadata\.plugins\org.eclipse.swt\EBWebView\Default\Local Storage\leveldb since it was missing.
+2025/10/15-12:07:26.289 c94 Reusing MANIFEST D:\DAM\Segundo_DAM\Programacion_de_servicios_y_procesos\Ejercicios\.metadata\.plugins\org.eclipse.swt\EBWebView\Default\Local Storage\leveldb/MANIFEST-000001

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path="DI01_Tarea/src"/>
+	<classpathentry kind="lib" path="DI01_Tarea/lib/CopyLibs/org-netbeans-modules-java-j2seproject-copylibstask.jar"/>
+	<classpathentry kind="lib" path="DI01_Tarea/lib/junit_4/junit-4.5.jar"/>
+	<classpathentry kind="lib" path="DI01_Tarea/lib/junit_4/junit-4.5-src.jar"/>
+	<classpathentry kind="lib" path="DI01_Tarea/lib/junit/junit-3.8.2.jar"/>
+	<classpathentry kind="lib" path="DI01_Tarea/lib/swing-app-framework/appframework-1.0.3.jar"/>
+	<classpathentry kind="lib" path="DI01_Tarea/lib/swing-app-framework/swing-worker-1.1.jar"/>
+	<classpathentry kind="output" path="DI01_Tarea/build/classes"/>
+</classpath>

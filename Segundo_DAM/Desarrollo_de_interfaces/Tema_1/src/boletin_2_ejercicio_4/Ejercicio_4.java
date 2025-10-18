@@ -10,6 +10,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Font;
 import java.awt.Color;
+import javax.swing.JSeparator;
 
 public class Ejercicio_4 {
 
@@ -87,17 +88,6 @@ public class Ejercicio_4 {
         comboImporte.setBounds(180, 130, 200, 25);
         frame.getContentPane().add(comboImporte);
 
-        // Información de límites
-        JLabel lblInfo1 = new JLabel("• Caja de Ahorro: límite 200 €");
-        lblInfo1.setFont(new Font("Tahoma", Font.PLAIN, 11));
-        lblInfo1.setBounds(50, 170, 250, 20);
-        frame.getContentPane().add(lblInfo1);
-
-        JLabel lblInfo2 = new JLabel("• Cuenta Corriente: límite 500 €");
-        lblInfo2.setFont(new Font("Tahoma", Font.PLAIN, 11));
-        lblInfo2.setBounds(50, 190, 250, 20);
-        frame.getContentPane().add(lblInfo2);
-
         // Botón Extraer
         JButton btnExtraer = new JButton("Extraer");
         btnExtraer.setFont(new Font("Tahoma", Font.BOLD, 14));
@@ -106,14 +96,8 @@ public class Ejercicio_4 {
                 procesarExtraccion();
             }
         });
-        btnExtraer.setBounds(140, 230, 150, 40);
+        btnExtraer.setBounds(140, 208, 150, 40);
         frame.getContentPane().add(btnExtraer);
-
-        // Separador
-        JLabel lblSeparador = new JLabel("─────────────────────────────────────");
-        lblSeparador.setFont(new Font("Tahoma", Font.PLAIN, 12));
-        lblSeparador.setBounds(40, 280, 370, 20);
-        frame.getContentPane().add(lblSeparador);
 
         // Label Saldo del Cajero
         JLabel lblTextoSaldo = new JLabel("Saldo del Cajero:");
@@ -137,6 +121,10 @@ public class Ejercicio_4 {
         lblResultado.setFont(new Font("Tahoma", Font.BOLD, 16));
         lblResultado.setBounds(160, 350, 250, 25);
         frame.getContentPane().add(lblResultado);
+        
+        JSeparator separator = new JSeparator();
+        separator.setBounds(48, 280, 332, 19);
+        frame.getContentPane().add(separator);
     }
 
     /**
