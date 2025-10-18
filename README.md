@@ -30,8 +30,7 @@ Estudio de lenguajes de marcas y su aplicación en el desarrollo web. HTML5, CSS
 **Contenidos principales:**
 - HTML5 semántico
 - CSS3 y diseño responsive
-- XML, DTD y XML Schema
-- XSLT y XPath
+- XML
 - JSON y formatos de intercambio de datos
 
 ---
@@ -60,7 +59,7 @@ Fundamentos de programación orientada a objetos usando Java. Desde conceptos b�
 - Programación orientada a objetos
 - Colecciones y genéricos
 - Manejo de excepciones
-- Streams y expresiones lambda
+- Streams y conexiones a bases de datos
 
 ---
 
@@ -168,13 +167,3 @@ DAM/
 Este repositorio contiene material educativo y ejercicios prácticos realizados durante el curso académico. El contenido está en constante actualización conforme avanzo en el ciclo formativo.
 
 ---
-
-## 📧 Contacto
-
-Si tienes alguna pregunta o sugerencia sobre el contenido, no dudes en contactarme.
-
----
-
-<p align="center">
-  <i>💡 "El código es poesía" - WordPress</i>
-</p>
