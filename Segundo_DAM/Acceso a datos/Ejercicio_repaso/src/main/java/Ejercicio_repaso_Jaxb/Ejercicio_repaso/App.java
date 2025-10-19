@@ -1,45 +1,71 @@
-package Ejercicio_repaso_Jaxb.Ejercicio_repaso;
+package app;
 
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.ArrayList;
+import javax.xml.bind.*;
+import java.io.File;
+import java.util.Arrays;
+import java.util.List;
 
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Marshaller;
+import clases.Concesionario;
+import clases.Vehiculo;
 
-/**
- * Hello world!
- */
-public class App {
-	public static void main(String[] args) throws JAXBException, IOException {
+public class GestorConcesionario {
 
-		JAXBContext contexto = JAXBContext.newInstance(Concesionario.class);
-		Marshaller m = contexto.createMarshaller();
+	public static void main(String[] args) {
+		String rutaArchivo = "res/concesionario.xml";
 
-		Concesionario conce = new Concesionario();
-		conce.setNombre("asda");
-		conce.setUbicacion("asdasdasd");
+		// Crear la carpeta "res" si no existe
+		File directorio = new File("res");
+		if (!directorio.exists()) {
+			directorio.mkdir();
+		}
 
-		ArrayList<Vehiculo> coches = new ArrayList<Vehiculo>();
+		// Crear datos de concesionario con vehículos
+		Concesionario concesionario = new Concesionario("Autos Deluxe",
+				Arrays.asList(new Vehiculo("Toyota", "Corolla", 2022, 25000, "Juan Pérez"),
+						new Vehiculo("Ford", "Focus", 2023, 32000, "Ana Gómez")),
+				"Calle Mayor 45, Madrid");
 
-		Vehiculo c1 = new Vehiculo();
-		c1.setAno(1999);
-		c1.setMarca("Mercedes");
-		c1.setModelo("patata");
-		c1.setPrecio(15000.00);
-		c1.setVendedor("Antonio");
+		// 1. Guardar en XML
+		guardarEnXML(concesionario, rutaArchivo);
 
-		coches.add(c1);
+		// 2. Leer y mostrar el XML
+		Concesionario concesionarioLeido = leerDesdeXML(rutaArchivo);
+		if (concesionarioLeido != null) {
+			mostrarConcesionario(concesionarioLeido);
+		}
+	}
 
-		conce.setvehiculos(coches);
+	private static void guardarEnXML(Concesionario concesionario, String rutaArchivo) {
+		try {
+			JAXBContext contexto = JAXBContext.newInstance(Concesionario.class);
+			Marshaller marshaller = contexto.createMarshaller();
+			marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+			marshaller.marshal(concesionario, new File(rutaArchivo));
+			System.out.println("Archivo XML generado: " + rutaArchivo);
+		} catch (JAXBException e) {
+			System.out.println("Error al guardar el XML: " + e.getMessage());
+		}
+	}
 
-		m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
-		m.marshal(conce, System.out);
+	private static Concesionario leerDesdeXML(String rutaArchivo) {
+		try {
+			JAXBContext contexto = JAXBContext.newInstance(Concesionario.class);
+			Unmarshaller unmarshaller = contexto.createUnmarshaller();
+			return (Concesionario) unmarshaller.unmarshal(new File(rutaArchivo));
+		} catch (JAXBException e) {
+			System.out.println("Error al leer el XML: " + e.getMessage());
+			return null;
+		}
+	}
 
-		FileWriter fw = new FileWriter("salida_coches.xml");
+	private static void mostrarConcesionario(Concesionario concesionario) {
+		System.out.println("\nCONCESIONARIO: " + concesionario.getNombre());
+		System.out.println("Ubicación: " + concesionario.getUbicacion());
+		List<Vehiculo> vehiculos = concesionario.getVehiculos();
+		System.out.println("Vehículos disponibles:" + vehiculos.size());
 
-		m.marshal(conce, fw);
-
+		for (Vehiculo v : vehiculos) {
+			System.out.println(v);
+		}
 	}
 }

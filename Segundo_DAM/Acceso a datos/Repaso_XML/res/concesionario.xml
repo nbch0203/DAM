@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<departamento>
+    <nombre>IT</nombre>
+    <presupuesto>1000.56</presupuesto>
+    <piso>3</piso>
+    <Trabajadores>
+        <Trabajador>
+            <nombre>nix</nombre>
+            <apellido>cruz</apellido>
+            <edad>21</edad>
+            <dni>
+                <nacionalidad>Española</nacionalidad>
+                <id>12345678A</id>
+                <fechacaducidad>11/6/2027</fechacaducidad>
+            </dni>
+        </Trabajador>
+    </Trabajadores>
+</departamento>

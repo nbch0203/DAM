@@ -1,48 +1,37 @@
 package Ejercicio_repaso_Jaxb.Ejercicio_repaso;
 
-import java.util.ArrayList;
+import javax.xml.bind.annotation.*;
 
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
+import java.util.List;
 
-@XmlRootElement(name = "Concesionario")
-@XmlType(propOrder = { "nombre", "vehiculos", "ubicacion" })
+@XmlRootElement
 public class Concesionario {
-	private ArrayList<Vehiculo> vehiculos = new ArrayList<Vehiculo>();
+    @XmlAttribute
+    private String nombre;
+	@XmlElementWrapper(name="vehiculos")
+    @XmlElement(name = "vehiculo")
+    private List<Vehiculo> vehiculos;
+    @XmlElement
+    private String ubicacion;
 
-	private String nombre;
-	private String ubicacion;
+    public Concesionario() {}
 
-	public Concesionario() {
-	}
+    public Concesionario(String nombre, List<Vehiculo> vehiculos, String ubicacion) {
+        this.nombre = nombre;
+        this.vehiculos = vehiculos;
+        this.ubicacion = ubicacion;
+    }
 
-	@XmlAttribute(name = "nombre")
-	public String getNombre() {
-		return nombre;
-	}
+    public String getNombre() {
+        return nombre;
+    }
 
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
 
-	@XmlAttribute(name = "ubicacion")
-	public String getUbicacion() {
-		return ubicacion;
-	}
+    public List<Vehiculo> getVehiculos() {
+        return vehiculos;
+    }
 
-	public void setUbicacion(String ubicacion) {
-		this.ubicacion = ubicacion;
-	}
-
-	@XmlElement(name = "Vehiculo")
-	public ArrayList<Vehiculo> getvehiculos() {
-		return vehiculos;
-	}
-
-	public void setvehiculos(ArrayList<Vehiculo> vehiculos) {
-		this.vehiculos = vehiculos;
-	}
-
+    public String getUbicacion() {
+        return ubicacion;
+    }
 }
