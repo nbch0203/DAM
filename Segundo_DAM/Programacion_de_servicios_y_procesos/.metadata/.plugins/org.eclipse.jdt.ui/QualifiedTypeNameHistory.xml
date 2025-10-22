@@ -11,8 +11,12 @@
     <fullyQualifiedTypeName name="java.lang.Process"/>
     <fullyQualifiedTypeName name="java.lang.ProcessBuilder"/>
     <fullyQualifiedTypeName name="java.io.File"/>
-    <fullyQualifiedTypeName name="java.lang.Thread"/>
     <fullyQualifiedTypeName name="java.util.Scanner"/>
     <fullyQualifiedTypeName name="java.lang.System"/>
     <fullyQualifiedTypeName name="boletin_3_ejercicio_1.Usuario"/>
+    <fullyQualifiedTypeName name="boletin_4_ejercicio_1.Persona"/>
+    <fullyQualifiedTypeName name="boletin_4_ejercicio_2.Contador"/>
+    <fullyQualifiedTypeName name="java.lang.ThreadGroup"/>
+    <fullyQualifiedTypeName name="boletin_4_ejercicio_3.Reloj"/>
+    <fullyQualifiedTypeName name="java.lang.Thread"/>
 </qualifiedTypeNameHistroy>

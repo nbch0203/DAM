@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <androidx.gridlayout.widget.GridLayout
+        android:layout_width="409dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        app:columnCount="4"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:rowCount="4">
+
+        <Button
+            android:id="@+id/boton_rojo"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#FF0000"
+            android:text="Rojo"
+            app:autoSizeTextType="uniform"
+            app:layout_column="0"
+            app:layout_columnWeight="1"
+            app:layout_row="0" />
+
+        <Button
+            android:id="@+id/boton_verde"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#4CAF50"
+            android:text="Verde"
+            app:autoSizeTextType="uniform"
+            app:layout_column="1"
+            app:layout_columnWeight="1"
+            app:layout_row="0" />
+
+        <Button
+            android:id="@+id/boton_naranja"
+            android:layout_width="19dp"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#FF9800"
+            android:text="Naranja"
+            app:autoSizeTextType="uniform"
+            app:layout_column="2"
+            app:layout_columnWeight="1"
+            app:layout_row="0" />
+
+        <Button
+            android:id="@+id/boton_azul"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#2196F3"
+            android:text="Azul"
+            app:autoSizeTextType="uniform"
+            app:layout_column="3"
+            app:layout_columnWeight="1"
+            app:layout_row="0" />
+
+        <Button
+            android:id="@+id/boton_marron"
+            android:layout_width="20dp"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#795548"
+            android:text="Marron"
+            app:autoSizeTextType="uniform"
+            app:layout_column="0"
+            app:layout_columnWeight="1"
+            app:layout_row="1" />
+
+        <Button
+            android:id="@+id/boton_negro"
+            android:layout_width="3dp"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#000000"
+            android:text="Negro"
+            android:textColor="@android:color/white"
+            app:autoSizeTextType="uniform"
+            app:layout_column="1"
+            app:layout_columnWeight="1"
+            app:layout_row="1" />
+
+        <Button
+            android:id="@+id/boton_amarillo"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#FFEB3B"
+            android:text="Amarillo"
+            app:autoSizeTextType="uniform"
+            app:layout_column="2"
+            app:layout_columnWeight="1"
+            app:layout_row="1" />
+
+        <Button
+            android:id="@+id/boton_rosa"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#E91E63"
+            android:text="Rosa"
+            app:autoSizeTextType="uniform"
+            app:layout_column="3"
+            app:layout_columnWeight="1"
+            app:layout_row="1" />
+
+        <Button
+            android:id="@+id/boton_empezar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Empezar"
+            app:autoSizeTextType="uniform"
+            app:layout_column="0"
+            app:layout_columnSpan="2"
+            app:layout_columnWeight="1"
+            app:layout_row="3" />
+
+        <Button
+            android:id="@+id/boton_limpiar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Limpiar"
+            app:autoSizeTextType="uniform"
+            app:layout_column="2"
+            app:layout_columnSpan="2"
+            app:layout_columnWeight="1"
+            app:layout_row="3" />
+
+    </androidx.gridlayout.widget.GridLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
