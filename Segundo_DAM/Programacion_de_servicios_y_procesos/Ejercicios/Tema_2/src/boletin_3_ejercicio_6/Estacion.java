@@ -49,35 +49,35 @@ public class Estacion implements Runnable {
 		switch (nombre) {
 		case "Verano":
 			System.out.println("Junio");
-			Thread.currentThread().sleep(2000);
+			Thread.sleep(2000);
 			System.out.println("Julio");
-			Thread.currentThread().sleep(3000);
+			Thread.sleep(3000);
 			System.out.println("Agosto");
-			Thread.currentThread().sleep(4000);
+			Thread.sleep(4000);
 			break;
 		case "Invierno":
 			System.out.println("Diciembre");
-			Thread.currentThread().sleep(2000);
+			Thread.sleep(2000);
 			System.out.println("Enero");
-			Thread.currentThread().sleep(3000);
+			Thread.sleep(3000);
 			System.out.println("Febrero");
-			Thread.currentThread().sleep(4000);
+			Thread.sleep(4000);
 			break;
 		case "Primavera":
 			System.out.println("Marzo");
-			Thread.currentThread().sleep(2000);
+			Thread.sleep(2000);
 			System.out.println("Abril");
-			Thread.currentThread().sleep(3000);
+			Thread.sleep(3000);
 			System.out.println("Mayo");
-			Thread.currentThread().sleep(4000);
+			Thread.sleep(4000);
 			break;
 		case "Otoño":
 			System.out.println("Septiembre");
-			Thread.currentThread().sleep(2000);
+			Thread.sleep(2000);
 			System.out.println("Octubre");
-			Thread.currentThread().sleep(3000);
+			Thread.sleep(3000);
 			System.out.println("Noviembre");
-			Thread.currentThread().sleep(4000);
+			Thread.sleep(4000);
 			break;
 
 		}

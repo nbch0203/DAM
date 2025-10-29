@@ -8,7 +8,8 @@ public class Atleta implements Runnable {
 
 			try {
 				System.out.print(i + " km ");
-				Thread.currentThread().sleep(3500);
+//				Thread.currentThread().sleep(3500);
+				Thread.sleep(3500);
 
 				if (i == 10) {
 					System.out.println("\n" + Thread.currentThread().getName() + " ha llegado a la meta");
