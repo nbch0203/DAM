@@ -13,6 +13,8 @@ public class Main {
 
 		try {
 			c.ejecutarConsulta();
+			
+			c.insertarLector(9, "Nixon", "Cruz", "nixonbcruzh@gmail.com", 2);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

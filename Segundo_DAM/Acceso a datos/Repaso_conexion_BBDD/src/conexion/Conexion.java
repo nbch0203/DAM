@@ -41,33 +41,30 @@ public class Conexion {
 	}
 
 	public void ejecutarConsulta() throws SQLException {
-		int empno,multas_p;
-		String nombre, apellidos, email;
+		int id;
+		String nombre, nacionalidad;
 
 		st = connection.createStatement();
-		rs = st.executeQuery("select ID_LECTOR,NOMBRE,APELLIDO,EMAIL,MULTAS_PENDIENTES from LECTORES");
+		rs = st.executeQuery("select ID_AUTOR,NOMBRE_AUTOR,NACIONALIDAD from AUTORES");
 
 		while (rs.next()) {
-			empno = rs.getInt("ID_LECTOR");
-			nombre = rs.getString("NOMBRE");
-			apellidos = rs.getString("APELLIDO");
-			email = rs.getString("EMAIL");
-			multas_p = rs.getInt("MULTAS_PENDIENTES");
-			System.out.println("empno:" + empno + "*nombre:" + nombre + "*apellidos:" + apellidos + "* email: "
-					+ email + "*multas pendientes: " + multas_p);
+			id = rs.getInt("ID_LECTOR");
+			nombre = rs.getString("NOMBRE_AUTOR");
+			nacionalidad = rs.getString("NACIONALIDAD");
+			System.out.println("Id del autor:" + id + "* nombre:" + nombre + "* nacionalidad:" + nacionalidad);
 
 		}
 	}
 
-	public void insertarCliente(int nCliente, String nombre, String direccion, String telefono, Date fecha_alta) {
-		String query = "INSERT INTO Clientes_taller (ncliente,nombre,direccion,telefono,fecha_alta) VALUES (?,?,?,?,?)";
+	public void insertarLector(int id, String nombre, String apellido, String email, int multas_pen) {
+		String query = "INSERT INTO LECTORES (ID_LECTOR,NOMBRE,APELLIDO,EMAIL,MULTAS_PENDIENTES) VALUES (?,?,?,?,?)";
 		try (Connection connection = DriverManager.getConnection(url, login, password);
 				PreparedStatement pstm = connection.prepareStatement(query)) {
-			pstm.setInt(1, nCliente);
+			pstm.setInt(1, id);
 			pstm.setString(2, nombre);
-			pstm.setString(3, direccion);
-			pstm.setNString(4, telefono);
-			pstm.setDate(5, fecha_alta);
+			pstm.setString(3, apellido);
+			pstm.setNString(4, email);
+			pstm.setInt(5, multas_pen);
 
 			System.out.println("Cliente insertado exitosamente");
 		} catch (Exception e) {
@@ -93,26 +90,41 @@ public class Conexion {
 		System.out.println("Conexion cerrada");
 	}
 
-	public void borrarCliente(int nCliente) {
-		String query = "DELETE FROM clientes_taller WHERE ncliente= ?";
+	public void borrarLector(int id_lector) {
+		String query = "DELETE FROM LECTORES WHERE ID_LECTOR= ?";
 		try (Connection connection = DriverManager.getConnection(url, login, password);
 				PreparedStatement pstmt = connection.prepareStatement(query)) {
-			pstmt.setInt(1, nCliente);
+			pstmt.setInt(1, id_lector);
 			int resultado = pstmt.executeUpdate();
-			System.out.println("Cliente/s borrado con exito" + resultado);
+			System.out.println("Lector/es borrado con exito " + resultado);
 		} catch (SQLException e) {
 			// TODO: handle exception
 			e.printStackTrace();
 		}
 	}
 
-	public void actualizarCliente(int ncliente, String nuevaDir) {
-		String query = ("UPDATE");
+	public void actualizarCliente(int id_lector, String nuevo_email) {
+		String query = "UPDATE LECTORES SET EMAIL = ? WHERE ID_LECTOR = ?";
 		try (Connection cn = DriverManager.getConnection(url, login, password);
 				PreparedStatement pstm = cn.prepareStatement(query)) {
 
-		} catch (Exception e) {
-			// TODO: handle exception
+			// Establecer los parámetros
+			pstm.setString(1, nuevo_email);
+			pstm.setInt(2, id_lector);
+
+			// Ejecutar la actualización
+			int filasActualizadas = pstm.executeUpdate();
+
+			// Opcional: informar del resultado
+			if (filasActualizadas > 0) {
+				System.out.println("Cliente actualizado correctamente");
+			} else {
+				System.out.println("No se encontró el cliente con ID: " + id_lector);
+			}
+
+		} catch (SQLException e) {
+			System.err.println("Error al actualizar cliente: " + e.getMessage());
+			e.printStackTrace();
 		}
 	}
 }

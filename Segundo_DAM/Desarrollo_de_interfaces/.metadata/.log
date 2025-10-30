@@ -7502,3 +7502,54 @@ user global configuration and to define the default location to store repositori
 not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
 EGit might behave differently since they see different configuration options.
 This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+!SESSION 2025-10-30 11:52:49.071 -----------------------------------------------
+eclipse.buildId=4.37.0.20250905-1455
+java.version=23.0.1
+java.vendor=Eclipse Adoptium
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=es_ES
+Framework arguments:  -product org.eclipse.epp.package.java.product
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.eclipse.epp.package.java.product -data D:\Clases\DAM\Segundo_DAM\Desarrollo_de_interfaces
+
+!ENTRY org.eclipse.lemminx.uber-jar 4 0 2025-10-30 11:52:51.642
+!MESSAGE bundle org.eclipse.lemminx.uber-jar:0.31.0 (1311) Component descriptor entry 'OSGI-INF/*.xml' not found
+
+!ENTRY ch.qos.logback.classic 1 0 2025-10-30 11:52:51.878
+!MESSAGE Activated before the state location was initialized. Retry after the state location is initialized.
+
+!ENTRY ch.qos.logback.classic 1 0 2025-10-30 11:52:53.703
+!MESSAGE Logback config file: D:\Clases\DAM\Segundo_DAM\Desarrollo_de_interfaces\.metadata\.plugins\org.eclipse.m2e.logback\logback.2.7.100.20250418-1315.xml
+
+!ENTRY org.eclipse.ui 2 0 2025-10-30 11:52:54.276
+!MESSAGE Warnings while parsing the commands from the 'org.eclipse.ui.commands' and 'org.eclipse.ui.actionDefinitions' extension points.
+!SUBENTRY 1 org.eclipse.ui 2 0 2025-10-30 11:52:54.276
+!MESSAGE Commands should really have a category: plug-in='org.springframework.tooling.boot.ls', id='spring.initializr.addStarters', categoryId='org.eclipse.lsp4e.commandCategory'
+
+!ENTRY org.eclipse.ui 2 0 2025-10-30 11:52:54.677
+!MESSAGE Warnings while parsing the commands from the 'org.eclipse.ui.commands' and 'org.eclipse.ui.actionDefinitions' extension points.
+!SUBENTRY 1 org.eclipse.ui 2 0 2025-10-30 11:52:54.677
+!MESSAGE Commands should really have a category: plug-in='org.springframework.tooling.boot.ls', id='spring.initializr.addStarters', categoryId='org.eclipse.lsp4e.commandCategory'
+
+!ENTRY org.eclipse.ui 4 0 2025-10-30 11:53:03.658
+!MESSAGE Abnormal Workbench Condition
+
+!ENTRY org.eclipse.egit.ui 2 0 2025-10-30 11:53:12.621
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\nixon'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY org.eclipse.e4.ui.workbench 2 0 2025-10-30 11:53:12.692
+!MESSAGE Removing PartDescriptorImpl with the "com.eco.bio7.ijmacro.editor.toolbar.debug" id and the "Debug" label.It points to the non available "bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityView" class. Bundle might have been uninstalled
+
+!ENTRY org.eclipse.e4.ui.workbench 2 0 2025-10-30 11:53:12.693
+!MESSAGE Removing PartDescriptorImpl with the "com.eco.bio7.imagej" id and the "ImageJ-Canvas" label.It points to the non available "bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityView" class. Bundle might have been uninstalled
+
+!ENTRY org.eclipse.e4.ui.workbench 2 0 2025-10-30 11:53:12.694
+!MESSAGE Removing PartDescriptorImpl with the "com.eco.bio7.thumbnails" id and the "Thumbnails" label.It points to the non available "bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityView" class. Bundle might have been uninstalled
+
+!ENTRY org.eclipse.e4.ui.workbench 2 0 2025-10-30 11:53:12.695
+!MESSAGE Removing PartDescriptorImpl with the "com.eco.bio7.ijtoolbar" id and the "ImageJ-Toolbar" label.It points to the non available "bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityView" class. Bundle might have been uninstalled
+
+!ENTRY org.eclipse.e4.ui.workbench 2 0 2025-10-30 11:53:12.696
+!MESSAGE Removing PartDescriptorImpl with the "com.eco.bio7.image.detachedImage" id and the "Image" label.It points to the non available "bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityView" class. Bundle might have been uninstalled
