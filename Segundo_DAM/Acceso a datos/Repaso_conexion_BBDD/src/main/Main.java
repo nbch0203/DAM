@@ -12,10 +12,11 @@ public class Main {
 		c.conectar();
 
 		try {
-			c.ejecutarConsulta();
-			
-			c.insertarLector(9, "Nixon", "Cruz", "nixonbcruzh@gmail.com", 2);
-		} catch (SQLException e) {
+//			c.borrarLector(2001);
+////			c.actualizarCliente(2001, "nixonbcruzh@gmail.com");
+//			c.buscarLibrosPorAnio(1981);
+			c.registrarNuevoAutorPS(5, "a", "peruano");
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
