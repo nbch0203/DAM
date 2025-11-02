@@ -1,5 +1,6 @@
 package conexion;
 
+import java.sql.CallableStatement;
 import java.sql.Connection;
 
 import java.sql.DriverManager;
@@ -7,6 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Types;
 
 public class Conexion {
 
@@ -178,5 +180,115 @@ public class Conexion {
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
+	}
+
+	public void cambiarCopiasDisponibles(String isbn, int nuevasCopias) {
+		String query = "UPDATE LIBROS SET NUM_COPIAS_DISP=? WHERE ISBN=?";
+		try (Connection cn = DriverManager.getConnection(url, login, password)) {
+			PreparedStatement pstm = cn.prepareStatement(query);
+
+			pstm.setInt(1, nuevasCopias);
+			pstm.setString(2, isbn);
+
+			boolean confirmacion = pstm.execute();
+
+			if (confirmacion) {
+
+				System.out.println("Se ha actualizado la cantidad de copias a : " + nuevasCopias);
+			} else {
+				System.out.println("No se ha podido actualizar el libro con el ISBN : " + isbn);
+			}
+
+		} catch (
+
+		SQLException e) {
+			// TODO: handle exception
+		}
+	}
+
+	public void listarLibrosDeAutor(String nombreAutor) {
+		String query = "SELECT L.TITULO FROM LIBROS L JOIN AUTORES ON L.ID_AUTOR=A.ID_AUTOR WHERE ID_AUTOR=? ";
+
+		try (Connection cn = DriverManager.getConnection(url, login, password)) {
+			PreparedStatement pstm = cn.prepareStatement(query);
+
+			pstm.setString(1, nombreAutor);
+
+			boolean confirmar = pstm.execute();
+
+			if (confirmar) {
+				ResultSet rs = pstm.executeQuery();
+				while (rs.next()) {
+					String titulo = rs.getString("TITULO");
+
+					System.out.println("El titulo del libro es : " + titulo + "\n");
+				}
+			} else {
+				System.out.println("No se ha podido ejecutar la query");
+
+			}
+
+		} catch (SQLException e) {
+			// TODO: handle exception
+		}
+	}
+
+	public void buscarLectoresConMultas() {
+		String query = "Select ID_LECTOR,NOMBRE,MULTAS_PENDIENTES FROM LECTORES where MULTAS_PENDIENTES>0";
+
+		try (Connection cn = DriverManager.getConnection(url, login, password)) {
+			PreparedStatement pstm = cn.prepareStatement(query);
+
+			ResultSet rs = pstm.executeQuery();
+			while (rs.next()) {
+				String id_lector = rs.getNString("ID_LECTOR");
+				String nombre = rs.getNString("NOMBRE");
+				int multas = rs.getInt("MULTAS_PENDIENTES");
+
+				System.out.println("ID: " + id_lector + " Nombre: " + nombre + " Multas: " + multas);
+
+//				if (multas > 0) {
+//					System.out.println("ID: " + id_lector + " Nombre: " + nombre + " Multas: " + multas);
+//				}
+
+			}
+
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+	}
+
+	public void procesarDevolucion(int idPrestamo) {
+		String call = "EXEC REGISTRAR_DEVOLUCION(?,?)";
+		try (Connection cn = DriverManager.getConnection(url, login, password)) {
+			CallableStatement cls = cn.prepareCall(call);
+
+			/*
+			 * Decimos el id del prestamo y como es la entrada del procedimiento lo
+			 * colocamos como primero
+			 */
+			cls.setInt(1, idPrestamo);
+
+			// Parametro de salida (donde y de que tipo)
+
+			cls.registerOutParameter(2, Types.VARCHAR);
+			// Ejecutamos
+			cls.execute();
+
+			// Obtenemos el resultado
+			String titulo = cls.getString("TITULO");
+
+			System.out.println("Devolucion exitosa");
+			System.out.println("Se ha devuelto el libro: " + titulo);
+
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+
+	}
+	
+	
+	public void obtenerMulta(int idLector) {
+		
 	}
 }
