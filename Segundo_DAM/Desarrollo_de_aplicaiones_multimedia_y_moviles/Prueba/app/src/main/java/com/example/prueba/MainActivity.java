@@ -31,14 +31,40 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Button reset = findViewById(R.id.btnReset);
         reset.setOnClickListener(this);
 
+        /*
+         Antes la clase implementaba View.OnClickListener y se usaba "reset.setOnClickListener(this);"
+         Ahora usamos una CLASE ANÓNIMA para registrar directamente el listener en el botón.
+         Esto evita tener que implementar el metodo onClick() fuera de aquí.
+        */
+        reset.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                TextView myText = findViewById(R.id.myText);
+                myText.setText("¡Acabo de Resetear el Txt!");
+            }
+        });
+
 
 
     }
 
+
+    /*
+    VENTAJAS
+     - El código del listener queda localizado justo donde se usa.
+     - Es más rápido de escribir si el botón solo se utiliza una vez.
+
+
+     INCONVENIENTES
+     - No se puede reutilizar el mismo listener para varios botones.
+     - Si hay muchos botones, el código puede volverse menos claro.
+*/
+
     @Override
     public void onClick(View v) {
         TextView mytext= findViewById(R.id.myText);
-        mytext.setText("Hola adrian");
+        mytext.setText("¡Acabo de Resetar el Txt!");
     }
 
 

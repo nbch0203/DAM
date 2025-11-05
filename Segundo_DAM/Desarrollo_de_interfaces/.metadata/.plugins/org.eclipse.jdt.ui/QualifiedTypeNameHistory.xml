@@ -8,4 +8,6 @@
     <fullyQualifiedTypeName name="javax.swing.ButtonModel"/>
     <fullyQualifiedTypeName name="java.awt.event.ActionListener"/>
     <fullyQualifiedTypeName name="javax.swing.JOptionPane"/>
+    <fullyQualifiedTypeName name="conexion.Conexion"/>
+    <fullyQualifiedTypeName name="vista.Vista"/>
 </qualifiedTypeNameHistroy>

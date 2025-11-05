@@ -4,3 +4,4 @@ org.eclipse.jdt.core.compiler.codegen.targetPlatform=23
 org.eclipse.jdt.core.compiler.compliance=23
 org.eclipse.jdt.core.compiler.release=enabled
 org.eclipse.jdt.core.compiler.source=23
+org.eclipse.jdt.core.userLibrary.Oracle_BBDD=<?xml version\="1.0" encoding\="UTF-8"?>\r\n<userlibrary systemlibrary\="false" version\="2">\r\n\t<archive path\="D\:/Clases/DAM/Segundo_DAM/Desarrollo_de_interfaces/Librerias/mysql-connector-j-9.5.0/mysql-connector-j-9.5.0/mysql-connector-j-9.5.0.jar"/>\r\n</userlibrary>\r\n
