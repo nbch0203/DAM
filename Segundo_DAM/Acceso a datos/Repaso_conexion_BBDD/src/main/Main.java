@@ -14,12 +14,13 @@ public class Main {
 		try {
 //			c.insertarLector(1, "prueba", "01", "email@prueba.com", 5.5);
 //			c.borrarLector(2001);
-////			c.actualizarCliente(2001, "nixonbcruzh@gmail.com");
+//			c.actualizarCliente(2001, "nixonbcruzh@gmail.com");
 //			c.buscarLibrosPorAnio(1981);
 //			c.registrarNuevoAutorPS(5, "a", "peruano");
-
 //			c.obtenerMulta(1);
-			c.registrarPrestamoSeguro(1, "asd");
+//			c.buscarLectoresConMultas();
+
+			c.registrarPrestamoSeguro(1, "9788497592208");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

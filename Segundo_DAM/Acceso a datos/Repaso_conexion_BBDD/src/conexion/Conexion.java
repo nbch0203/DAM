@@ -2,7 +2,7 @@ package conexion;
 
 import java.sql.CallableStatement;
 import java.sql.Connection;
-
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -24,6 +24,10 @@ public class Conexion {
 
 	public void conectar() {
 
+		/*
+		 * Ejercicio 1: Conexión y Cierre
+		 */
+
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 			connection = DriverManager.getConnection(url, login, password);
@@ -37,40 +41,6 @@ public class Conexion {
 			e.printStackTrace();
 		} catch (SQLException e) {
 			// TODO: handle exception
-			e.printStackTrace();
-		}
-	}
-
-	public void ejecutarConsulta() throws SQLException {
-		int id;
-		String nombre, nacionalidad;
-
-		st = connection.createStatement();
-		rs = st.executeQuery("select ID_AUTOR,NOMBRE_AUTOR,NACIONALIDAD from AUTORES");
-
-		while (rs.next()) {
-			id = rs.getInt("ID_AUTOR");
-			nombre = rs.getString("NOMBRE_AUTOR");
-			nacionalidad = rs.getString("NACIONALIDAD");
-			System.out.println("Id del autor:" + id + "* nombre:" + nombre + "* nacionalidad:" + nacionalidad);
-
-		}
-	}
-
-	public void insertarLector(int id, String nombre, String apellido, String email, double multas_pen) {
-		String query = "INSERT INTO LECTORES (ID_LECTOR,NOMBRE,APELLIDO,EMAIL,MULTAS_PENDIENTES) VALUES (?,?,?,?,?)";
-		try (Connection connection = DriverManager.getConnection(url, login, password);
-				PreparedStatement pstm = connection.prepareStatement(query)) {
-			pstm.setInt(1, id);
-			pstm.setString(2, nombre);
-			pstm.setString(3, apellido);
-			pstm.setNString(4, email);
-			pstm.setDouble(5, multas_pen);
-
-			pstm.execute();
-
-			System.out.println("Cliente insertado exitosamente");
-		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
@@ -93,18 +63,51 @@ public class Conexion {
 		System.out.println("Conexion cerrada");
 	}
 
-	public void borrarLector(int id_lector) {
-		String query = "DELETE FROM LECTORES WHERE ID_LECTOR= ?";
+	/*
+	 * Ejercicio 2: SELECT Básico
+	 */
+
+	public void ejecutarConsulta() throws SQLException {
+		int id;
+		String nombre, nacionalidad;
+
+		st = connection.createStatement();
+		rs = st.executeQuery("select ID_AUTOR,NOMBRE_AUTOR,NACIONALIDAD from AUTORES");
+
+		while (rs.next()) {
+			id = rs.getInt("ID_AUTOR");
+			nombre = rs.getString("NOMBRE_AUTOR");
+			nacionalidad = rs.getString("NACIONALIDAD");
+			System.out.println("Id del autor:" + id + "* nombre:" + nombre + "* nacionalidad:" + nacionalidad);
+
+		}
+	}
+
+	/*
+	 * Ejercicio 3: INSERT
+	 */
+
+	public void insertarLector(int id, String nombre, String apellido, String email, double multas_pen) {
+		String query = "INSERT INTO LECTORES (ID_LECTOR,NOMBRE,APELLIDO,EMAIL,MULTAS_PENDIENTES) VALUES (?,?,?,?,?)";
 		try (Connection connection = DriverManager.getConnection(url, login, password);
-				PreparedStatement pstmt = connection.prepareStatement(query)) {
-			pstmt.setInt(1, id_lector);
-			int resultado = pstmt.executeUpdate();
-			System.out.println("Lector/es borrado con exito " + resultado);
+				PreparedStatement pstm = connection.prepareStatement(query)) {
+			pstm.setInt(1, id);
+			pstm.setString(2, nombre);
+			pstm.setString(3, apellido);
+			pstm.setNString(4, email);
+			pstm.setDouble(5, multas_pen);
+
+			pstm.execute();
+
+			System.out.println("Cliente insertado exitosamente");
 		} catch (SQLException e) {
-			// TODO: handle exception
 			e.printStackTrace();
 		}
 	}
+
+	/*
+	 * Ejercicio 4: UPDATE
+	 */
 
 	public void actualizarCliente(int id_lector, String nuevo_email) {
 		String query = "UPDATE LECTORES SET email = ? WHERE id_lector = ?";
@@ -130,6 +133,27 @@ public class Conexion {
 			e.printStackTrace();
 		}
 	}
+
+	/*
+	 * Ejercicio 5: DELETE y Filas Afectadas
+	 */
+
+	public void borrarLector(int id_lector) {
+		String query = "DELETE FROM LECTORES WHERE ID_LECTOR= ?";
+		try (Connection connection = DriverManager.getConnection(url, login, password);
+				PreparedStatement pstmt = connection.prepareStatement(query)) {
+			pstmt.setInt(1, id_lector);
+			int resultado = pstmt.executeUpdate();
+			System.out.println("Lector/es borrado con exito " + resultado);
+		} catch (SQLException e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+	}
+
+	/*
+	 * Ejercicio 6: SELECT Parametrizado
+	 */
 
 	public void buscarLibrosPorAnio(int anio) {
 		int isbn, anio_publi, num_copias_total, num_copias_dis, id_autor;
@@ -159,10 +183,15 @@ public class Conexion {
 			}
 
 		} catch (SQLException e) {
-			// TODO: handle exception
+			// TODO: handle
+			e.printStackTrace();
 		}
 
 	}
+
+	/*
+	 * Ejercicio 7: INSERT Parametrizado
+	 */
 
 	public void registrarNuevoAutorPS(int id, String nombre, String nacionalidad) {
 		String query = "INSERT INTO AUTORES (ID_AUTOR,NOMBRE_AUTOR,NACIONALIDAD) VALUES (?,?,?)";
@@ -179,10 +208,15 @@ public class Conexion {
 			} else
 				System.out.println("No se ha podido insertar");
 
-		} catch (Exception e) {
+		} catch (SQLException e) {
 			// TODO: handle exception
+			e.printStackTrace();
 		}
 	}
+
+	/*
+	 * Ejercicio 8: UPDATE Parametrizado
+	 */
 
 	public void cambiarCopiasDisponibles(String isbn, int nuevasCopias) {
 		String query = "UPDATE LIBROS SET NUM_COPIAS_DISP=? WHERE ISBN=?";
@@ -201,12 +235,15 @@ public class Conexion {
 				System.out.println("No se ha podido actualizar el libro con el ISBN : " + isbn);
 			}
 
-		} catch (
-
-		SQLException e) {
+		} catch (SQLException e) {
 			// TODO: handle exception
+			e.printStackTrace();
 		}
 	}
+
+	/*
+	 * Ejercicio 9: Consulta con JOIN
+	 */
 
 	public void listarLibrosDeAutor(String nombreAutor) {
 		String query = "SELECT L.TITULO FROM LIBROS L JOIN AUTORES ON L.ID_AUTOR=A.ID_AUTOR WHERE ID_AUTOR=? ";
@@ -232,8 +269,13 @@ public class Conexion {
 
 		} catch (SQLException e) {
 			// TODO: handle exception
+			e.printStackTrace();
 		}
 	}
+
+	/*
+	 * Ejercicio 10: Ejercicio Desafío (SELECT con WHERE)
+	 */
 
 	public void buscarLectoresConMultas() {
 		String query = "Select ID_LECTOR,NOMBRE,MULTAS_PENDIENTES FROM LECTORES where MULTAS_PENDIENTES>0";
@@ -245,20 +287,21 @@ public class Conexion {
 			while (rs.next()) {
 				String id_lector = rs.getNString("ID_LECTOR");
 				String nombre = rs.getNString("NOMBRE");
-				int multas = rs.getInt("MULTAS_PENDIENTES");
+				double multas = rs.getDouble("MULTAS_PENDIENTES");
 
 				System.out.println("ID: " + id_lector + " Nombre: " + nombre + " Multas: " + multas);
 
-//				if (multas > 0) {
-//					System.out.println("ID: " + id_lector + " Nombre: " + nombre + " Multas: " + multas);
-//				}
-
 			}
 
-		} catch (Exception e) {
+		} catch (SQLException e) {
 			// TODO: handle exception
+			e.printStackTrace();
 		}
 	}
+
+	/*
+	 * Ejercicio 11: CallableStatement (Parámetro OUT)
+	 */
 
 	public void procesarDevolucion(int idPrestamo) {
 		String call = "EXEC REGISTRAR_DEVOLUCION(?,?)";
@@ -283,11 +326,16 @@ public class Conexion {
 			System.out.println("Devolucion exitosa");
 			System.out.println("Se ha devuelto el libro: " + titulo);
 
-		} catch (Exception e) {
+		} catch (SQLException e) {
 			// TODO: handle exception
+			e.printStackTrace();
 		}
 
 	}
+
+	/*
+	 * Ejercicio 12: CallableStatement (Llamada a Función)
+	 */
 
 	public void obtenerMulta(int idLector) throws SQLException {
 		Connection cn = null;
@@ -319,33 +367,113 @@ public class Conexion {
 
 	}
 
+	/*
+	 * Ejercicio 13: Transacciones (COMMIT) Tarda mucho en cargar y no termina
+	 * revisar
+	 */
 	public void registrarPrestamoSeguro(int idLector, String isbn) throws SQLException {
 		Connection cn = null;
-		String insert = "insert into prestamos (ID_PRESTAMO,ID_LECTOR,ISBN) values(?,?,?)";
-		String update = "";
+		String insert = "insert into prestamos (ID_PRESTAMO,ID_LECTOR,ISBN,FECHA_LIMITE) values(?,?,?,?)";
+		String update = "update prestamos set Fecha_limite=? where id_prestamo=4";
 		try {
 			cn = DriverManager.getConnection(url, login, password);
-//			cn.setAutoCommit(false);
-
 			PreparedStatement pstm = cn.prepareStatement(insert);
+
+			/*
+			 * Para usar date hay que crear un objeto de ese tipo y setearle un long en este
+			 * caso la fecha del systema
+			 */
+			Date date = new Date(System.currentTimeMillis());
 			pstm.setInt(1, 4);
 			pstm.setInt(2, idLector);
 			pstm.setString(3, isbn);
+			pstm.setDate(4, date);
 
 			int verificacion = pstm.executeUpdate();
-//			cn.commit();
 
 			if (verificacion > 0) {
-
+				pstm.close();
 				System.out.println("Se ha creado un nuevo prestamo al lector con id: " + idLector);
 				System.out.println("El ISBN del libro es : " + isbn);
-			}
 
-//			PreparedStatement pstm2 = cn.prepareStatement(update);
+				PreparedStatement pstm2 = cn.prepareStatement(update);
+
+				pstm2.setDate(1, date);
+
+				int veri = pstm2.executeUpdate();
+
+				if (veri > 0) {
+					pstm2.close();
+
+					System.out.println("Updateado");
+				} else
+					throw new SQLException();
+
+			} else
+				throw new SQLException();
 
 		} catch (SQLException e) {
 			// TODO: handle exception
-//			cn.rollback();
+			e.printStackTrace();
 		}
+	}
+
+	/*
+	 * Ejercicio 14: Transacciones (ROLLBACK)
+	 */
+	public void transaccionesRollback(int idLector, String isbn) throws SQLException {
+		Connection cn = null;
+		String insert = "insert into prestamos (ID_PRESTAMO,ID_LECTOR,ISBN,FECHA_LIMITE) values(?,?,?,?)";
+		String update = "update prestamos set Fecha_limite=? where id_prestamo=4";
+		try {
+			cn = DriverManager.getConnection(url, login, password);
+			cn.setAutoCommit(false);
+			PreparedStatement pstm = cn.prepareStatement(insert);
+
+			/*
+			 * Para usar date hay que crear un objeto de ese tipo y setearle un long en este
+			 * caso la fecha del systema
+			 */
+			Date date = new Date(System.currentTimeMillis());
+			pstm.setInt(1, 4);
+			pstm.setInt(2, idLector);
+			pstm.setString(3, isbn);
+			pstm.setDate(4, date);
+
+			int verificacion = pstm.executeUpdate();
+
+			if (verificacion > 0) {
+				pstm.close();
+				System.out.println("Se ha creado un nuevo prestamo al lector con id: " + idLector);
+				System.out.println("El ISBN del libro es : " + isbn);
+
+				PreparedStatement pstm2 = cn.prepareStatement(update);
+
+				pstm2.setDate(1, date);
+
+				int veri = pstm2.executeUpdate();
+
+				if (veri > 0) {
+					pstm2.close();
+					cn.commit();
+					System.out.println("Updateado");
+				} else
+					throw new SQLException();
+
+			} else
+				throw new SQLException();
+
+		} catch (SQLException e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			cn.rollback();
+		}
+	}
+
+	/*
+	 * Ejercicio 15: CallableStatement (Parámetro IN/OUT)
+	 */
+
+	public void aplicarMulta(int idLector, double montoAdicional) {
 	}
 }
