@@ -57,7 +57,7 @@ public class Conexion {
 		}
 	}
 
-	public void insertarLector(int id, String nombre, String apellido, String email, int multas_pen) {
+	public void insertarLector(int id, String nombre, String apellido, String email, double multas_pen) {
 		String query = "INSERT INTO LECTORES (ID_LECTOR,NOMBRE,APELLIDO,EMAIL,MULTAS_PENDIENTES) VALUES (?,?,?,?,?)";
 		try (Connection connection = DriverManager.getConnection(url, login, password);
 				PreparedStatement pstm = connection.prepareStatement(query)) {
@@ -65,7 +65,9 @@ public class Conexion {
 			pstm.setString(2, nombre);
 			pstm.setString(3, apellido);
 			pstm.setNString(4, email);
-			pstm.setInt(5, multas_pen);
+			pstm.setDouble(5, multas_pen);
+
+			pstm.execute();
 
 			System.out.println("Cliente insertado exitosamente");
 		} catch (Exception e) {
@@ -286,9 +288,64 @@ public class Conexion {
 		}
 
 	}
-	
-	
-	public void obtenerMulta(int idLector) {
-		
+
+	public void obtenerMulta(int idLector) throws SQLException {
+		Connection cn = null;
+		String call = "{? = call CALCULAR_MULTA_LECTOR(?)}";
+
+		try {
+			cn = DriverManager.getConnection(url, login, password);
+			cn.setAutoCommit(false);
+
+			CallableStatement cls = cn.prepareCall(call);
+
+			cls.registerOutParameter(1, Types.NUMERIC);
+
+			cls.setInt(2, idLector);
+
+			cls.execute();
+
+			cn.commit();
+
+			double cantidad = cls.getDouble(1);
+
+			System.out.println("La multa del lector con id :" + idLector + " es de : " + cantidad + " €");
+
+		} catch (SQLException e) {
+			// TODO: handle exception
+			System.out.println("no se ha podido");
+			cn.rollback();
+		}
+
+	}
+
+	public void registrarPrestamoSeguro(int idLector, String isbn) throws SQLException {
+		Connection cn = null;
+		String insert = "insert into prestamos (ID_PRESTAMO,ID_LECTOR,ISBN) values(?,?,?)";
+		String update = "";
+		try {
+			cn = DriverManager.getConnection(url, login, password);
+//			cn.setAutoCommit(false);
+
+			PreparedStatement pstm = cn.prepareStatement(insert);
+			pstm.setInt(1, 4);
+			pstm.setInt(2, idLector);
+			pstm.setString(3, isbn);
+
+			int verificacion = pstm.executeUpdate();
+//			cn.commit();
+
+			if (verificacion > 0) {
+
+				System.out.println("Se ha creado un nuevo prestamo al lector con id: " + idLector);
+				System.out.println("El ISBN del libro es : " + isbn);
+			}
+
+//			PreparedStatement pstm2 = cn.prepareStatement(update);
+
+		} catch (SQLException e) {
+			// TODO: handle exception
+//			cn.rollback();
+		}
 	}
 }

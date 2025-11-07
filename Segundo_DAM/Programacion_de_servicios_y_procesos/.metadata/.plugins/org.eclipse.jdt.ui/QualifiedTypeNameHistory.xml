@@ -16,18 +16,21 @@
     <fullyQualifiedTypeName name="boletin_4_ejercicio_2.Contador"/>
     <fullyQualifiedTypeName name="boletin_4_ejercicio_3.Reloj"/>
     <fullyQualifiedTypeName name="boletin_3_ejercicio_3.Atleta"/>
-    <fullyQualifiedTypeName name="java.lang.String"/>
     <fullyQualifiedTypeName name="java.lang.System"/>
     <fullyQualifiedTypeName name="java.util.HashMap"/>
     <fullyQualifiedTypeName name="boletin_3_ejercicio_6.Estacion"/>
     <fullyQualifiedTypeName name="java.util.Map"/>
     <fullyQualifiedTypeName name="java.util.Scanner"/>
-    <fullyQualifiedTypeName name="java.util.ArrayList"/>
     <fullyQualifiedTypeName name="boletin_3_ejercicio_7.Pitufo"/>
     <fullyQualifiedTypeName name="java.lang.ThreadGroup"/>
     <fullyQualifiedTypeName name="boletin_5_ejercicio_1.Contador"/>
-    <fullyQualifiedTypeName name="java.lang.Thread"/>
     <fullyQualifiedTypeName name="boletin_5_ejercicio_2.ContadorInterrumpible"/>
-    <fullyQualifiedTypeName name="java.lang.Runnable"/>
     <fullyQualifiedTypeName name="boletin_6_ejercicio_1.Mihilo"/>
+    <fullyQualifiedTypeName name="java.lang.String"/>
+    <fullyQualifiedTypeName name="boletin_6_ejercicio_3.Tac"/>
+    <fullyQualifiedTypeName name="boletin_6_ejercicio_3.Tic"/>
+    <fullyQualifiedTypeName name="java.lang.Runnable"/>
+    <fullyQualifiedTypeName name="java.util.ArrayList"/>
+    <fullyQualifiedTypeName name="java.lang.Thread"/>
+    <fullyQualifiedTypeName name="boletin_6_ejercicio_4.Ascensor"/>
 </qualifiedTypeNameHistroy>
