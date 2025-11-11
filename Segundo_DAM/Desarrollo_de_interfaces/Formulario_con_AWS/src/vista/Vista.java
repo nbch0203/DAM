@@ -377,10 +377,12 @@ public class Vista extends JFrame {
 		);
 		
 		if (insertado) {
-			mostrarExito("✓ RESERVA ENVIADA CORRECTAMENTE\n✓ CLIENTE REGISTRADO EN LA BASE DE DATOS");
+			mostrarExito("RESERVA ENVIADA CORRECTAMENTE\n✓ CLIENTE REGISTRADO EN LA BASE DE DATOS");
 			limpiarCampos();
+			textPane.setText("La reserva se ha hecho correctamente");
 		} else {
 			mostrarError("No se pudo registrar la reserva en la base de datos");
+			textPane.setText("La reserva no se ha podido hacer correctamente");
 		}
 	}
 

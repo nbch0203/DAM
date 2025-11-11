@@ -347,9 +347,8 @@ public class Conexion {
 
 			CallableStatement cls = cn.prepareCall(call);
 
-			cls.registerOutParameter(1, Types.NUMERIC);
-
 			cls.setInt(2, idLector);
+			cls.registerOutParameter(1, Types.NUMERIC);
 
 			cls.execute();
 
@@ -370,51 +369,73 @@ public class Conexion {
 	/*
 	 * Ejercicio 13: Transacciones (COMMIT) Tarda mucho en cargar y no termina
 	 * revisar
+	 * 
+	 * mi intento
 	 */
-	public void registrarPrestamoSeguro(int idLector, String isbn) throws SQLException {
-		Connection cn = null;
-		String insert = "insert into prestamos (ID_PRESTAMO,ID_LECTOR,ISBN,FECHA_LIMITE) values(?,?,?,?)";
-		String update = "update prestamos set Fecha_limite=? where id_prestamo=4";
+//	public void registrarPrestamoSeguro(int idLector, String isbn) throws SQLException {
+//		Connection cn = null;
+//		String insert = "insert into prestamos (ID_PRESTAMO,ID_LECTOR,ISBN,FECHA_LIMITE) values(?,?,?,?)";
+//		String update = "update prestamos set Fecha_limite=? where id_prestamo=4";
+//		try {
+//			cn = DriverManager.getConnection(url, login, password);
+//			PreparedStatement pstm = cn.prepareStatement(insert);
+//
+//			/*
+//			 * Para usar date hay que crear un objeto de ese tipo y setearle un long en este
+//			 * caso la fecha del systema
+//			 */
+//			Date date = new Date(System.currentTimeMillis());
+//			pstm.setInt(1, 4);
+//			pstm.setInt(2, idLector);
+//			pstm.setString(3, isbn);
+//			pstm.setDate(4, date);
+//
+//			int verificacion = pstm.executeUpdate();
+//
+//			if (verificacion > 0) {
+//				pstm.close();
+//				System.out.println("Se ha creado un nuevo prestamo al lector con id: " + idLector);
+//				System.out.println("El ISBN del libro es : " + isbn);
+//
+//				PreparedStatement pstm2 = cn.prepareStatement(update);
+//
+//				pstm2.setDate(1, date);
+//
+//				int veri = pstm2.executeUpdate();
+//
+//				if (veri > 0) {
+//					pstm2.close();
+//
+//					System.out.println("Updateado");
+//				} else
+//					throw new SQLException();
+//
+//			} else
+//				throw new SQLException();
+//
+//		} catch (SQLException e) {
+//			// TODO: handle exception
+//			e.printStackTrace();
+//		}
+//	}
+
+	private static void registrarPrestamoSeguro(int id, String isbn) throws SQLException {
 		try {
-			cn = DriverManager.getConnection(url, login, password);
-			PreparedStatement pstm = cn.prepareStatement(insert);
+			connection.setAutoCommit(false);
+			String sql = "UPDATE prestamos SET isbn = ? WHERE id_prestamo = ?";
+			PreparedStatement ps = connection.prepareStatement(sql);
+			ps.setString(1, sql);
+			ps.setInt(2, id);
+			ps.executeUpdate();
 
-			/*
-			 * Para usar date hay que crear un objeto de ese tipo y setearle un long en este
-			 * caso la fecha del systema
-			 */
-			Date date = new Date(System.currentTimeMillis());
-			pstm.setInt(1, 4);
-			pstm.setInt(2, idLector);
-			pstm.setString(3, isbn);
-			pstm.setDate(4, date);
-
-			int verificacion = pstm.executeUpdate();
-
-			if (verificacion > 0) {
-				pstm.close();
-				System.out.println("Se ha creado un nuevo prestamo al lector con id: " + idLector);
-				System.out.println("El ISBN del libro es : " + isbn);
-
-				PreparedStatement pstm2 = cn.prepareStatement(update);
-
-				pstm2.setDate(1, date);
-
-				int veri = pstm2.executeUpdate();
-
-				if (veri > 0) {
-					pstm2.close();
-
-					System.out.println("Updateado");
-				} else
-					throw new SQLException();
-
-			} else
-				throw new SQLException();
-
+			sql = "INSERT INTO prestamos(id_prestamo, isbn) VALUES(?, ?)";
+			ps = connection.prepareStatement(sql);
+			ps.setInt(1, id);
+			ps.setString(2, sql);
+			ps.executeUpdate();
+			connection.commit();
 		} catch (SQLException e) {
-			// TODO: handle exception
-			e.printStackTrace();
+			connection.rollback();
 		}
 	}
 
@@ -475,5 +496,41 @@ public class Conexion {
 	 */
 
 	public void aplicarMulta(int idLector, double montoAdicional) {
+		Connection cn = null;
+		String call = "call ACTUALIZAR_MULTA_INOUT(?,?)";
+//		String query = "Select MULTAS_PENDIENTES from lectores where id_lector=?";
+//		Double multa = null;
+		try {
+			cn = DriverManager.getConnection(url, login, password);
+			CallableStatement cls = cn.prepareCall(call);
+//			PreparedStatement pstm = cn.prepareStatement(query);
+
+//			pstm.setInt(1, idLector);
+			// seteo de entrada el parametro 1
+			cls.setInt(1, idLector);
+
+			// cambio a salida el parametro 2
+			cls.registerOutParameter(2, Types.DOUBLE);
+
+			// seteo de entrada el parametro 2
+			cls.setDouble(2, montoAdicional);
+
+//			ResultSet rs = pstm.executeQuery();
+//
+//			while (rs.next()) {
+//				multa = rs.getDouble("MULTAS_PENDIENTES");
+//			}
+
+			cls.execute();
+
+			double monto = cls.getDouble(2);
+
+			System.out.println("Se le ha sumado una cantidad de : " + monto);
+
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+
 	}
 }

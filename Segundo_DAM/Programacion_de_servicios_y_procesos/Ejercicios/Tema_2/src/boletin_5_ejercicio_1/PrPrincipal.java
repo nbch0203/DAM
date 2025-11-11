@@ -4,7 +4,7 @@ public class PrPrincipal {
 	public static void main(String[] args) {
 		Contador c = new Contador();
 
-		Thread t = new Thread(c);
+		Thread t = new Thread((Runnable) c);
 
 	}
 

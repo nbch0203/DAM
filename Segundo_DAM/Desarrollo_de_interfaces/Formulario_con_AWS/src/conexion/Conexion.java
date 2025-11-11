@@ -92,29 +92,7 @@ public class Conexion {
 		}
 	}
 
-	/**
-	 * Inserta un cliente en la base de datos
-	 * @param nombre Nombre del cliente
-	 * @param correo Correo electrónico
-	 * @param telefono Teléfono
-	 * @return true si fue exitoso, false en caso contrario
-	 */
-	public boolean insertarCliente(String nombre, String correo, String telefono) {
-		String query = "INSERT INTO clientes (nombre, correo, telefono, fecha_registro) VALUES (?, ?, ?, NOW())";
-		try (PreparedStatement pstm = connection.prepareStatement(query)) {
-			pstm.setString(1, nombre);
-			pstm.setString(2, correo);
-			pstm.setString(3, telefono);
-
-			int filasAfectadas = pstm.executeUpdate();
-			System.out.println("Cliente insertado exitosamente. Filas afectadas: " + filasAfectadas);
-			return true;
-		} catch (SQLException e) {
-			System.err.println("Error al insertar cliente");
-			e.printStackTrace();
-			return false;
-		}
-	}
+	
 
 	/**
 	 * Inserta un cliente y devuelve su ID generado
@@ -148,28 +126,7 @@ public class Conexion {
 		}
 	}
 
-	/**
-	 * Ejecuta una consulta de todos los clientes
-	 */
-	public void ejecutarConsulta() throws SQLException {
-		int id;
-		String nombre, correo, telefono;
-		Timestamp fechaRegistro;
 
-		st = connection.createStatement();
-		rs = st.executeQuery("SELECT id, nombre, correo, telefono, fecha_registro FROM clientes");
-
-		while (rs.next()) {
-			id = rs.getInt("id");
-			nombre = rs.getString("nombre");
-			correo = rs.getString("correo");
-			telefono = rs.getString("telefono");
-			fechaRegistro = rs.getTimestamp("fecha_registro");
-
-			System.out.println("ID: " + id + " | Nombre: " + nombre + " | Correo: " + correo + " | Telefono: "
-					+ telefono + " | Fecha Registro: " + fechaRegistro);
-		}
-	}
 
 	/**
 	 * Cierra la conexión con la base de datos y libera recursos
@@ -192,107 +149,6 @@ public class Conexion {
 		}
 	}
 
-	/**
-	 * Borra un cliente por ID
-	 */
-	public void borrarCliente(int id) {
-		String query = "DELETE FROM clientes WHERE id = ?";
-		try (PreparedStatement pstmt = connection.prepareStatement(query)) {
-			pstmt.setInt(1, id);
-			int resultado = pstmt.executeUpdate();
-			System.out.println("Cliente/s borrado con exito. Filas afectadas: " + resultado);
-		} catch (SQLException e) {
-			System.err.println("Error al borrar cliente");
-			e.printStackTrace();
-		}
-	}
-
-	/**
-	 * Actualiza el correo de un cliente
-	 */
-	public void actualizarCorreo(int id, String correo) {
-		String query = "UPDATE clientes SET correo = ? WHERE id = ?";
-		try (PreparedStatement pstm = connection.prepareStatement(query)) {
-			pstm.setString(1, correo);
-			pstm.setInt(2, id);
-			int filasAfectadas = pstm.executeUpdate();
-			System.out.println("Correo actualizado exitosamente. Filas afectadas: " + filasAfectadas);
-		} catch (SQLException e) {
-			System.err.println("Error al actualizar correo");
-			e.printStackTrace();
-		}
-	}
-
-	/**
-	 * Actualiza todos los datos de un cliente
-	 */
-	public void actualizarCliente(int id, String nombre, String correo, String telefono) {
-		String query = "UPDATE clientes SET nombre = ?, correo = ?, telefono = ? WHERE id = ?";
-		try (PreparedStatement pstm = connection.prepareStatement(query)) {
-			pstm.setString(1, nombre);
-			pstm.setString(2, correo);
-			pstm.setString(3, telefono);
-			pstm.setInt(4, id);
-			int filasAfectadas = pstm.executeUpdate();
-			System.out.println("Cliente actualizado exitosamente. Filas afectadas: " + filasAfectadas);
-		} catch (SQLException e) {
-			System.err.println("Error al actualizar cliente");
-			e.printStackTrace();
-		}
-	}
-
-	/**
-	 * Busca un cliente por ID
-	 */
-	public void buscarClientePorId(int id) {
-		String query = "SELECT id, nombre, correo, telefono, fecha_registro FROM clientes WHERE id = ?";
-		try (PreparedStatement pstm = connection.prepareStatement(query)) {
-			pstm.setInt(1, id);
-			ResultSet resultado = pstm.executeQuery();
-
-			if (resultado.next()) {
-				System.out.println("ID: " + resultado.getInt("id"));
-				System.out.println("Nombre: " + resultado.getString("nombre"));
-				System.out.println("Correo: " + resultado.getString("correo"));
-				System.out.println("Telefono: " + resultado.getString("telefono"));
-				System.out.println("Fecha Registro: " + resultado.getTimestamp("fecha_registro"));
-			} else {
-				System.out.println("No se encontro cliente con ID: " + id);
-			}
-			resultado.close();
-		} catch (SQLException e) {
-			System.err.println("Error al buscar cliente");
-			e.printStackTrace();
-		}
-	}
-
-	/**
-	 * Busca clientes por nombre (búsqueda parcial)
-	 */
-	public void buscarClientesPorNombre(String nombreBuscar) {
-		String query = "SELECT id, nombre, correo, telefono, fecha_registro FROM clientes WHERE nombre LIKE ?";
-		try (PreparedStatement pstm = connection.prepareStatement(query)) {
-			pstm.setString(1, "%" + nombreBuscar + "%");
-			ResultSet resultado = pstm.executeQuery();
-
-			boolean encontrado = false;
-			while (resultado.next()) {
-				encontrado = true;
-				System.out.println(
-						"ID: " + resultado.getInt("id") + " | Nombre: " + resultado.getString("nombre") + " | Correo: "
-								+ resultado.getString("correo") + " | Telefono: " + resultado.getString("telefono")
-								+ " | Fecha Registro: " + resultado.getTimestamp("fecha_registro"));
-			}
-
-			if (!encontrado) {
-				System.out.println("No se encontraron clientes con nombre similar a: " + nombreBuscar);
-			}
-			resultado.close();
-		} catch (SQLException e) {
-			System.err.println("Error al buscar clientes");
-			e.printStackTrace();
-		}
-	}
 
 	/**
 	 * Verifica si la conexión está activa
