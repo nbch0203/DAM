@@ -29,8 +29,12 @@
     <fullyQualifiedTypeName name="java.lang.String"/>
     <fullyQualifiedTypeName name="boletin_6_ejercicio_3.Tac"/>
     <fullyQualifiedTypeName name="boletin_6_ejercicio_3.Tic"/>
-    <fullyQualifiedTypeName name="java.lang.Runnable"/>
-    <fullyQualifiedTypeName name="java.util.ArrayList"/>
-    <fullyQualifiedTypeName name="java.lang.Thread"/>
     <fullyQualifiedTypeName name="boletin_6_ejercicio_4.Ascensor"/>
+    <fullyQualifiedTypeName name="java.lang.Runnable"/>
+    <fullyQualifiedTypeName name="java.util.concurrent.Semaphore"/>
+    <fullyQualifiedTypeName name="ejercicios_repaso_monitores_barreras.Coordinador"/>
+    <fullyQualifiedTypeName name="javax.sql.rowset.spi.SyncResolver"/>
+    <fullyQualifiedTypeName name="java.lang.Thread"/>
+    <fullyQualifiedTypeName name="java.util.ArrayList"/>
+    <fullyQualifiedTypeName name="ejercicios_repaso_monitores_barreras.Tarea"/>
 </qualifiedTypeNameHistroy>
