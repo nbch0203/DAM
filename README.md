@@ -155,17 +155,16 @@ Introducción a servicios cloud y computación en la nube con AWS. Despliegue de
 DAM/
 │
 ├── 📘 Primero/
-│   ├── BBDD/
-│   ├── LenguajeDeMarcas/
-│   ├── SistemasInformaticos/
+│   ├── Bases de datos/
+│   ├── Lenguaje de Marcas/
 │   └── Programacion/
 │
 └── 📕 Segundo/
-    ├── AccesoDatos/
-    ├── DesarrolloInterfaces/
-    ├── SGE/
-    ├── PMDM/
-    └── PSP/
+    ├── Acceso a Datos/
+    ├── Desarrollo de aplicaciones multimedia y moviles/
+    ├── Desarrollo de interfaces/
+    ├── Programacion de servicios y procesos/
+    └── Sistemas gestores de empresas/
 ```
 
 ---
