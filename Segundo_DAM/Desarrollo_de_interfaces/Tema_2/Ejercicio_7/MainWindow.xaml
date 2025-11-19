@@ -1,0 +1,16 @@
+﻿<Window x:Class="Ejercicio_7.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+ Title="Ejercicio 7" Height="200" Width="300">
+    <Window.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Background" Value="LightGreen"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+        </Style>
+    </Window.Resources>
+
+    <Grid Name="mainGrid">
+        <Button Content="Botón Estilizado" Width="150" Height="50" VerticalAlignment="Center" HorizontalAlignment="Center" Click="backgroundColorChange"/>
+    </Grid>
+</Window>

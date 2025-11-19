@@ -7,7 +7,6 @@ public class Coordinador {
 	ArrayList<Tarea> lista = new ArrayList<Tarea>();
 	private Tarea t;
 	private int contador = 0;
-	private boolean confirmacion_todos = false;
 
 	public synchronized void iniciar() {
 
@@ -16,15 +15,19 @@ public class Coordinador {
 		lista.add(new Tarea());
 
 		for (int i = 0; i < lista.size(); i++) {
-			t=lista.get(i);
-			t.run();
-			t.j
+			t = lista.get(i);
+			Thread h1= new Thread(t);
+			h1.start();
+			contador++;
+			
+			System.out.println("Iniciado el hilo:"+h1.getId());
 		}
 
 	}
 
 	public void finalizar() {
 		if (contador == 3) {
+			
 			System.out.println("Todos los hilos han terminado la fase finalizar");
 		}
 	}

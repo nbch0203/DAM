@@ -1,0 +1,8 @@
+﻿<Window x:Class="Ejercicio_6.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+ xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+ Title="Ejercicio 6" Height="300" Width="400">
+    <Grid>
+        <DataGrid Name="dataGridUsers" AutoGenerateColumns="True" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+    </Grid>
+</Window>

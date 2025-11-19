@@ -13,7 +13,8 @@ public class PrPrincipal {
 
 		for (int i = 0; i < 10; i++)
 			try {
-				pacientes[i].join();
+				Thread h = new Thread(pacientes[i]);
+				h.join();
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}

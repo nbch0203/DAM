@@ -20,6 +20,7 @@ public class Paciente implements Runnable {
 		try {
 			semaforo.acquire();
 			this.consultorioMedico.entrarConsulta(this.idCliente);
+			semaforo.release();
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

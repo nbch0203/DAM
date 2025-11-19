@@ -4,8 +4,6 @@ import java.util.concurrent.Semaphore;
 
 public class Tarea implements Runnable {
 
-	private boolean confirmacion = false;
-	private int contador;
 	private Semaphore sm = new Semaphore(3);
 
 	@Override
