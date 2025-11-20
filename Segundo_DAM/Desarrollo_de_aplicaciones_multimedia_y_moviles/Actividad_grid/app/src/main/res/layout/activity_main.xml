@@ -59,9 +59,9 @@
             android:backgroundTint="#2196F3"
             android:text="Azul"
             app:autoSizeTextType="uniform"
-            app:layout_column="3"
+            app:layout_column="1"
             app:layout_columnWeight="1"
-            app:layout_row="0" />
+            app:layout_row="3" />
 
         <Button
             android:id="@+id/boton_marron"
@@ -98,37 +98,25 @@
             app:layout_row="1" />
 
         <Button
-            android:id="@+id/boton_rosa"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:backgroundTint="#E91E63"
-            android:text="Rosa"
+            android:id="@+id/boton_limpiar"
+            android:layout_width="15dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="0dp"
+            android:text="Limpiar"
             app:autoSizeTextType="uniform"
-            app:layout_column="3"
-            app:layout_columnWeight="1"
-            app:layout_row="1" />
-
-        <Button
-            android:id="@+id/boton_empezar"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="Empezar"
-            app:autoSizeTextType="uniform"
-            app:layout_column="0"
+            app:layout_column="2"
             app:layout_columnSpan="2"
             app:layout_columnWeight="1"
             app:layout_row="3" />
 
         <Button
-            android:id="@+id/boton_limpiar"
-            android:layout_width="0dp"
+            android:id="@+id/boton_empezar"
+            android:layout_width="15dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="Limpiar"
+            android:layout_marginStart="16dp"
+            android:text="Empezar"
             app:autoSizeTextType="uniform"
-            app:layout_column="2"
-            app:layout_columnSpan="2"
+            app:layout_column="0"
             app:layout_columnWeight="1"
             app:layout_row="3" />
 
