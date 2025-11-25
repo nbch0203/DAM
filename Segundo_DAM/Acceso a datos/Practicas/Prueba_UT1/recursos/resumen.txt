@@ -1,0 +1,5 @@
+--- REPORTE DE ARTÍCULOS CON PRECIO SUPERIOR AL PROMEDIO ---
+Precio Promedio del Catálogo: 122,08€
+
+Artículos por encima del promedio:
+[P001] Monitor Curvo 27: 299,99 €
