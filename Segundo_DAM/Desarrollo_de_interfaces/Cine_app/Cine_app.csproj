@@ -23,4 +23,10 @@
     </None>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Logica_presentacion\" />
+    <Folder Include="Recursos\" />
+    <Folder Include="Utilidades\" />
+  </ItemGroup>
+
 </Project>
