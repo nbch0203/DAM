@@ -1,0 +1,27 @@
+# Credenciales
+*.env
+.env.*
+
+# Visual Studio
+.vs/
+*.suo
+*.user
+[Bb]in/
+[Oo]bj/
+
+# Eclipse
+.metadata/
+.settings/
+.classpath
+.project
+
+# Compilados Java
+[Tt]arget/
+
+# Compilados generales
+*.dll
+*.exe
+*.pdb
+*.cache
+*.class
+
