@@ -23,11 +23,9 @@
 *.exe
 *.pdb
 *.cache
-*.class
 *.jar
 *.war
 *.ear
-// ...existing code...
 
 # VS Code
 .vscode/
