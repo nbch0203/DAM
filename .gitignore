@@ -24,21 +24,69 @@
 *.pdb
 *.cache
 *.class
+*.jar
+*.war
+*.ear
+// ...existing code...
 
+# VS Code
+.vscode/
+!.vscode/extensions.json
+!.vscode/settings.json
+!.vscode/launch.json
+!.vscode/tasks.json
 
+# IntelliJ IDEA
+.idea/
 *.iml
-.gradle
-/local.properties
-/.idea/caches
-/.idea/libraries
-/.idea/modules.xml
-/.idea/workspace.xml
-/.idea/navEditor.xml
-/.idea/assetWizardSettings.xml
-.DS_Store
-/build
-/captures
-.externalNativeBuild
-.cxx
-local.properties
+out/
 
+# NetBeans
+nbproject/private/
+nbbuild/
+dist/
+.nb-gradle/
+
+# Gradle
+.gradle/
+[Bb]uild/
+# Mantener wrapper en el repo
+!gradlew
+!gradlew.bat
+!gradle/wrapper/gradle-wrapper.jar
+!gradle/wrapper/gradle-wrapper.properties
+
+# Maven (mantener wrapper en el repo)
+!mvnw
+!mvnw.cmd
+!.mvn/wrapper/maven-wrapper.jar
+!.mvn/wrapper/maven-wrapper.properties
+
+# Android
+local.properties
+.cxx/
+.externalNativeBuild/
+captures/
+*.keystore
+*.jks
+
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-error.log*
+
+# Bases de datos y datos locales
+*.db
+*.sqlite
+*.sqlite3
+
+# Archivos de sistema
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Logs y dumps
+*.log
+*.dump
+*.tmp
