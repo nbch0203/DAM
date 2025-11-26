@@ -1,0 +1,8 @@
+using System.Windows;
+
+namespace Cine_app
+{
+    public partial class App : Application
+    {
+    }
+}
