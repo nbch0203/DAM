@@ -1,6 +1,7 @@
 ﻿using Cine_app.Modelos;
 using Cine_app.Models;
 using Cine_app.Services;
+using Cine_app.Servicios;
 using System.Windows;
 
 namespace Cine_app.Views
@@ -86,15 +87,44 @@ namespace Cine_app.Views
         {
             if (sender is FrameworkElement element && element.Tag is Sesion sesion)
             {
-                // Abrir ventana de selección de butacas
-                var seleccionButacasWindow = new SeleccionButacasWindow(sesion, _pelicula);
-                seleccionButacasWindow.ShowDialog();
-
-                // Si completó la reserva, cerrar esta ventana
-                if (seleccionButacasWindow.DialogResult == true)
+                // Verificar si el usuario está autenticado antes de continuar
+                if (!ServicioSesion.Instance.EstaAutenticado)
                 {
-                    this.Close();
+                    var result = MessageBox.Show(
+                        "Debes iniciar sesión para poder reservar entradas.\n\n¿Deseas iniciar sesión ahora?",
+                        "Iniciar Sesión Requerido",
+                        MessageBoxButton.YesNo,
+                        MessageBoxImage.Information);
+
+                    if (result == MessageBoxResult.Yes)
+                    {
+                        var loginWindow = new LoginWindow();
+                        bool? loginResult = loginWindow.ShowDialog();
+
+                        // Si después del login el usuario está autenticado, continuar
+                        if (ServicioSesion.Instance.EstaAutenticado)
+                        {
+                            AbrirSeleccionButacas(sesion);
+                        }
+                    }
+                    return;
                 }
+
+                // Usuario autenticado, abrir ventana de selección de butacas
+                AbrirSeleccionButacas(sesion);
+            }
+        }
+
+        private void AbrirSeleccionButacas(Sesion sesion)
+        {
+            // Abrir ventana de selección de butacas
+            var seleccionButacasWindow = new SeleccionButacasWindow(sesion, _pelicula);
+            seleccionButacasWindow.ShowDialog();
+
+            // Si completó la reserva, cerrar esta ventana
+            if (seleccionButacasWindow.DialogResult == true)
+            {
+                this.Close();
             }
         }
 

@@ -63,7 +63,8 @@
                 <TextBlock Text="Contraseña:" FontWeight="SemiBold" Margin="0,15,0,5"/>
                 <PasswordBox x:Name="txtPassword"
                             BorderBrush="#ddd"
-                            BorderThickness="1"/>
+                            BorderThickness="1"
+                            KeyDown="TxtPassword_KeyDown"/>
 
                 <!-- Mensaje de error -->
                 <TextBlock x:Name="txtError" 
@@ -92,7 +93,7 @@
                         FontWeight="SemiBold"/>
 
                 <Button x:Name="btnInvitado" 
-                        Content="Continuar sin cuenta" 
+                        Content="Cancelar" 
                         Click="BtnInvitado_Click"
                         Background="Transparent"
                         Foreground="#666"

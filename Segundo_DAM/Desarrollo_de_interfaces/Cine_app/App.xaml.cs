@@ -1,8 +1,18 @@
 using System.Windows;
+using Cine_app.Views;
+using Cine_app.Modelos;
 
 namespace Cine_app
 {
     public partial class App : Application
     {
+        public static Usuario? UsuarioActual { get; set; }
+
+        private void Application_Startup(object sender, StartupEventArgs e)
+        {
+            // Abrir directamente la ventana de cartelera
+            var carteleraWindow = new CarteleraWindow();
+            carteleraWindow.Show();
+        }
     }
 }

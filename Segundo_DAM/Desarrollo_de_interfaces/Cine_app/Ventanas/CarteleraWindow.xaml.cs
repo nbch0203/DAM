@@ -77,7 +77,7 @@ namespace Cine_app.Views
         {
             if (sender is FrameworkElement element && element.Tag is int peliculaId)
             {
-                AbrirReserva(peliculaId);
+                AbrirVentanaSeleccionSesion(peliculaId);
             }
         }
 
@@ -85,38 +85,8 @@ namespace Cine_app.Views
         {
             if (sender is FrameworkElement element && element.Tag is int peliculaId)
             {
-                AbrirReserva(peliculaId);
+                AbrirVentanaSeleccionSesion(peliculaId);
             }
-        }
-
-        private void AbrirReserva(int peliculaId)
-        {
-            // Verificar si el usuario está autenticado
-            if (!ServicioSesion.Instance.EstaAutenticado)
-            {
-                var result = MessageBox.Show(
-                    "Debes iniciar sesión para poder reservar entradas.\n\n¿Deseas iniciar sesión ahora?",
-                    "Iniciar Sesión Requerido",
-                    MessageBoxButton.YesNo,
-                    MessageBoxImage.Information);
-
-                if (result == MessageBoxResult.Yes)
-                {
-                    var loginWindow = new LoginWindow();
-                    loginWindow.ShowDialog();
-
-                    // Si después del login el usuario está autenticado, continuar
-                    if (ServicioSesion.Instance.EstaAutenticado)
-                    {
-                        ActualizarEstadoUsuario();
-                        AbrirVentanaSeleccionSesion(peliculaId);
-                    }
-                }
-                return;
-            }
-
-            // Usuario autenticado, abrir ventana de selección de sesión
-            AbrirVentanaSeleccionSesion(peliculaId);
         }
 
         private void AbrirVentanaSeleccionSesion(int peliculaId)
@@ -157,7 +127,5 @@ namespace Cine_app.Views
                 ActualizarEstadoUsuario();
             }
         }
-
-
     }
 }
