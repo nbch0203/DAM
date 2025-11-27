@@ -190,8 +190,9 @@
                                     </Border>
 
                                     <!-- Información de la película -->
-                                    <StackPanel Padding="15">
-                                        <TextBlock Text="{Binding Titulo}" 
+                                    <Border Padding="15">
+                                        <StackPanel>
+                                            <TextBlock Text="{Binding Titulo}" 
                                                   FontSize="18" 
                                                   FontWeight="Bold"
                                                   TextWrapping="Wrap"
@@ -199,33 +200,34 @@
                                                   MaxHeight="50"
                                                   TextTrimming="CharacterEllipsis"/>
 
-                                        <TextBlock Text="{Binding Genero}" 
-                                                  FontSize="14" 
-                                                  Foreground="#666"
-                                                  Margin="0,5,0,0"/>
+                                            <TextBlock Text="{Binding Genero}" 
+                                                      FontSize="14" 
+                                                      Foreground="#666"
+                                                      Margin="0,5,0,0"/>
 
-                                        <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
-                                            <TextBlock Text="⏱️" FontSize="14" Margin="0,0,5,0"/>
-                                            <TextBlock FontSize="14" Foreground="#666">
-                                                <TextBlock.Text>
-                                                    <MultiBinding StringFormat="{}{0} min">
-                                                        <Binding Path="Duracion"/>
-                                                    </MultiBinding>
-                                                </TextBlock.Text>
-                                            </TextBlock>
+                                            <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
+                                                <TextBlock Text="⏱️" FontSize="14" Margin="0,0,5,0"/>
+                                                <TextBlock FontSize="14" Foreground="#666">
+                                                    <TextBlock.Text>
+                                                        <MultiBinding StringFormat="{}{0} min">
+                                                            <Binding Path="Duracion"/>
+                                                        </MultiBinding>
+                                                    </TextBlock.Text>
+                                                </TextBlock>
+                                            </StackPanel>
+
+                                            <Button Content="Ver Horarios ➔" 
+                                                   Background="#e94560"
+                                                   Foreground="White"
+                                                   BorderThickness="0"
+                                                   Padding="10,8"
+                                                   Margin="0,15,0,0"
+                                                   FontWeight="SemiBold"
+                                                   Cursor="Hand"
+                                                   Click="BtnVerHorarios_Click"
+                                                   Tag="{Binding Id}"/>
                                         </StackPanel>
-
-                                        <Button Content="Ver Horarios ➔" 
-                                               Background="#e94560"
-                                               Foreground="White"
-                                               BorderThickness="0"
-                                               Padding="10,8"
-                                               Margin="0,15,0,0"
-                                               FontWeight="SemiBold"
-                                               Cursor="Hand"
-                                               Click="BtnVerHorarios_Click"
-                                               Tag="{Binding Id}"/>
-                                    </StackPanel>
+                                    </Border>
                                 </StackPanel>
                             </Border>
                         </DataTemplate>

@@ -1,6 +1,7 @@
 ﻿<Window x:Class="Cine_app.Views.SeleccionSesionWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:System="clr-namespace:System;assembly=mscorlib"
         Title="Seleccionar Sesión" Height="600" Width="900"
         WindowStartupLocation="CenterScreen"
         ResizeMode="CanResize">
@@ -97,7 +98,6 @@
                               Margin="0,0,0,15"/>
 
                     <Calendar x:Name="calendario"
-                             DisplayDateStart="{Binding Source={x:Static System:DateTime.Now}}"
                              SelectedDatesChanged="Calendario_SelectedDatesChanged"
                              HorizontalAlignment="Center"/>
                 </StackPanel>

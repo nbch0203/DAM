@@ -17,6 +17,7 @@ namespace Cine_app.Views
             _pelicula = pelicula;
 
             CargarInfoPelicula();
+            calendario.DisplayDateStart = DateTime.Today;
             calendario.SelectedDate = DateTime.Today;
         }
 
