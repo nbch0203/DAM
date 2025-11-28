@@ -1,109 +1,378 @@
-# ?? DOCUMENTACI�N COMPLETA DEL PROYECTO - Sistema de Reserva de Cine
+﻿# 📚 DOCUMENTACIÓN COMPLETA DEL PROYECTO - Sistema de Reserva de Cine
 
-## ?? Tabla de Contenidos
-1. [Visi�n General](#visi�n-general)
+## 📋 Tabla de Contenidos
+1. [Visión General](#visión-general)
 2. [Arquitectura del Sistema](#arquitectura-del-sistema)
 3. [Estructura del Proyecto](#estructura-del-proyecto)
-4. [Modelos de Datos](#modelos-de-datos)
+4. [Modelos de Datos](#1-modelos-de-datos)
 5. [Servicios](#servicios)
-6. [Ventanas de la Aplicaci�n](#ventanas-de-la-aplicaci�n)
-7. [Base de Datos](#base-de-datos)
-8. [Flujo de Navegaci�n](#flujo-de-navegaci�n)
-9. [Caracter�sticas de Seguridad](#caracter�sticas-de-seguridad)
-10. [Dependencias](#dependencias)
+6. [Ventanas de la Aplicación](#ventanas-de-la-aplicación)
+7. [Flujo de Navegación](#flujo-de-navegación)
 
 ---
 
-## ?? Visi�n General
+## 🎯 Visión General
 
-### Descripci�n del Proyecto
-Sistema de reserva de cine desarrollado en **WPF (Windows Presentation Foundation)** con **.NET 10.0**, que permite a los usuarios ver la cartelera de pel�culas, seleccionar sesiones, reservar butacas y gestionar su perfil.
+### Descripción del Proyecto
+Sistema de reserva de cine desarrollado en **WPF (Windows Presentation Foundation)** con **.NET 10.0**, que permite a los usuarios ver la cartelera de películas, seleccionar sesiones, reservar butacas y gestionar su perfil.
 
-### Caracter�sticas Principales
-- ? Visualizaci�n de cartelera de pel�culas activas
-- ? Selecci�n de sesiones por fecha
-- ? Selecci�n visual de butacas con efecto de perspectiva
-- ? Sistema de autenticaci�n de usuarios
-- ? Registro de nuevos usuarios
-- ? Gesti�n de perfil y cambio de contrase�a
-- ? Historial de reservas
-- ? Generaci�n de c�digos de reserva �nicos
-- ? Manejo de estados de butacas (disponible, ocupada, seleccionada)
-- ? Soporte para diferentes tipos de butacas (Normal, VIP, Discapacitado)
+### Características Principales
+- ✅ Visualización de cartelera de películas activas
+- ✅ Selección de sesiones por fecha
+- ✅ Selección visual de butacas con efecto de perspectiva
+- ✅ Sistema de autenticación de usuarios
+- ✅ Registro de nuevos usuarios
+- ✅ Gestión de perfil y cambio de contraseña
+- ✅ Historial de reservas
+- ✅ Generación de códigos de reserva únicos
+- ✅ Manejo de estados de butacas (disponible, ocupada, seleccionada)
+- ✅ Soporte para diferentes tipos de butacas (Normal, VIP, Discapacitado)
 
-### Tecnolog�as Utilizadas
+### Tecnologías Utilizadas
 - **Framework**: .NET 10.0
 - **UI Framework**: WPF (Windows Presentation Foundation)
 - **Base de Datos**: MySQL
-- **Patr�n de Arquitectura**: MVVM (Model-View-ViewModel) parcial
-- **Programaci�n As�ncrona**: async/await
+- **Patrón de Arquitectura**: MVVM (Model-View-ViewModel) parcial
+- **Programación Asíncrona**: async/await
 - **ORM**: ADO.NET con MySql.Data
 
 ---
 
-## ??? Arquitectura del Sistema
+## 🏗️ Arquitectura del Sistema
 
-### Patr�n de Dise�o
+### Patrón de Diseño
 El proyecto sigue una arquitectura en capas:
 
 ```
-???????????????????????????????????????
-?         Capa de Presentaci�n        ?
-?     (Ventanas XAML + Code-behind)   ?
-???????????????????????????????????????
-?        Capa de Servicios            ?
-?  (ServicioBaseDeDatos, ServicioSesion) ?
-???????????????????????????????????????
-?         Capa de Modelos             ?
-?   (Entidades: Usuario, Pelicula,    ?
-?    Sesion, Butaca, Reserva)         ?
-???????????????????????????????????????
-?       Capa de Datos                 ?
-?      (Base de Datos MySQL)          ?
-???????????????????????????????????????
+┌────────────────────────────────────────┐
+│         Capa de Presentación           │
+│     (Ventanas XAML + Code-behind)      │
+├────────────────────────────────────────┤
+│           Capa de Servicios            │
+│  (ServicioBaseDeDatos, ServicioSesion) │
+├────────────────────────────────────────┤
+│             Capa de Modelos            │
+│     (Entidades: Usuario, Pelicula,     │
+│       Sesion, Butaca, Reserva)         │
+├────────────────────────────────────────┤
+│             Capa de Datos              │
+│         (Base de Datos MySQL)          │
+└────────────────────────────────────────┘
 ```
 
 ### Principios Aplicados
-- **Separaci�n de Responsabilidades**: Cada capa tiene una responsabilidad espec�fica
-- **Singleton Pattern**: ServicioSesion implementa el patr�n Singleton
-- **Programaci�n As�ncrona**: Operaciones de base de datos ejecutadas de forma as�ncrona
-- **Manejo de Errores**: Try-catch en operaciones cr�ticas con mensajes al usuario
+- **Separación de Responsabilidades**: Cada capa tiene una responsabilidad específica
+- **Singleton Pattern**: ServicioSesion implementa el patrón Singleton
+- **Programación Asíncrona**: Operaciones de base de datos ejecutadas de forma asíncrona
+- **Manejo de Errores**: Try-catch en operaciones críticas con mensajes al usuario
 
 ---
 
-## ?? Estructura del Proyecto
+## 📁 Estructura del Proyecto
+
+### Vista de Árbol Completa
 
 ```
-Cine_app/
-??? ?? Modelos/
-?   ??? Usuario.cs              # Modelo de usuario
-?   ??? Pelicula.cs            # Modelo de pel�cula
-?   ??? Sesion.cs              # Modelo de sesi�n y sala
-?   ??? Butaca.cs              # Modelos de butaca, reserva y vistas
-?
-??? ?? Servicios/
-?   ??? ServicioBaseDeDatos.cs # Acceso a datos
-?   ??? ServicioSesion.cs      # Gesti�n de sesi�n de usuario
-?
-??? ?? Ventanas/
-?   ??? CarteleraWindow.xaml[.cs]        # Ventana principal
-?   ??? LoginWindow.xaml[.cs]            # Inicio de sesi�n
-?   ??? RegistroWindow.xaml[.cs]         # Registro de usuarios
-?   ??? SeleccionSesionWindow.xaml[.cs]  # Selecci�n de horarios
-?   ??? SeleccionButacasWindow.xaml[.cs] # Selecci�n de butacas
-?   ??? PerfilUsuarioWindow.xaml[.cs]    # Perfil y reservas
-?
-??? ?? Database/
-?   ??? cinema_database_mysql.sql        # Script de base de datos
-?
-??? App.xaml[.cs]              # Punto de entrada de la aplicaci�n
-??? .env                       # Variables de entorno (conexi�n DB)
-??? Cine_app.csproj           # Archivo de proyecto
+🎬 Cine_app/
+│
+├── 📂 Modelos/                         # Entidades del dominio
+│   ├── 📄 Usuario.cs                   # Modelo de datos de usuario
+│   │   ├── ✓ Propiedades: Id, Nombre, Apellidos, Email, Password
+│   │   ├── ✓ Propiedad computada: NombreCompleto
+│   │   └── ✓ Validación: Activo, FechaRegistro
+│   │
+│   ├── 📄 Pelicula.cs                  # Modelo de datos de película
+│   │   ├── ✓ Propiedades: Id, Titulo, Descripcion, Director
+│   │   ├── ✓ Información: Duracion, Genero, FechaEstreno
+│   │   ├── ✓ Multimedia: ImagenUrl, Calificacion
+│   │   └── ✓ Estado: Activa
+│   │
+│   ├── 📄 Sesion.cs                    # Modelo de sesión/función
+│   │   ├── ✓ Clase Sesion
+│   │   │   ├── → Propiedades: Id, PeliculaId, SalaId
+│   │   │   ├── → FechaHora, Precio, Activa
+│   │   │   ├── → Navegación: Pelicula, Sala
+│   │   │   └── → Formato: FechaHoraFormateada
+│   │   │
+│   │   └── ✓ Clase Sala
+│   │       ├── → Id, Nombre
+│   │       ├── → Filas, ColumnasPerFila
+│   │       └── → CapacidadTotal (computed)
+│   │
+│   └── 📄 Butaca.cs                    # Modelos de butacas y reservas
+│       ├── ✓ Clase Butaca
+│       │   ├── → Id, SalaId, Fila, Columna
+│       │   ├── → Tipo (Normal/VIP/Discapacitado)
+│       │   ├── → Activa
+│       │   └── → Identificador (ej: "A1", "B5")
+│       │
+│       ├── ✓ Clase Reserva
+│       │   ├── → Id, UsuarioId, SesionId
+│       │   ├── → FechaReserva, Total, Estado
+│       │   ├── → CodigoReserva (único)
+│       │   └── → Navegación: Usuario, Sesion, Butacas
+│       │
+│       ├── ✓ Clase ReservaButaca
+│       │   ├── → Id, ReservaId, ButacaId, SesionId
+│       │   └── → Navegación: Butaca
+│       │
+│       └── ✓ Clase ReservaViewModel
+│           └── → Para binding en UI
+│
+├── 📂 Servicios/                       # Lógica de negocio
+│   ├── 📄 ServicioBaseDeDatos.cs       # Acceso y operaciones de BD
+│   │   ├── 🔧 Constructor
+│   │   │   └── → Carga connectionString desde .env
+│   │   │
+│   │   ├── 🎬 Métodos de Películas
+│   │   │   └── → ObtenerPeliculasActivasAsync()
+│   │   │
+│   │   ├── 📅 Métodos de Sesiones
+│   │   │   └── → ObtenerSesionesPorPeliculaAsync()
+│   │   │
+│   │   ├── 💺 Métodos de Butacas
+│   │   │   ├── → ObtenerButacasPorSalaAsync()
+│   │   │   └── → ObtenerButacasReservadasAsync()
+│   │   │
+│   │   ├── 👤 Métodos de Usuarios
+│   │   │   ├── → ValidarUsuarioAsync()
+│   │   │   ├── → ExisteUsuarioAsync()
+│   │   │   ├── → RegistrarUsuarioAsync()
+│   │   │   └── → ActualizarPasswordAsync()
+│   │   │
+│   │   └── 🎟️ Métodos de Reservas
+│   │       ├── → ObtenerReservasPorUsuarioAsync()
+│   │       ├── → ObtenerButacasDeReservaAsync() [privado]
+│   │       └── → CrearReservaAsync() [con transacción]
+│   │
+│   └── 📄 ServicioSesion.cs            # Gestión de sesión (Singleton)
+│       ├── 🔒 Propiedades
+│       │   ├── → Instance (Singleton)
+│       │   ├── → UsuarioActual
+│       │   └── → EstaAutenticado
+│       │
+│       ├── 📡 Eventos
+│       │   ├── → SesionIniciada
+│       │   └── → SesionCerrada
+│       │
+│       └── 🔧 Métodos
+│           ├── → IniciarSesion(Usuario)
+│           └── → CerrarSesion()
+│
+├── 📂 Ventanas/                        # Interfaz de usuario (Views)
+│   │
+│   ├── 🎬 CarteleraWindow.xaml[.cs]    # Ventana principal
+│   │   ├── 📋 Responsabilidades
+│   │   │   ├── → Mostrar cartelera de películas
+│   │   │   ├── → Gestión de sesión de usuario
+│   │   │   └── → Navegación a otras ventanas
+│   │   │
+│   │   └── 🔧 Métodos principales
+│   │       ├── → CarteleraWindow_Loaded()
+│   │       ├── → ActualizarEstadoUsuario()
+│   │       ├── → CargarPeliculas()
+│   │       ├── → Pelicula_Click()
+│   │       ├── → BtnVerHorarios_Click()
+│   │       ├── → BtnCuentaAccion_Click()
+│   │       └── → BtnPerfilUsuario_Click()
+│   │
+│   ├── 🔐 LoginWindow.xaml[.cs]        # Inicio de sesión
+│   │   ├── 📋 Responsabilidades
+│   │   │   ├── → Validar credenciales
+│   │   │   ├── → Autenticación de usuarios
+│   │   │   └── → Navegación a registro
+│   │   │
+│   │   └── 🔧 Métodos principales
+│   │       ├── → BtnLogin_Click()
+│   │       ├── → BtnRegistro_Click()
+│   │       ├── → BtnInvitado_Click()
+│   │       ├── → MostrarError()
+│   │       └── → TxtPassword_KeyDown()
+│   │
+│   ├── 📝 RegistroWindow.xaml[.cs]     # Registro de usuarios
+│   │   ├── 📋 Responsabilidades
+│   │   │   ├── → Validación de formulario
+│   │   │   ├── → Registro de nuevos usuarios
+│   │   │   └── → Verificación de email único
+│   │   │
+│   │   └── 🔧 Métodos principales
+│   │       ├── → BtnRegistrar_Click()
+│   │       ├── → ValidarCampos()
+│   │       │   ├── ✓ Valida nombre (min 2 chars)
+│   │       │   ├── ✓ Valida apellidos (min 2 chars)
+│   │       │   ├── ✓ Valida email (regex)
+│   │       │   ├── ✓ Valida teléfono (opcional, min 9)
+│   │       │   ├── ✓ Valida password (min 6 chars)
+│   │       │   └── ✓ Confirma password
+│   │       ├── → EsEmailValido()
+│   │       ├── → MostrarError()
+│   │       ├── → MostrarExito()
+│   │       └── → BtnCancelar_Click()
+│   │
+│   ├── 📅 SeleccionSesionWindow.xaml[.cs]  # Selección de horarios
+│   │   ├── 📋 Responsabilidades
+│   │   │   ├── → Mostrar info de película
+│   │   │   ├── → Calendario de fechas
+│   │   │   ├── → Listar sesiones disponibles
+│   │   │   └── → Verificar autenticación
+│   │   │
+│   │   └── 🔧 Métodos principales
+│   │       ├── → CargarInfoPelicula()
+│   │       ├── → Calendario_SelectedDatesChanged()
+│   │       ├── → CargarSesiones()
+│   │       ├── → BtnSeleccionarSesion_Click()
+│   │       ├── → AbrirSeleccionButacas()
+│   │       └── → BtnCerrar_Click()
+│   │
+│   ├── 💺 SeleccionButacasWindow.xaml[.cs]  # Selección de butacas
+│   │   ├── 📋 Responsabilidades
+│   │   │   ├── → Visualización 3D de sala
+│   │   │   ├── → Gestión de butacas (disponible/ocupada/seleccionada)
+│   │   │   ├── → Cálculo de total en tiempo real
+│   │   │   └── → Confirmación de reserva
+│   │   │
+│   │   ├── 🎨 Características visuales
+│   │   │   ├── ✓ Efecto de perspectiva
+│   │   │   ├── ✓ Tamaño dinámico por fila
+│   │   │   ├── ✓ Espaciado lateral (cono)
+│   │   │   └── ✓ Estilos por tipo de butaca
+│   │   │
+│   │   └── 🔧 Métodos principales
+│   │       ├── → CargarInformacion()
+│   │       ├── → CargarButacas()
+│   │       ├── → CrearVisualizacionButacas()
+│   │       ├── → CrearBotonButaca()
+│   │       ├── → BtnButaca_Click()
+│   │       ├── → ActualizarResumen()
+│   │       ├── → BtnConfirmarReserva_Click()
+│   │       └── → ProcesarReserva()
+│   │
+│   └── 👤 PerfilUsuarioWindow.xaml[.cs]    # Perfil y reservas
+│       ├── 📋 Responsabilidades
+│       │   ├── → Mostrar información de usuario
+│       │   ├── → Cambiar contraseña
+│       │   ├── → Historial de reservas
+│       │   └── → Formato de datos de reserva
+│       │
+│       ├── 📑 Tabs/Secciones
+│       │   ├── ℹ️ Información Personal
+│       │   │   ├── → Datos del usuario
+│       │   │   └── → Cambio de password
+│       │   │
+│       │   └── 🎟️ Mis Reservas
+│       │       ├── → Lista de reservas activas
+│       │       └── → Detalle por reserva
+│       │
+│       └── 🔧 Métodos principales
+│           ├── → CargarInformacionUsuario()
+│           ├── → BtnMenuInformacion_Click()
+│           ├── → BtnMenuReservas_Click()
+│           ├── → CargarReservas()
+│           ├── → BtnCambiarPassword_Click()
+│           ├── → MostrarMensajePassword()
+│           └── → BtnVolver_Click()
+│
+├── 📂 Database/                        # Scripts de base de datos
+│   └── 📄 cinema_database_mysql.sql    # Script completo de creación
+│       ├── 📊 Tablas
+│       │   ├── → Usuarios
+│       │   ├── → Peliculas
+│       │   ├── → Salas
+│       │   ├── → Sesiones
+│       │   ├── → Butacas
+│       │   ├── → Reservas
+│       │   └── → ReservasButacas
+│       │
+│       └── 🔗 Relaciones/Foreign Keys
+│           ├── → Sesiones ← Peliculas
+│           ├── → Sesiones ← Salas
+│           ├── → Butacas ← Salas
+│           ├── → Reservas ← Usuarios
+│           ├── → Reservas ← Sesiones
+│           ├── → ReservasButacas ← Reservas
+│           ├── → ReservasButacas ← Butacas
+│           └── → ReservasButacas ← Sesiones
+│
+├── 📂 obj/                             # Archivos temporales de compilación
+│   └── 📂 Debug/
+│       └── 📂 net10.0-windows/
+│           ├── 📄 *.g.i.cs             # Archivos generados de XAML
+│           ├── 📄 Cine_app.AssemblyInfo.cs
+│           └── 📄 Cine_app.GlobalUsings.g.cs
+│
+├── 📄 App.xaml                         # Definición de recursos de aplicación
+│   ├── 🎨 ResourceDictionaries
+│   │   ├── → Estilos globales
+│   │   ├── → Colores y brushes
+│   │   ├── → Templates
+│   │   └── → Estilos de butacas
+│   │
+│   └── 🔧 Configuración
+│       └── → StartupUri="Ventanas/CarteleraWindow.xaml"
+│
+├── 📄 App.xaml.cs                      # Code-behind de aplicación
+│   ├── 🚀 Application_Startup()
+│   │   ├── → Configuración de cultura (es-ES)
+│   │   └── → Apertura de CarteleraWindow
+│   │
+│   └── ⚠️ Manejadores de errores
+│       ├── → App_DispatcherUnhandledException
+│       └── → CurrentDomain_UnhandledException
+│
+├── 📄 Cine_app.csproj                  # Archivo de proyecto
+│   ├── ⚙️ Configuración
+│   │   ├── → TargetFramework: net10.0-windows
+│   │   ├── → OutputType: WinExe
+│   │   ├── → UseWPF: true
+│   │   └── → Nullable: enable
+│   │
+│   ├── 📦 PackageReferences
+│   │   ├── → MySql.Data (v9.5.0)
+│   │   └── → DotNetEnv (v3.1.1)
+│   │
+│   └── 📁 ItemGroups
+│       ├── → Page Include="App.xaml"
+│       └── → None Update=".env"
+│
+├── 📄 .env                             # Variables de entorno
+│   └── 🔐 DATABASE=server=...;database=...;user=...;password=...
+│
+└── 📄 .gitignore                       # Archivos ignorados por Git
+    ├── → bin/
+    ├── → obj/
+    ├── → .env
+    └── → *.user
 ```
+
+### Descripción de Componentes por Carpeta
+
+#### 📂 Modelos/ (Entidades del Dominio)
+| Archivo | Responsabilidad | Clases Principales |
+|---------|----------------|-------------------|
+| `Usuario.cs` | Datos de usuario del sistema | Usuario |
+| `Pelicula.cs` | Datos de películas en cartelera | Pelicula |
+| `Sesion.cs` | Funciones y salas | Sesion, Sala |
+| `Butaca.cs` | Butacas y reservas | Butaca, Reserva, ReservaButaca, ReservaViewModel |
+
+#### 📂 Servicios/ (Lógica de Negocio)
+| Archivo | Responsabilidad | Patrón |
+|---------|----------------|--------|
+| `ServicioBaseDeDatos.cs` | CRUD y consultas a MySQL | Repository |
+| `ServicioSesion.cs` | Gestión de usuario autenticado | Singleton |
+
+#### 📂 Ventanas/ (Interfaz de Usuario)
+| Archivo | Ventana | Función Principal |
+|---------|---------|-------------------|
+| `CarteleraWindow` | Principal | Muestra películas disponibles |
+| `LoginWindow` | Modal | Autenticación de usuarios |
+| `RegistroWindow` | Modal | Registro de nuevos usuarios |
+| `SeleccionSesionWindow` | Modal | Selección de fecha/hora |
+| `SeleccionButacasWindow` | Modal | Selección de asientos |
+| `PerfilUsuarioWindow` | Modal | Perfil y reservas |
 
 ---
 
-## ??? Modelos de Datos
+## 1. Modelos de Datos
 
 ### 1. **Usuario.cs**
 Representa un usuario del sistema.
@@ -126,20 +395,20 @@ public class Usuario
 ```
 
 **Propiedades:**
-- `Id`: Identificador �nico del usuario
+- `Id`: Identificador único del usuario
 - `Nombre`: Nombre del usuario
 - `Apellidos`: Apellidos del usuario
-- `Email`: Correo electr�nico (usado para login)
-- `Password`: Contrase�a (actualmente sin hash - mejorar en producci�n)
-- `Telefono`: Tel�fono opcional
-- `FechaRegistro`: Fecha de creaci�n de la cuenta
+- `Email`: Correo electrónico (usado para login)
+- `Password`: Contraseña (actualmente sin hash - mejorar en producción)
+- `Telefono`: Teléfono opcional
+- `FechaRegistro`: Fecha de creación de la cuenta
 - `Activo`: Estado de la cuenta (activo/inactivo)
-- `NombreCompleto`: Concatenaci�n de nombre y apellidos
+- `NombreCompleto`: Concatenación de nombre y apellidos
 
 ---
 
 ### 2. **Pelicula.cs**
-Representa una pel�cula en cartelera.
+Representa una película en cartelera.
 
 ```csharp
 public class Pelicula
@@ -158,21 +427,21 @@ public class Pelicula
 ```
 
 **Propiedades:**
-- `Id`: Identificador �nico de la pel�cula
-- `Titulo`: T�tulo de la pel�cula
-- `Descripcion`: Sinopsis o descripci�n
+- `Id`: Identificador único de la película
+- `Titulo`: Título de la película
+- `Descripcion`: Sinopsis o descripción
 - `Director`: Nombre del director
-- `Duracion`: Duraci�n en minutos
-- `Genero`: G�nero cinematogr�fico
+- `Duracion`: Duración en minutos
+- `Genero`: Género cinematográfico
 - `FechaEstreno`: Fecha de estreno
 - `ImagenUrl`: URL de la imagen/poster
-- `Calificacion`: Calificaci�n (1-10)
-- `Activa`: Si est� disponible en cartelera
+- `Calificacion`: Calificación (1-10)
+- `Activa`: Si está disponible en cartelera
 
 ---
 
 ### 3. **Sesion.cs**
-Representa una sesi�n/funci�n de una pel�cula.
+Representa una sesión/función de una película.
 
 ```csharp
 public class Sesion
@@ -184,7 +453,7 @@ public class Sesion
     public decimal Precio { get; set; }
     public bool Activa { get; set; }
     
-    // Propiedades de navegaci�n
+    // Propiedades de navegación
     public Pelicula? Pelicula { get; set; }
     public Sala? Sala { get; set; }
     
@@ -203,22 +472,22 @@ public class Sala
 ```
 
 **Sesion - Propiedades:**
-- `Id`: Identificador de la sesi�n
-- `PeliculaId`: FK a la pel�cula
+- `Id`: Identificador de la sesión
+- `PeliculaId`: FK a la película
 - `SalaId`: FK a la sala
-- `FechaHora`: Fecha y hora de la funci�n
+- `FechaHora`: Fecha y hora de la función
 - `Precio`: Precio de la entrada
-- `Activa`: Si la sesi�n est� disponible
-- `Pelicula`: Objeto pel�cula relacionado
+- `Activa`: Si la sesión está disponible
+- `Pelicula`: Objeto película relacionado
 - `Sala`: Objeto sala relacionada
 - `FechaHoraFormateada`: Formato de fecha legible
 
 **Sala - Propiedades:**
 - `Id`: Identificador de la sala
 - `Nombre`: Nombre de la sala
-- `Filas`: N�mero de filas
+- `Filas`: Número de filas
 - `ColumnasPerFila`: Butacas por fila
-- `CapacidadTotal`: C�lculo de capacidad total
+- `CapacidadTotal`: Cálculo de capacidad total
 
 ---
 
@@ -249,7 +518,7 @@ public class Reserva
     public string Estado { get; set; } // Pendiente, Confirmada, Cancelada
     public string? CodigoReserva { get; set; }
     
-    // Propiedades de navegaci�n
+    // Propiedades de navegación
     public Usuario? Usuario { get; set; }
     public Sesion? Sesion { get; set; }
     public List<ReservaButaca> Butacas { get; set; } = new();
@@ -277,30 +546,30 @@ public class ReservaViewModel
 **Butaca - Propiedades:**
 - `Id`: Identificador de la butaca
 - `SalaId`: FK a la sala
-- `Fila`: N�mero de fila (1, 2, 3...)
-- `Columna`: N�mero de columna
+- `Fila`: Número de fila (1, 2, 3...)
+- `Columna`: Número de columna
 - `Tipo`: Tipo de butaca (Normal, VIP, Discapacitado)
-- `Activa`: Si est� disponible para reserva
+- `Activa`: Si está disponible para reserva
 - `Identificador`: Formato legible (ej: "A1", "B5")
 
 **Reserva - Propiedades:**
 - `Id`: Identificador de la reserva
 - `UsuarioId`: FK al usuario que reserva
-- `SesionId`: FK a la sesi�n
+- `SesionId`: FK a la sesión
 - `FechaReserva`: Fecha de la reserva
 - `Total`: Monto total pagado
 - `Estado`: Estado de la reserva
-- `CodigoReserva`: C�digo �nico de reserva
+- `CodigoReserva`: Código único de reserva
 
 **ReservaButaca:**
-Tabla intermedia que relaciona reservas con butacas espec�ficas.
+Tabla intermedia que relaciona reservas con butacas específicas.
 
 **ReservaViewModel:**
 Modelo de vista para mostrar reservas en la UI de manera formateada.
 
 ---
 
-## ?? Servicios
+## Servicios
 
 ### 1. **ServicioBaseDeDatos.cs**
 Servicio principal para todas las operaciones de base de datos.
@@ -310,101 +579,101 @@ Servicio principal para todas las operaciones de base de datos.
 public ServicioBaseDeDatos()
 {
     DotNetEnv.Env.Load();
-    connectionString = Environment.GetEnvironmentVariable("DATABASE") ?? string.Empty;
+    connectionString = Environment.GetEnvironmentVariable("DATABASE")  string.Empty;
 }
 ```
 - Carga variables de entorno desde `.env`
-- Obtiene la cadena de conexi�n a MySQL
+- Obtiene la cadena de conexión a MySQL
 
 ---
 
-#### M�todos de Pel�culas
+#### Métodos de Películas
 
 **`ObtenerPeliculasActivasAsync()`**
 ```csharp
 public async Task<List<Pelicula>> ObtenerPeliculasActivasAsync()
 ```
-- **Descripci�n**: Obtiene todas las pel�culas activas en cartelera
-- **Retorno**: Lista de pel�culas ordenadas por fecha de estreno
+- **Descripción**: Obtiene todas las películas activas en cartelera
+- **Retorno**: Lista de películas ordenadas por fecha de estreno
 - **Query**: `SELECT * FROM Peliculas WHERE Activa = 1 ORDER BY FechaEstreno DESC`
 - **Uso**: Ventana de cartelera principal
 
 ---
 
-#### M�todos de Sesiones
+#### Métodos de Sesiones
 
 **`ObtenerSesionesPorPeliculaAsync(int peliculaId, DateTime? fecha = null)`**
 ```csharp
 public async Task<List<Sesion>> ObtenerSesionesPorPeliculaAsync(int peliculaId, DateTime? fecha = null)
 ```
-- **Descripci�n**: Obtiene sesiones de una pel�cula espec�fica
-- **Par�metros**:
-  - `peliculaId`: ID de la pel�cula
+- **Descripción**: Obtiene sesiones de una película específica
+- **Parámetros**:
+  - `peliculaId`: ID de la película
   - `fecha`: Fecha opcional para filtrar (si es null, muestra todas las futuras)
-- **Retorno**: Lista de sesiones con informaci�n de pel�cula y sala
+- **Retorno**: Lista de sesiones con información de película y sala
 - **Query**: JOIN entre Sesiones, Peliculas y Salas
 - **Filtros**: Solo sesiones activas y futuras
-- **Uso**: Ventana de selecci�n de sesi�n
+- **Uso**: Ventana de selección de sesión
 
 ---
 
-#### M�todos de Butacas
+#### Métodos de Butacas
 
 **`ObtenerButacasPorSalaAsync(int salaId)`**
 ```csharp
 public async Task<List<Butaca>> ObtenerButacasPorSalaAsync(int salaId)
 ```
-- **Descripci�n**: Obtiene todas las butacas de una sala
-- **Par�metros**: `salaId` - ID de la sala
+- **Descripción**: Obtiene todas las butacas de una sala
+- **Parámetros**: `salaId` - ID de la sala
 - **Retorno**: Lista de butacas ordenadas por fila y columna
 - **Query**: `SELECT * FROM Butacas WHERE SalaId = @SalaId AND Activa = 1`
-- **Uso**: Ventana de selecci�n de butacas
+- **Uso**: Ventana de selección de butacas
 
 **`ObtenerButacasReservadasAsync(int sesionId)`**
 ```csharp
 public async Task<List<int>> ObtenerButacasReservadasAsync(int sesionId)
 ```
-- **Descripci�n**: Obtiene IDs de butacas ya reservadas para una sesi�n
-- **Par�metros**: `sesionId` - ID de la sesi�n
+- **Descripción**: Obtiene IDs de butacas ya reservadas para una sesión
+- **Parámetros**: `sesionId` - ID de la sesión
 - **Retorno**: Lista de IDs de butacas ocupadas
 - **Query**: JOIN entre ReservasButacas y Reservas
 - **Filtro**: Solo reservas en estado 'Pendiente' o 'Confirmada'
-- **Uso**: Ventana de selecci�n de butacas (para marcar ocupadas)
+- **Uso**: Ventana de selección de butacas (para marcar ocupadas)
 
 ---
 
-#### M�todos de Usuarios
+#### Métodos de Usuarios
 
 **`ValidarUsuarioAsync(string email, string password)`**
 ```csharp
 public async Task<Usuario?> ValidarUsuarioAsync(string email, string password)
 ```
-- **Descripci�n**: Valida credenciales de un usuario
-- **Par�metros**: 
+- **Descripción**: Valida credenciales de un usuario
+- **Parámetros**: 
   - `email`: Email del usuario
-  - `password`: Contrase�a
-- **Retorno**: Objeto Usuario si es v�lido, null si no
+  - `password`: Contraseña
+- **Retorno**: Objeto Usuario si es válido, null si no
 - **Query**: `SELECT * FROM Usuarios WHERE Email = @Email AND Password = @Password AND Activo = 1`
-- **Nota**: ?? Password en texto plano (mejorar con hash en producci�n)
+- **Nota**:  Password en texto plano (mejorar con hash en producción)
 - **Uso**: Ventana de login
 
 **`ExisteUsuarioAsync(string email)`**
 ```csharp
 public async Task<bool> ExisteUsuarioAsync(string email)
 ```
-- **Descripci�n**: Verifica si un email ya est� registrado
-- **Par�metros**: `email` - Email a verificar
+- **Descripción**: Verifica si un email ya está registrado
+- **Parámetros**: `email` - Email a verificar
 - **Retorno**: true si existe, false si no
 - **Query**: `SELECT COUNT(*) FROM Usuarios WHERE Email = @Email`
-- **Uso**: Ventana de registro (validaci�n)
+- **Uso**: Ventana de registro (validación)
 
 **`RegistrarUsuarioAsync(Usuario usuario)`**
 ```csharp
 public async Task<bool> RegistrarUsuarioAsync(Usuario usuario)
 ```
-- **Descripci�n**: Registra un nuevo usuario en el sistema
-- **Par�metros**: `usuario` - Objeto Usuario con los datos
-- **Retorno**: true si se registr� correctamente, false si no
+- **Descripción**: Registra un nuevo usuario en el sistema
+- **Parámetros**: `usuario` - Objeto Usuario con los datos
+- **Retorno**: true si se registró correctamente, false si no
 - **Query**: INSERT INTO Usuarios
 - **Campos**: Nombre, Apellidos, Email, Password, Telefono, FechaRegistro, Activo
 - **Uso**: Ventana de registro
@@ -413,25 +682,25 @@ public async Task<bool> RegistrarUsuarioAsync(Usuario usuario)
 ```csharp
 public async Task<bool> ActualizarPasswordAsync(int usuarioId, string nuevaPassword)
 ```
-- **Descripci�n**: Actualiza la contrase�a de un usuario
-- **Par�metros**:
+- **Descripción**: Actualiza la contraseña de un usuario
+- **Parámetros**:
   - `usuarioId`: ID del usuario
-  - `nuevaPassword`: Nueva contrase�a
-- **Retorno**: true si se actualiz�, false si no
+  - `nuevaPassword`: Nueva contraseña
+- **Retorno**: true si se actualizó, false si no
 - **Query**: `UPDATE Usuarios SET Password = @Password WHERE Id = @Id`
-- **Uso**: Ventana de perfil (cambio de contrase�a)
+- **Uso**: Ventana de perfil (cambio de contraseña)
 
 ---
 
-#### M�todos de Reservas
+#### Métodos de Reservas
 
 **`ObtenerReservasPorUsuarioAsync(int usuarioId)`**
 ```csharp
 public async Task<List<Reserva>> ObtenerReservasPorUsuarioAsync(int usuarioId)
 ```
-- **Descripci�n**: Obtiene todas las reservas activas de un usuario
-- **Par�metros**: `usuarioId` - ID del usuario
-- **Retorno**: Lista de reservas con informaci�n completa
+- **Descripción**: Obtiene todas las reservas activas de un usuario
+- **Parámetros**: `usuarioId` - ID del usuario
+- **Retorno**: Lista de reservas con información completa
 - **Query**: JOIN complejo entre Reservas, Sesiones, Peliculas y Salas
 - **Filtro**: Solo reservas en estado 'Pendiente' o 'Confirmada'
 - **Carga Adicional**: Llama a `ObtenerButacasDeReservaAsync()` para cada reserva
@@ -442,1066 +711,1026 @@ public async Task<List<Reserva>> ObtenerReservasPorUsuarioAsync(int usuarioId)
 ```csharp
 private async Task<List<ReservaButaca>> ObtenerButacasDeReservaAsync(int reservaId)
 ```
-- **Descripci�n**: Obtiene las butacas de una reserva espec�fica
-- **Par�metros**: `reservaId` - ID de la reserva
-- **Retorno**: Lista de ReservaButaca con informaci�n de butaca
+- **Descripción**: Obtiene las butacas de una reserva específica
+- **Parámetros**: `reservaId` - ID de la reserva
+- **Retorno**: Lista de ReservaButaca con información de butaca
 - **Query**: JOIN entre ReservasButacas y Butacas
-- **Uso**: M�todo auxiliar de `ObtenerReservasPorUsuarioAsync()`
+- **Uso**: Método auxiliar de `ObtenerReservasPorUsuarioAsync()`
 
 **`CrearReservaAsync(Reserva reserva, List<int> butacaIds)`**
 ```csharp
 public async Task<int> CrearReservaAsync(Reserva reserva, List<int> butacaIds)
 ```
-- **Descripci�n**: Crea una nueva reserva con transacci�n
-- **Par�metros**:
+- **Descripción**: Crea una nueva reserva con transacción
+- **Parámetros**:
   - `reserva`: Objeto Reserva con los datos
   - `butacaIds`: Lista de IDs de butacas seleccionadas
 - **Retorno**: ID de la reserva creada
-- **Transacci�n**: Utiliza transacci�n de MySQL para garantizar consistencia
-- **Generaci�n de C�digo**: Crea c�digo �nico formato `RES{fecha}{random}`
-- **Proceso**:
-  1. Inicia transacci�n
-  2. Inserta registro en tabla Reservas
-  3. Inserta registros en tabla ReservasButacas
-  4. Confirma transacci�n
-  5. Si falla, hace rollback
-- **Uso**: Ventana de selecci�n de butacas (confirmar reserva)
+- **Transacción**: Utiliza transacción de MySQL para garantizar consistencia
+- **Generación de Código**: Crea código único formato `RES{fecha}{random}`
+
+**Proceso de Transacción:**
+1. Inicia transacción MySQL
+2. Genera código de reserva único
+3. Inserta registro en tabla Reservas
+4. Para cada butaca seleccionada:
+   - Inserta en tabla ReservasButacas
+5. Commit de la transacción
+6. En caso de error: Rollback automático
 
 ---
 
 ### 2. **ServicioSesion.cs**
-Servicio Singleton para gestionar la sesi�n del usuario actual.
+Servicio Singleton para gestionar la sesión del usuario autenticado.
 
+#### Patrón Singleton
 ```csharp
 public class ServicioSesion
 {
     private static ServicioSesion? _instance;
-    public static ServicioSesion Instance => _instance ??= new ServicioSesion();
+    private static readonly object _lock = new object();
     
-    public Usuario? UsuarioActual { get; private set; }
-    public bool EstaAutenticado => UsuarioActual != null;
+    public static ServicioSesion Instance
+    {
+        get
+        {
+            if (_instance == null)
+            {
+                lock (_lock)
+                {
+                    if (_instance == null)
+                    {
+                        _instance = new ServicioSesion();
+                    }
+                }
+            }
+            return _instance;
+        }
+    }
     
-    public event EventHandler? SesionIniciada;
-    public event EventHandler? SesionCerrada;
+    private ServicioSesion() { }
 }
 ```
 
-**Propiedades:**
-- `Instance`: Instancia �nica del servicio (Singleton)
-- `UsuarioActual`: Usuario actualmente autenticado
-- `EstaAutenticado`: Boolean que indica si hay usuario logueado
+#### Propiedades
+```csharp
+public Usuario? UsuarioActual { get; private set; }
+public bool EstaAutenticado => UsuarioActual != null;
+```
 
-**Eventos:**
-- `SesionIniciada`: Se dispara al iniciar sesi�n
-- `SesionCerrada`: Se dispara al cerrar sesi�n
+#### Eventos
+```csharp
+public event EventHandler? SesionIniciada;
+public event EventHandler? SesionCerrada;
+```
 
-**M�todos:**
-
+#### Métodos
 **`IniciarSesion(Usuario usuario)`**
 ```csharp
 public void IniciarSesion(Usuario usuario)
-{
-    UsuarioActual = usuario;
-    SesionIniciada?.Invoke(this, EventArgs.Empty);
-}
 ```
-- Establece el usuario actual
-- Dispara evento SesionIniciada
+- **Descripción**: Establece el usuario actual y dispara evento
+- **Parámetros**: `usuario` - Usuario autenticado
+- **Efecto**: Actualiza `UsuarioActual` y dispara `SesionIniciada`
 
 **`CerrarSesion()`**
 ```csharp
 public void CerrarSesion()
-{
-    UsuarioActual = null;
-    SesionCerrada?.Invoke(this, EventArgs.Empty);
-}
 ```
-- Limpia el usuario actual
-- Dispara evento SesionCerrada
+- **Descripción**: Limpia la sesión actual
+- **Efecto**: `UsuarioActual = null` y dispara `SesionCerrada`
+
+**Ventajas del Singleton:**
+- ✅ Una única instancia de sesión en toda la aplicación
+- ✅ Acceso global desde cualquier ventana
+- ✅ Estado consistente del usuario autenticado
+- ✅ Sistema de eventos para reaccionar a cambios de sesión
 
 ---
 
-## ?? Ventanas de la Aplicaci�n
+## Ventanas de la Aplicación
 
-### 1. **App.xaml.cs**
-Punto de entrada de la aplicaci�n.
+### 1. **CarteleraWindow** (Ventana Principal) 🎬
 
-**Propiedades:**
-```csharp
-public static Usuario? UsuarioActual { get; set; }
-```
+#### Descripción
+Ventana principal de la aplicación que muestra la cartelera de películas disponibles. Es la primera ventana que se carga al iniciar la aplicación y actúa como hub de navegación.
 
-**Constructor:**
-```csharp
-public App()
-{
-    this.DispatcherUnhandledException += App_DispatcherUnhandledException;
-    AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
-}
-```
-- Registra manejadores de excepciones no controladas
+#### Elementos de UI
 
-**`Application_Startup()`**
-```csharp
-private void Application_Startup(object sender, StartupEventArgs e)
-{
-    // Configurar cultura espa�ola para formato de moneda
-    var cultureInfo = new CultureInfo("es-ES");
-    Thread.CurrentThread.CurrentCulture = cultureInfo;
-    Thread.CurrentThread.CurrentUICulture = cultureInfo;
-    
-    // Abrir ventana de cartelera
-    var carteleraWindow = new CarteleraWindow();
-    carteleraWindow.Show();
-}
-```
-- **Configura cultura**: Formato espa�ol para moneda (euros)
-- **Ventana inicial**: Abre CarteleraWindow
+**Barra Superior:**
+- Logo/Título: "CINEMAX"
+- Información de usuario (si está autenticado)
+- Botones de acción:
+  - "Iniciar Sesión" / "Cerrar Sesión"
+  - "Mi Perfil" (solo si está autenticado)
 
-**Manejadores de Excepciones:**
-- `App_DispatcherUnhandledException`: Captura errores del dispatcher
-- `CurrentDomain_UnhandledException`: Captura errores fatales del dominio
-- Ambos muestran MessageBox con detalles del error
+**Grid de Películas:**
+- Diseño responsive con WrapPanel
+- Cards de películas con:
+  - Imagen/Poster
+  - Título de la película
+  - Información básica (género, duración)
+  - Botón "Ver Horarios"
 
----
+#### Métodos Principales
 
-### 2. **CarteleraWindow.xaml.cs**
-Ventana principal que muestra la cartelera de pel�culas.
-
-**Propiedades:**
-```csharp
-private readonly ServicioBaseDeDatos _dbService;
-```
-
-**Constructor:**
-```csharp
-public CarteleraWindow()
-{
-    InitializeComponent();
-    _dbService = new ServicioBaseDeDatos();
-    
-    Loaded += CarteleraWindow_Loaded;
-    ActualizarEstadoUsuario();
-}
-```
-
-**M�todos Principales:**
-
-**`CarteleraWindow_Loaded()`**
-```csharp
-private async void CarteleraWindow_Loaded(object sender, RoutedEventArgs e)
-{
-    await CargarPeliculas();
-}
-```
+**`CarteleraWindow_Loaded(object sender, RoutedEventArgs e)`**
 - Se ejecuta al cargar la ventana
-- Llama a CargarPeliculas()
+- Suscribe eventos de ServicioSesion
+- Llama a `ActualizarEstadoUsuario()`
+- Llama a `CargarPeliculas()`
 
 **`ActualizarEstadoUsuario()`**
 ```csharp
 private void ActualizarEstadoUsuario()
 ```
-- Actualiza UI seg�n estado de autenticaci�n
-- Si est� autenticado: Muestra nombre y bot�n de perfil
-- Si no: Muestra "Invitado" y bot�n de login
-- Cambia texto del bot�n entre "Iniciar Sesi�n" y "Cerrar Sesi�n"
+- Verifica si hay usuario autenticado
+- Actualiza texto del botón de cuenta
+- Muestra/oculta botón de perfil
+- Actualiza mensaje de bienvenida
 
-**`CargarPeliculas()`**
+**`async CargarPeliculas()`**
 ```csharp
-private async Task CargarPeliculas()
+private async void CargarPeliculas()
 ```
-- Muestra indicador de carga
-- Obtiene pel�culas activas de BD
-- Vincula datos a `itemsPeliculas.ItemsSource`
-- Maneja errores mostrando mensaje al usuario
-- **Estados UI**:
-  - `pnlLoading`: Visible durante carga
-  - `scrollPeliculas`: Visible si hay pel�culas
-  - `pnlSinPeliculas`: Visible si no hay pel�culas
+- Obtiene películas activas desde BD
+- Crea cards dinámicamente
+- Renderiza grid de películas
+- Maneja errores con MessageBox
 
-**`Pelicula_Click()` y `BtnVerHorarios_Click()`**
-```csharp
-private void Pelicula_Click(object sender, MouseButtonEventArgs e)
-private void BtnVerHorarios_Click(object sender, RoutedEventArgs e)
-```
-- Manejan clics en pel�culas
-- Obtienen el `peliculaId` del Tag del elemento
-- Llaman a `AbrirVentanaSeleccionSesion(peliculaId)`
+**`BtnVerHorarios_Click(object sender, RoutedEventArgs e)`**
+- Obtiene película seleccionada del Tag del botón
+- Abre SeleccionSesionWindow
+- Pasa película como parámetro
 
-**`AbrirVentanaSeleccionSesion(int peliculaId)`**
-```csharp
-private void AbrirVentanaSeleccionSesion(int peliculaId)
-```
-- Busca la pel�cula en la lista
-- Abre `SeleccionSesionWindow` como di�logo modal
-- Pasa el objeto pel�cula como par�metro
+**`BtnCuentaAccion_Click(object sender, RoutedEventArgs e)`**
+- Si está autenticado: Cierra sesión
+- Si no está autenticado: Abre LoginWindow
+- Actualiza UI después de la acción
 
-**`BtnCuentaAccion_Click()`**
-```csharp
-private void BtnCuentaAccion_Click(object sender, RoutedEventArgs e)
-```
-- Si est� autenticado: Confirma y cierra sesi�n
-- Si no: Abre ventana de login
-- Actualiza estado UI despu�s de la acci�n
+**`BtnPerfilUsuario_Click(object sender, RoutedEventArgs e)`**
+- Verifica autenticación
+- Abre PerfilUsuarioWindow
 
-**`BtnPerfilUsuario_Click()`**
-```csharp
-private void BtnPerfilUsuario_Click(object sender, RoutedEventArgs e)
-```
-- Verifica autenticaci�n
-- Abre ventana de perfil como di�logo modal
+#### Características
+- ✅ Carga dinámica de películas desde BD
+- ✅ Gestión de estado de sesión
+- ✅ Navegación a otras ventanas
+- ✅ Actualización automática al cambiar sesión
+- ✅ Diseño responsive
 
 ---
 
-### 3. **LoginWindow.xaml.cs**
-Ventana para inicio de sesi�n.
+### 2. **LoginWindow** (Inicio de sesión) 🔐
 
-**Propiedades:**
-```csharp
-private readonly ServicioBaseDeDatos _dbService;
-public Usuario? UsuarioAutenticado { get; private set; }
-```
+#### Descripción
+Ventana modal para autenticación de usuarios. Permite iniciar sesión con email y contraseña, acceder como invitado o navegar al registro.
 
-**M�todos Principales:**
+#### Elementos de UI
 
-**`BtnLogin_Click()`**
+**Formulario de Login:**
+- Campo de texto: Email
+- Campo de contraseña: Password (con PasswordBox)
+- Botón: "Iniciar Sesión"
+- Link: "¿No tienes cuenta? Regístrate"
+- Botón: "Continuar como Invitado"
+
+**Diseño:**
+- Ventana centrada
+- Fondo con gradiente o imagen
+- Logo/Título de la aplicación
+- Mensajes de error visibles
+
+#### Métodos Principales
+
+**`async BtnLogin_Click(object sender, RoutedEventArgs e)`**
 ```csharp
 private async void BtnLogin_Click(object sender, RoutedEventArgs e)
 ```
-- **Validaciones**:
-  - Email no vac�o
-  - Contrase�a no vac�a
-- **Proceso**:
-  1. Deshabilita bot�n (evita doble clic)
-  2. Cambia texto a "Validando..."
-  3. Llama a `ValidarUsuarioAsync()`
-  4. Si es v�lido: 
-     - Guarda en `ServicioSesion.Instance`
-     - Cierra con `DialogResult = true`
-  5. Si no es v�lido:
-     - Muestra error
-     - Limpia password
-- **Finally**: Rehabilita bot�n
+**Proceso:**
+1. Valida que campos no estén vacíos
+2. Llama a `ValidarUsuarioAsync()` del servicio
+3. Si es válido:
+   - Inicia sesión con `ServicioSesion`
+   - Cierra ventana con `DialogResult = true`
+4. Si no es válido:
+   - Muestra error con `MostrarError()`
 
-**`BtnRegistro_Click()`**
-```csharp
-private void BtnRegistro_Click(object sender, RoutedEventArgs e)
-```
-- Abre ventana de registro como di�logo
-- Si el registro fue exitoso:
-  - Muestra mensaje de �xito en verde
-  - Limpia campos de login
+**`BtnRegistro_Click(object sender, RoutedEventArgs e)`**
+- Abre RegistroWindow
+- Si el registro es exitoso, cierra LoginWindow
 
-**`BtnInvitado_Click()`**
-```csharp
-private void BtnInvitado_Click(object sender, RoutedEventArgs e)
-```
-- Cierra ventana sin autenticar
-- `DialogResult = false`
+**`BtnInvitado_Click(object sender, RoutedEventArgs e)`**
+- Cierra la ventana sin autenticar
+- Permite navegar como invitado
+
+**`TxtPassword_KeyDown(object sender, KeyEventArgs e)`**
+- Detecta tecla Enter
+- Ejecuta login automáticamente
 
 **`MostrarError(string mensaje)`**
 ```csharp
 private void MostrarError(string mensaje)
 ```
-- Muestra mensaje de error en rojo
-- Hace visible el TextBlock de error
+- Muestra mensaje de error en TextBlock
+- Opcionalmente muestra MessageBox
+- Hace visible el panel de error
 
-**`TxtPassword_KeyDown()`**
-```csharp
-private void TxtPassword_KeyDown(object sender, KeyEventArgs e)
-```
-- Permite login con tecla Enter
-- Llama a `BtnLogin_Click()`
+#### Validaciones
+- ✅ Campos no vacíos
+- ✅ Email válido (verificado en BD)
+- ✅ Password correcto
+- ✅ Usuario activo
+
+#### Flujo de Usuario
+1. Usuario ingresa credenciales
+2. Click en "Iniciar Sesión"
+3. Validación en BD
+4. Si es correcto → Cierra ventana y vuelve a cartelera
+5. Si es incorrecto → Muestra mensaje de error
 
 ---
 
-### 4. **RegistroWindow.xaml.cs**
-Ventana para registro de nuevos usuarios.
+### 3. **RegistroWindow** (Registro de Usuarios) 📝
 
-**Propiedades:**
-```csharp
-private readonly ServicioBaseDeDatos _dbService;
-```
+#### Descripción
+Ventana modal para registro de nuevos usuarios. Incluye validación completa de formulario y verificación de email único.
 
-**M�todos Principales:**
+#### Elementos de UI
 
-**`BtnRegistrar_Click()`**
+**Formulario de Registro:**
+- Campo: Nombre (requerido)
+- Campo: Apellidos (requerido)
+- Campo: Email (requerido, único)
+- Campo: Teléfono (opcional)
+- Campo: Contraseña (requerido, min 6 caracteres)
+- Campo: Confirmar Contraseña (requerido)
+- Botones:
+  - "Registrarse"
+  - "Cancelar"
+
+**Panel de Mensajes:**
+- Área para mostrar errores de validación
+- Mensaje de éxito
+
+#### Métodos Principales
+
+**`async BtnRegistrar_Click(object sender, RoutedEventArgs e)`**
 ```csharp
 private async void BtnRegistrar_Click(object sender, RoutedEventArgs e)
 ```
-- **Proceso**:
-  1. Valida todos los campos con `ValidarCampos()`
-  2. Verifica si email ya existe con `ExisteUsuarioAsync()`
-  3. Crea objeto Usuario
-  4. Registra en BD con `RegistrarUsuarioAsync()`
-  5. Si exitoso:
-     - Muestra mensaje de �xito
-     - Espera 1.5 segundos
-     - Cierra con `DialogResult = true`
-- **Deshabilita bot�n**: Durante el proceso
+**Proceso:**
+1. Llama a `ValidarCampos()`
+2. Verifica que el email no exista con `ExisteUsuarioAsync()`
+3. Crea objeto Usuario
+4. Llama a `RegistrarUsuarioAsync()`
+5. Muestra mensaje de éxito
+6. Cierra ventana con `DialogResult = true`
 
 **`ValidarCampos()`**
 ```csharp
 private bool ValidarCampos()
 ```
-- **Valida nombre**:
-  - No vac�o
-  - M�nimo 2 caracteres
-- **Valida apellidos**:
-  - No vac�o
-  - M�nimo 2 caracteres
-- **Valida email**:
-  - No vac�o
-  - Formato v�lido con `EsEmailValido()`
-- **Valida tel�fono** (opcional):
-  - Si se ingresa, debe tener m�nimo 9 caracteres
-  - Solo d�gitos, +, espacios, guiones
-- **Valida contrase�a**:
-  - No vac�a
-  - M�nimo 6 caracteres
-- **Valida confirmaci�n**:
-  - No vac�a
-  - Coincide con contrase�a
-- **Retorno**: true si todo v�lido, false si alguno falla
+**Validaciones:**
+- ✅ Nombre: mínimo 2 caracteres
+- ✅ Apellidos: mínimo 2 caracteres
+- ✅ Email: formato válido (regex)
+- ✅ Teléfono: opcional, si se ingresa mínimo 9 dígitos
+- ✅ Contraseña: mínimo 6 caracteres
+- ✅ Confirmar contraseña: debe coincidir
 
 **`EsEmailValido(string email)`**
 ```csharp
 private bool EsEmailValido(string email)
 ```
-- Usa Regex para validar formato de email
-- Patr�n: `^[^@\s]+@[^@\s]+\.[^@\s]+$`
-- Verifica: algo@algo.algo
+- Valida formato de email con expresión regular
+- Patrón: `^[^@\s]+@[^@\s]+\.[^@\s]+$`
 
-**`MostrarError()` y `MostrarExito()`**
-```csharp
-private void MostrarError(string mensaje)
-private void MostrarExito(string mensaje)
-```
-- Muestran mensajes en rojo (error) o verde (�xito)
+**`MostrarError(string mensaje)`**
+- Muestra mensaje de error en TextBlock
+- Hace visible el panel de errores
+- Aplica estilo de error
 
-**`BtnCancelar_Click()`**
-```csharp
-private void BtnCancelar_Click(object sender, RoutedEventArgs e)
-```
-- Cierra sin guardar
+**`MostrarExito(string mensaje)`**
+- Muestra mensaje de éxito
+- Aplica estilo de éxito
+- Se muestra brevemente antes de cerrar
+
+**`BtnCancelar_Click(object sender, RoutedEventArgs e)`**
+- Cierra ventana sin registrar
 - `DialogResult = false`
+
+#### Validaciones en Detalle
+
+| Campo | Validación | Mensaje de Error |
+|-------|-----------|------------------|
+| Nombre | Min 2 caracteres | "El nombre debe tener al menos 2 caracteres" |
+| Apellidos | Min 2 caracteres | "Los apellidos deben tener al menos 2 caracteres" |
+| Email | Formato válido | "El formato del email no es válido" |
+| Email | Único en BD | "Este email ya está registrado" |
+| Teléfono | Min 9 dígitos (opcional) | "El teléfono debe tener al menos 9 dígitos" |
+| Password | Min 6 caracteres | "La contraseña debe tener al menos 6 caracteres" |
+| Confirmar | Coincide con password | "Las contraseñas no coinciden" |
+
+#### Flujo de Usuario
+1. Usuario completa formulario
+2. Click en "Registrarse"
+3. Validación de campos
+4. Verificación de email único
+5. Registro en BD
+6. Mensaje de éxito
+7. Cierra ventana → Vuelve a Login
 
 ---
 
-### 5. **SeleccionSesionWindow.xaml.cs**
-Ventana para seleccionar sesi�n/horario de una pel�cula.
+### 4. **SeleccionSesionWindow** (Selección de Horarios) 📅
 
-**Propiedades:**
+#### Descripción
+Ventana modal que muestra las sesiones disponibles de una película específica. Incluye calendario para selección de fecha y lista de horarios.
+
+#### Elementos de UI
+
+**Información de Película:**
+- Imagen/Poster
+- Título
+- Director
+- Duración
+- Género
+- Calificación
+
+**Calendario:**
+- Control Calendar de WPF
+- Selección de fecha única
+- Fechas futuras habilitadas
+
+**Lista de Sesiones:**
+- ItemsControl con sesiones del día seleccionado
+- Cada sesión muestra:
+  - Hora de inicio
+  - Sala
+  - Precio
+  - Butacas disponibles
+  - Botón "Seleccionar"
+
+**Botones:**
+- "Cerrar"
+
+#### Propiedades Privadas
 ```csharp
-private readonly ServicioBaseDeDatos _dbService;
-private readonly Pelicula _pelicula;
+private Pelicula peliculaActual;
+private ServicioBaseDeDatos servicioBD;
 ```
 
-**Constructor:**
+#### Constructor
 ```csharp
 public SeleccionSesionWindow(Pelicula pelicula)
-{
-    InitializeComponent();
-    _dbService = new ServicioBaseDeDatos();
-    _pelicula = pelicula;
-    
-    CargarInfoPelicula();
-    calendario.DisplayDateStart = DateTime.Today;
-    calendario.SelectedDate = DateTime.Today;
-}
 ```
-- Recibe pel�cula como par�metro
-- Configura calendario (solo fechas futuras)
-- Selecciona hoy por defecto
+- Recibe película como parámetro
+- Inicializa servicio de BD
+- Carga información de la película
 
-**M�todos Principales:**
+#### Métodos Principales
 
 **`CargarInfoPelicula()`**
 ```csharp
 private void CargarInfoPelicula()
 ```
-- Muestra t�tulo de la pel�cula
-- Concatena informaci�n: G�nero � Duraci�n � Director
-- Carga imagen si hay URL disponible
+- Muestra información de la película en UI
+- Carga imagen desde URL
+- Formatea duración (ej: "120 min")
+- Muestra calificación
 
-**`Calendario_SelectedDatesChanged()`**
+**`Calendario_SelectedDatesChanged(object sender, SelectionChangedEventArgs e)`**
 ```csharp
-private async void Calendario_SelectedDatesChanged(object sender, SelectionChangedEventArgs e)
+private void Calendario_SelectedDatesChanged(object sender, SelectionChangedEventArgs e)
 ```
-- Se ejecuta al cambiar fecha en el calendario
-- Llama a `CargarSesiones()` con la fecha seleccionada
+- Se dispara al cambiar fecha en calendario
+- Obtiene fecha seleccionada
+- Llama a `CargarSesiones(fechaSeleccionada)`
 
-**`CargarSesiones(DateTime fecha)`**
+**`async CargarSesiones(DateTime fecha)`**
 ```csharp
-private async Task CargarSesiones(DateTime fecha)
+private async void CargarSesiones(DateTime fecha)
 ```
-- Muestra indicador de carga
-- Obtiene sesiones de la pel�cula para la fecha
-- Vincula a `itemsSesiones.ItemsSource`
-- **Estados UI**:
-  - `pnlLoadingSesiones`: Durante carga
-  - `scrollSesiones`: Si hay sesiones
-  - `pnlSinSesiones`: Si no hay sesiones
+**Proceso:**
+1. Obtiene sesiones desde BD con `ObtenerSesionesPorPeliculaAsync()`
+2. Filtra sesiones por fecha
+3. Para cada sesión:
+   - Calcula butacas disponibles
+   - Crea elemento de UI
+   - Añade a ItemsControl
+4. Si no hay sesiones: muestra mensaje
 
-**`BtnSeleccionarSesion_Click()`**
+**`BtnSeleccionarSesion_Click(object sender, RoutedEventArgs e)`**
 ```csharp
 private void BtnSeleccionarSesion_Click(object sender, RoutedEventArgs e)
 ```
-- Obtiene sesi�n del Tag del bot�n
-- **Verifica autenticaci�n**:
-  - Si no autenticado: Pregunta si quiere iniciar sesi�n
-  - Si rechaza: No contin�a
-  - Si acepta: Abre login
-- Si autenticado: Llama a `AbrirSeleccionButacas()`
+**Proceso:**
+1. Obtiene sesión seleccionada del Tag del botón
+2. Verifica autenticación:
+   - Si NO está autenticado: Muestra LoginWindow
+   - Si está autenticado: Continúa
+3. Llama a `AbrirSeleccionButacas(sesion)`
 
 **`AbrirSeleccionButacas(Sesion sesion)`**
 ```csharp
 private void AbrirSeleccionButacas(Sesion sesion)
 ```
-- Abre `SeleccionButacasWindow` con sesi�n y pel�cula
-- Si completa reserva (`DialogResult = true`): Cierra esta ventana
+- Crea instancia de SeleccionButacasWindow
+- Pasa sesión como parámetro
+- Muestra ventana modal
+- Al cerrar: recarga sesiones (por si cambió disponibilidad)
 
-**`BtnCerrar_Click()`**
-```csharp
-private void BtnCerrar_Click(object sender, RoutedEventArgs e)
-```
-- Cierra ventana
+**`BtnCerrar_Click(object sender, RoutedEventArgs e)`**
+- Cierra la ventana
+
+#### Características
+- ✅ Visualización completa de información de película
+- ✅ Calendario interactivo
+- ✅ Carga dinámica de sesiones por fecha
+- ✅ Verificación de autenticación
+- ✅ Cálculo de disponibilidad en tiempo real
+
+#### Flujo de Usuario
+1. Usuario ve información de película
+2. Selecciona fecha en calendario
+3. Ve lista de sesiones disponibles
+4. Click en "Seleccionar" de una sesión
+5. Si no está autenticado → Muestra Login
+6. Si está autenticado → Abre selección de butacas
 
 ---
 
-### 6. **SeleccionButacasWindow.xaml.cs**
-Ventana para seleccionar butacas con visualizaci�n de sala.
+### 5. **SeleccionButacasWindow** (Selección de Asientos) 💺
 
-**Propiedades:**
+#### Descripción
+Ventana modal avanzada que muestra la sala de cine con visualización de butacas en perspectiva 3D. Permite seleccionar asientos y confirmar reserva.
+
+#### Elementos de UI
+
+**Cabecera:**
+- Información de sesión:
+  - Película
+  - Fecha y hora
+  - Sala
+  - Precio por butaca
+
+**Visualización de Sala:**
+- Grid con efecto de perspectiva
+- Pantalla de cine en la parte superior
+- Butacas organizadas por filas y columnas
+- Código de colores:
+  - 🟢 Verde: Disponible
+  - 🔴 Rojo: Ocupada
+  - 🔵 Azul: Seleccionada
+  - 🟡 Amarillo: VIP disponible
+  - 🟣 Morado: Discapacitado disponible
+
+**Leyenda:**
+- Explicación de estados de butacas
+- Iconos con colores
+
+**Panel de Resumen:**
+- Butacas seleccionadas (lista)
+- Cantidad de butacas
+- Total a pagar
+- Botón "Confirmar Reserva"
+- Botón "Cancelar"
+
+#### Propiedades Privadas
 ```csharp
-private readonly ServicioBaseDeDatos _dbService;
-private readonly Sesion _sesion;
-private readonly Pelicula _pelicula;
-private List<Butaca> _todasLasButacas = new();
-private List<int> _butacasOcupadas = new();
-private List<Butaca> _butacasSeleccionadas = new();
+private Sesion sesionActual;
+private ServicioBaseDeDatos servicioBD;
+private List<Butaca> todasLasButacas;
+private List<int> butacasOcupadas;
+private List<Butaca> butacasSeleccionadas;
 ```
 
-**Constructor:**
+#### Constructor
 ```csharp
-public SeleccionButacasWindow(Sesion sesion, Pelicula pelicula)
-{
-    InitializeComponent();
-    _dbService = new ServicioBaseDeDatos();
-    _sesion = sesion;
-    _pelicula = pelicula;
-    
-    CargarInformacion();
-    Loaded += async (s, e) => await CargarButacas();
-}
+public SeleccionButacasWindow(Sesion sesion)
 ```
+- Recibe sesión como parámetro
+- Inicializa colecciones
+- Llama a `CargarInformacion()`
 
-**M�todos Principales:**
+#### Métodos Principales
 
-**`CargarInformacion()`**
+**`async CargarInformacion()`**
 ```csharp
-private void CargarInformacion()
+private async void CargarInformacion()
 ```
-- Muestra t�tulo de pel�cula
-- Muestra info de sesi�n: Fecha � Hora � Sala � Precio
-- Muestra precio unitario
+**Proceso:**
+1. Muestra información de sesión en UI
+2. Llama a `CargarButacas()`
 
-**`CargarButacas()`**
+**`async CargarButacas()`**
 ```csharp
-private async Task CargarButacas()
+private async void CargarButacas()
 ```
-- Obtiene butacas de la sala
-- Obtiene butacas ya reservadas de la sesi�n
-- Llama a `CrearVisualizacionButacas()`
-- Maneja errores y cierra ventana si falla
+**Proceso:**
+1. Obtiene todas las butacas de la sala
+2. Obtiene butacas ya reservadas para esta sesión
+3. Llama a `CrearVisualizacionButacas()`
 
 **`CrearVisualizacionButacas()`**
 ```csharp
 private void CrearVisualizacionButacas()
 ```
-- **Efecto de perspectiva**:
-  - Calcula espaciado lateral por fila (efecto cono)
-  - Calcula tama�o de butaca seg�n fila
-  - Filas traseras m�s peque�as y estrechas
-- **Crea estructura**:
-  - StackPanel por cada fila
-  - Etiqueta de fila (A, B, C...)
-  - Botones de butacas
-  - Etiqueta de fila al final
-- Llama a `CrearBotonButaca()` para cada butaca
-
-**`CrearBotonButaca(Butaca butaca, int ancho, int alto)`**
-```csharp
-private Button CrearBotonButaca(Butaca butaca, int ancho, int alto)
+**Algoritmo de Perspectiva:**
 ```
-- Crea Button para cada butaca
-- Asigna tama�o din�mico (perspectiva)
-- **Aplica estilos seg�n estado**:
-  - Si ocupada: `ButacaOcupadaStyle` (no clickeable)
-  - Si disponible:
-    - Normal: `ButacaNormalStyle`
-    - VIP: `ButacaVIPStyle`
-    - Discapacitado: `ButacaDiscapacitadoStyle`
-- Asigna evento Click si disponible
+Para cada fila (de atrás hacia adelante):
+  - Calcular factor de escala: 1.0 → 0.6
+  - Calcular tamaño de butaca según fila
+  - Calcular espaciado lateral (efecto cono)
+  - Crear botones de butaca
+  - Aplicar estado (disponible/ocupada)
+```
 
-**`BtnButaca_Click()`**
+**Fórmulas de Perspectiva:**
+```csharp
+scaleFactor = 1.0 - (fila - 1) * 0.05;  // Reduce 5% por fila
+buttonSize = baseSize * scaleFactor;
+lateralSpacing = (maxWidth - (columnas * buttonSize)) / 2;
+```
+
+**`CrearBotonButaca(Butaca butaca, double size, int fila, int columna)`**
+```csharp
+private Button CrearBotonButaca(Butaca butaca, double size, int fila, int columna)
+```
+- Crea Button para una butaca
+- Aplica estilo según tipo y estado
+- Configura evento Click
+- Establece propiedades:
+  - Width/Height
+  - Content (identificador, ej: "A1")
+  - Tag (objeto Butaca)
+  - IsEnabled (según si está ocupada)
+
+**`BtnButaca_Click(object sender, RoutedEventArgs e)`**
 ```csharp
 private void BtnButaca_Click(object sender, RoutedEventArgs e)
 ```
-- **Si ya seleccionada**:
-  - Quita de `_butacasSeleccionadas`
-  - Restaura estilo original
-- **Si no seleccionada**:
-  - Agrega a `_butacasSeleccionadas`
-  - Aplica `ButacaSeleccionadaStyle`
-- Llama a `ActualizarResumen()`
+**Lógica de Toggle:**
+```csharp
+Si butaca está en lista de seleccionadas:
+  - Remover de lista
+  - Cambiar estilo a "disponible"
+Sino:
+  - Añadir a lista
+  - Cambiar estilo a "seleccionada"
+Actualizar resumen
+```
 
 **`ActualizarResumen()`**
 ```csharp
 private void ActualizarResumen()
 ```
-- **Si no hay butacas**:
-  - Muestra "Ninguna"
-  - Deshabilita bot�n de confirmar
-- **Si hay butacas**:
-  - Lista butacas: "A1, A2, B5"
-  - Muestra cantidad
-  - Calcula y muestra total
-  - Habilita bot�n de confirmar
+- Actualiza TextBlock con lista de butacas seleccionadas
+- Calcula total: `cantidad × precio`
+- Muestra información en panel de resumen
+- Habilita/deshabilita botón de confirmar
 
-**`BtnConfirmarReserva_Click()`**
+**`async BtnConfirmarReserva_Click(object sender, RoutedEventArgs e)`**
 ```csharp
 private async void BtnConfirmarReserva_Click(object sender, RoutedEventArgs e)
 ```
-- Valida que haya butacas seleccionadas
-- Valida autenticaci�n
-- Muestra confirmaci�n con resumen
-- Si acepta: Llama a `ProcesarReserva()`
+**Proceso:**
+1. Verifica que hay butacas seleccionadas
+2. Verifica autenticación
+3. Muestra confirmación con MessageBox
+4. Si acepta: llama a `ProcesarReserva()`
 
-**`ProcesarReserva()`**
+**`async ProcesarReserva()`**
 ```csharp
 private async Task ProcesarReserva()
 ```
-- Deshabilita bot�n durante proceso
-- Calcula total
-- Crea objeto Reserva
-- Obtiene IDs de butacas
-- Llama a `CrearReservaAsync()`
-- **Si exitoso**:
-  - Muestra mensaje de confirmaci�n con todos los detalles
-  - Cierra con `DialogResult = true`
-- **Si falla**:
-  - Muestra error
-  - Rehabilita bot�n
+**Proceso de Reserva:**
+1. Crea objeto Reserva
+2. Obtiene IDs de butacas seleccionadas
+3. Llama a `CrearReservaAsync()` (con transacción)
+4. Si es exitoso:
+   - Muestra código de reserva
+   - Mensaje de éxito
+   - Cierra ventana
+5. Si falla:
+   - Muestra error
+   - Mantiene ventana abierta
 
-**`BtnCerrar_Click()`**
+#### Características Visuales
+
+**Efecto de Perspectiva:**
+- Filas traseras más grandes
+- Filas delanteras más pequeñas
+- Espaciado lateral progresivo (forma de cono)
+- Simulación de profundidad
+
+**Estilos de Butacas:**
 ```csharp
-private void BtnCerrar_Click(object sender, RoutedEventArgs e)
+// Normal disponible
+Background = Green, Foreground = White
+
+// VIP disponible
+Background = Gold, Foreground = Black
+
+// Discapacitado disponible
+Background = Purple, Foreground = White
+
+// Ocupada
+Background = Red, IsEnabled = false
+
+// Seleccionada
+Background = Blue, Foreground = White
 ```
-- Cierra ventana sin guardar
+
+#### Validaciones
+- ✅ No permitir selección de butacas ocupadas
+- ✅ Verificar autenticación antes de confirmar
+- ✅ Validar que haya al menos una butaca seleccionada
+- ✅ Confirmación antes de procesar reserva
+
+#### Flujo de Usuario
+1. Usuario ve sala con butacas disponibles/ocupadas
+2. Click en butacas para seleccionar (máximo permitido)
+3. Ve resumen en tiempo real
+4. Click en "Confirmar Reserva"
+5. Confirmación final
+6. Procesamiento de reserva
+7. Mensaje con código de reserva
+8. Cierra ventana
 
 ---
 
-### 7. **PerfilUsuarioWindow.xaml.cs**
-Ventana de perfil de usuario con informaci�n y reservas.
+### 6. **PerfilUsuarioWindow** (Perfil y Reservas) 👤
 
-**Propiedades:**
+#### Descripción
+Ventana modal que muestra el perfil del usuario autenticado, permite cambiar contraseña y ver historial de reservas.
+
+#### Elementos de UI
+
+**Menú Lateral:**
+- Botón: "Información Personal"
+- Botón: "Mis Reservas"
+
+**Panel de Información Personal:**
+- Datos del usuario:
+  - Nombre completo
+  - Email
+  - Teléfono
+  - Fecha de registro
+- Sección "Cambiar Contraseña":
+  - Campo: Contraseña actual
+  - Campo: Nueva contraseña
+  - Campo: Confirmar nueva contraseña
+  - Botón: "Cambiar Contraseña"
+
+**Panel de Mis Reservas:**
+- Lista de reservas activas
+- Cada reserva muestra:
+  - Código de reserva
+  - Película
+  - Fecha y hora de sesión
+  - Sala
+  - Butacas reservadas
+  - Total pagado
+  - Estado (Pendiente/Confirmada)
+
+**Botones:**
+- "Volver"
+
+#### Propiedades Privadas
 ```csharp
-private readonly ServicioBaseDeDatos _dbService;
-private Usuario? _usuario;
+private Usuario usuarioActual;
+private ServicioBaseDeDatos servicioBD;
 ```
 
-**Constructor:**
+#### Constructor
 ```csharp
 public PerfilUsuarioWindow()
-{
-    InitializeComponent();
-    _dbService = new ServicioBaseDeDatos();
-    
-    _usuario = ServicioSesion.Instance.UsuarioActual;
-    
-    if (_usuario != null)
-    {
-        CargarInformacionUsuario();
-    }
-}
 ```
+- Obtiene usuario actual de ServicioSesion
+- Inicializa servicio de BD
+- Llama a `CargarInformacionUsuario()`
+- Muestra panel de información por defecto
 
-**M�todos Principales:**
+#### Métodos Principales
 
 **`CargarInformacionUsuario()`**
 ```csharp
 private void CargarInformacionUsuario()
 ```
-- Muestra nombre completo en men�
-- Muestra nombre, apellidos, email
-- Muestra tel�fono (o "No especificado")
-- Ajusta color seg�n si hay tel�fono
+- Muestra nombre completo
+- Muestra email
+- Muestra teléfono (o "No especificado")
+- Muestra fecha de registro formateada
 
-**`BtnMenuInformacion_Click()`**
-```csharp
-private void BtnMenuInformacion_Click(object sender, RoutedEventArgs e)
-```
-- Muestra panel de informaci�n
+**`BtnMenuInformacion_Click(object sender, RoutedEventArgs e)`**
 - Oculta panel de reservas
-- Actualiza estilos de botones (activo/inactivo)
+- Muestra panel de información
+- Actualiza estilo de botones de menú
 
-**`BtnMenuReservas_Click()`**
-```csharp
-private async void BtnMenuReservas_Click(object sender, RoutedEventArgs e)
-```
-- Oculta panel de informaci�n
+**`BtnMenuReservas_Click(object sender, RoutedEventArgs e)`**
+- Oculta panel de información
 - Muestra panel de reservas
-- Actualiza estilos de botones
-- Carga reservas con `CargarReservas()`
+- Llama a `CargarReservas()`
+- Actualiza estilo de botones de menú
 
-**`CargarReservas()`**
+**`async CargarReservas()`**
 ```csharp
-private async Task CargarReservas()
+private async void CargarReservas()
 ```
-- Valida usuario autenticado
-- Muestra indicador de carga
-- Obtiene reservas del usuario
-- **Manejo robusto de errores**:
-  - Try-catch anidados
-  - Contin�a si una reserva falla
-  - Log de errores en Debug
-- **Formatea cada reserva**:
-  - Valida que tenga sesi�n, pel�cula, sala
-  - Formatea lista de butacas ordenada
-  - Crea `ReservaViewModel`
-- Vincula a `itemsReservas.ItemsSource`
-- **Estados UI**:
-  - `pnlLoadingReservas`: Durante carga
-  - `itemsReservas`: Si hay reservas
-  - `pnlSinReservas`: Si no hay reservas
+**Proceso:**
+1. Obtiene reservas del usuario desde BD
+2. Si no hay reservas: muestra mensaje
+3. Para cada reserva:
+   - Crea ReservaViewModel
+   - Formatea butacas (ej: "A1, A2, B3")
+   - Añade a ItemsControl
+4. Maneja errores con try-catch
 
-**`BtnCambiarPassword_Click()`**
+**`async BtnCambiarPassword_Click(object sender, RoutedEventArgs e)`**
 ```csharp
 private async void BtnCambiarPassword_Click(object sender, RoutedEventArgs e)
 ```
-- **Validaciones**:
-  - Contrase�a actual no vac�a
-  - Nueva contrase�a no vac�a y m�nimo 6 caracteres
-  - Confirmaci�n no vac�a
-  - Contrase�as coinciden
-  - Contrase�a actual es correcta
-- **Proceso**:
-  1. Deshabilita bot�n
-  2. Llama a `ActualizarPasswordAsync()`
-  3. Si exitoso:
-     - Actualiza en memoria (`_usuario.Password`)
-     - Muestra mensaje de �xito
-     - Limpia campos
-  4. Si falla: Muestra error
-- **Finally**: Rehabilita bot�n
+**Validaciones:**
+1. Verifica que campos no estén vacíos
+2. Valida contraseña actual
+3. Verifica que nueva contraseña tenga mínimo 6 caracteres
+4. Verifica que contraseñas nuevas coincidan
+5. Llama a `ActualizarPasswordAsync()`
+6. Muestra mensaje de éxito/error
+7. Limpia campos
 
 **`MostrarMensajePassword(string mensaje, bool esError)`**
 ```csharp
 private void MostrarMensajePassword(string mensaje, bool esError)
 ```
-- Muestra mensaje en rojo (error) o verde (�xito)
-- Controla visibilidad del TextBlock
+- Muestra mensaje en TextBlock
+- Aplica estilo según tipo (error/éxito)
+- Hace visible el panel de mensaje
 
-**`BtnVolver_Click()`**
-```csharp
-private void BtnVolver_Click(object sender, RoutedEventArgs e)
+**`BtnVolver_Click(object sender, RoutedEventArgs e)`**
+- Cierra la ventana
+
+#### DataTemplate de Reservas
+
+**Información Mostrada:**
 ```
-- Cierra ventana
+┌──────────────────────────────────────────┐
+│ Reserva: RES20240115ABCD                 │
+│ Película: Oppenheimer                    │
+│ Sesión: 15/01/2024 20:30 - Sala 1        │
+│ Butacas: A1, A2, A3                      │
+│ Total: €30.00                            │
+│ Estado: Confirmada                       │
+└──────────────────────────────────────────┘
+
+```
+
+#### Validaciones de Cambio de Contraseña
+
+| Validación | Mensaje de Error |
+|-----------|------------------|
+| Campos vacíos | "Por favor, complete todos los campos" |
+| Contraseña actual incorrecta | "La contraseña actual no es correcta" |
+| Nueva contraseña corta | "La nueva contraseña debe tener al menos 6 caracteres" |
+| Contraseñas no coinciden | "Las contraseñas nuevas no coinciden" |
+| Error en BD | "Error al cambiar la contraseña" |
+
+#### Características
+- ✅ Visualización de datos de perfil
+- ✅ Cambio seguro de contraseña
+- ✅ Historial completo de reservas
+- ✅ Formato claro de información
+- ✅ Manejo de errores
+
+#### Flujo de Usuario
+
+**Información Personal:**
+1. Usuario ve sus datos
+2. Puede cambiar contraseña
+3. Valida contraseña actual
+4. Ingresa nueva contraseña
+5. Confirma cambio
+6. Mensaje de éxito
+
+**Mis Reservas:**
+1. Usuario navega a "Mis Reservas"
+2. Ve lista de reservas activas
+3. Cada reserva muestra detalles completos
+4. Puede ver códigos de reserva
 
 ---
 
-## ??? Base de Datos
+## Flujo de Navegación
 
-### Estructura de Tablas
+### Diagrama de Flujo General
 
-La base de datos MySQL contiene las siguientes tablas principales:
-
-#### 1. **Usuarios**
-```sql
-CREATE TABLE Usuarios (
-    Id INT PRIMARY KEY AUTO_INCREMENT,
-    Nombre VARCHAR(100) NOT NULL,
-    Apellidos VARCHAR(100) NOT NULL,
-    Email VARCHAR(100) UNIQUE NOT NULL,
-    Password VARCHAR(255) NOT NULL,
-    Telefono VARCHAR(20),
-    FechaRegistro DATETIME NOT NULL,
-    Activo BOOLEAN DEFAULT TRUE
-);
+```
+                    ┌──────────────────────┐
+                    │   INICIO APLICACIÓN  │
+                    └──────────┬───────────┘
+                               │
+                               ▼
+                    ┌──────────────────────┐
+                    │  CarteleraWindow     │◄────────────┐
+                    │  (Ventana Principal) │             │
+                    └──────────┬───────────┘             │
+                               │                         │
+                ┌──────────────┼──────────────┐          │
+                │              │              │          │
+                ▼              ▼              ▼          │
+       ┌──────────────┐ ┌────────────┐   ┌─────────────┐ │
+       │ LoginWindow  │ │Ver Película│   │  Mi Perfil  │ │
+       │              │ │            │   │             │ │
+       └──────┬───────┘ └─────┬──────┘   └──────┬──────┘ │
+              │               │                 │        │
+              │               ▼                 │        │
+              │    ┌──────────────────────┐     │        │
+              │    │SeleccionSesionWindow │     │        │
+              │    └──────────┬───────────┘     │        │
+              │               │                 │        │
+              │               │ (requiere       │        │
+              │               │  autenticación) │        │
+              ▼               ▼                 │        │
+       ┌──────────────┐ ┌───────────────────┐   │        │
+       │RegistroWindow│ │SeleccionButacas   │   │        │
+       │              │ │     Window        │   │        │
+       └──────────────┘ └──────────┬────────┘   │        │
+                                   │            │        │
+                                   │            ▼        │
+                                   │    ┌──────────────┐ │
+                                   │    │PerfilUsuario │ │
+                                   │    │   Window     │ │
+                                   │    └──────────────┘ │
+                                   │                     │
+                                   └─────────────────────┘
 ```
 
-#### 2. **Peliculas**
-```sql
-CREATE TABLE Peliculas (
-    Id INT PRIMARY KEY AUTO_INCREMENT,
-    Titulo VARCHAR(200) NOT NULL,
-    Descripcion TEXT,
-    Director VARCHAR(100),
-    Duracion INT,
-    Genero VARCHAR(50),
-    FechaEstreno DATE,
-    ImagenUrl VARCHAR(500),
-    Calificacion DECIMAL(3,1),
-    Activa BOOLEAN DEFAULT TRUE
-);
+### Flujos Detallados
+
+#### 1. **Flujo de Autenticación**
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│                    FLUJO DE AUTENTICACIÓN                   │
+└─────────────────────────────────────────────────────────────┘
+
+1. Usuario entra a CarteleraWindow
+   │
+   ├─► Click en "Iniciar Sesión"
+   │   │
+   │   └─► Abre LoginWindow
+   │       │
+   │       ├─► Opción 1: Ingresa credenciales
+   │       │   ├─► Valida en BD
+   │       │   ├─► Si es correcto:
+   │       │   │   └─► ServicioSesion.IniciarSesion()
+   │       │   │       └─► Cierra LoginWindow
+   │       │   │           └─► Actualiza CarteleraWindow
+   │       │   └─► Si es incorrecto:
+   │       │       └─► Muestra error
+   │       │
+   │       ├─► Opción 2: Click en "Registrarse"
+   │       │   └─► Abre RegistroWindow
+   │       │       ├─► Completa formulario
+   │       │       ├─► Valida campos
+   │       │       ├─► Registra en BD
+   │       │       ├─► Mensaje de éxito
+   │       │       └─► Vuelve a LoginWindow
+   │       │
+   │       └─► Opción 3: Click en "Continuar como Invitado"
+   │           └─► Cierra LoginWindow
+   │               └─► Vuelve a CarteleraWindow (sin autenticar)
+   │
+   └─► Si ya está autenticado:
+       └─► Muestra "Cerrar Sesión" y "Mi Perfil"
 ```
 
-#### 3. **Salas**
-```sql
-CREATE TABLE Salas (
-    Id INT PRIMARY KEY AUTO_INCREMENT,
-    Nombre VARCHAR(50) NOT NULL,
-    Filas INT NOT NULL,
-    ColumnasPerFila INT NOT NULL
-);
+#### 2. **Flujo de Reserva de Película**
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│                 FLUJO DE RESERVA DE PELÍCULA                │
+└─────────────────────────────────────────────────────────────┘
+
+1. Usuario ve CarteleraWindow
+   │
+   └─► Click en "Ver Horarios" de una película
+       │
+       └─► Abre SeleccionSesionWindow
+           │
+           ├─► Muestra información de película
+           ├─► Usuario selecciona fecha en calendario
+           ├─► Se cargan sesiones del día
+           │
+           └─► Click en "Seleccionar" de una sesión
+               │
+               │
+               ├─► Verifica autenticación
+               │   │
+               │   ├─► Si NO está autenticado:
+               │   │   └─► Abre LoginWindow
+               │   │       └─► Después de login exitoso:
+               │   │           └─► Continúa con reserva
+               │   │
+               │   └─► Si está autenticado:
+               │       └─► Abre SeleccionButacasWindow
+               │           │
+               │           ├─► Muestra sala con butacas
+               │           ├─► Usuario selecciona butacas
+               │           ├─► Ve resumen en tiempo real
+               │           │
+               │           └─► Click en "Confirmar Reserva"
+               │               │
+               │               ├─► Confirmación con MessageBox
+               │               ├─► Procesa reserva (transacción BD)
+               │               ├─► Genera código de reserva
+               │               ├─► Muestra mensaje de éxito
+               │               │
+               │               └─► Cierra SeleccionButacasWindow
+               │                   └─► Vuelve a SeleccionSesionWindow
+               │                       └─► Usuario puede cerrar
+               │                           └─► Vuelve a CarteleraWindow
+               │
+               └─► Si hay error:
+                   └─► Muestra mensaje de error
+                       └─► Mantiene ventana abierta
 ```
 
-#### 4. **Sesiones**
-```sql
-CREATE TABLE Sesiones (
-    Id INT PRIMARY KEY AUTO_INCREMENT,
-    PeliculaId INT NOT NULL,
-    SalaId INT NOT NULL,
-    FechaHora DATETIME NOT NULL,
-    Precio DECIMAL(10,2) NOT NULL,
-    Activa BOOLEAN DEFAULT TRUE,
-    FOREIGN KEY (PeliculaId) REFERENCES Peliculas(Id),
-    FOREIGN KEY (SalaId) REFERENCES Salas(Id)
-);
+#### 3. **Flujo de Gestión de Perfil**
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│                 FLUJO DE GESTIÓN DE PERFIL                  │
+└─────────────────────────────────────────────────────────────┘
+
+1. Usuario autenticado en CarteleraWindow
+   │
+   └─► Click en "Mi Perfil"
+       │
+       └─► Abre PerfilUsuarioWindow
+           │
+           ├─► Por defecto: Panel "Información Personal"
+           │   │
+           │   ├─► Ve datos de perfil
+           │   │
+           │   └─► Cambiar contraseña
+           │       ├─► Ingresa contraseña actual
+           │       ├─► Ingresa nueva contraseña
+           │       ├─► Confirma nueva contraseña
+           │       ├─► Click en "Cambiar Contraseña"
+           │       ├─► Valida campos
+           │       ├─► Actualiza en BD
+           │       └─► Muestra mensaje de éxito/error
+           │
+           └─► Click en "Mis Reservas"
+               │
+               └─► Carga historial de reservas
+                   │
+                   ├─► Muestra lista de reservas activas
+                   │   └─► Cada reserva con:
+                   │       ├─► Código
+                   │       ├─► Película
+                   │       ├─► Sesión
+                   │       ├─► Butacas
+                   │       └─► Total
+                   │
+                   └─► Si no hay reservas:
+                       └─► Muestra mensaje "No tienes reservas"
 ```
 
-#### 5. **Butacas**
-```sql
-CREATE TABLE Butacas (
-    Id INT PRIMARY KEY AUTO_INCREMENT,
-    SalaId INT NOT NULL,
-    Fila INT NOT NULL,
-    Columna INT NOT NULL,
-    Tipo VARCHAR(20) DEFAULT 'Normal',
-    Activa BOOLEAN DEFAULT TRUE,
-    FOREIGN KEY (SalaId) REFERENCES Salas(Id)
-);
+#### 4. **Flujo de Usuario Invitado**
+
 ```
+┌─────────────────────────────────────────────────────────────┐
+│                   FLUJO DE USUARIO INVITADO                 │
+└─────────────────────────────────────────────────────────────┘
 
-#### 6. **Reservas**
-```sql
-CREATE TABLE Reservas (
-    Id INT PRIMARY KEY AUTO_INCREMENT,
-    UsuarioId INT NOT NULL,
-    SesionId INT NOT NULL,
-    FechaReserva DATETIME NOT NULL,
-    Total DECIMAL(10,2) NOT NULL,
-    Estado VARCHAR(20) DEFAULT 'Pendiente',
-    CodigoReserva VARCHAR(50) UNIQUE,
-    FOREIGN KEY (UsuarioId) REFERENCES Usuarios(Id),
-    FOREIGN KEY (SesionId) REFERENCES Sesiones(Id)
-);
-```
-
-#### 7. **ReservasButacas**
-```sql
-CREATE TABLE ReservasButacas (
-    Id INT PRIMARY KEY AUTO_INCREMENT,
-    ReservaId INT NOT NULL,
-    ButacaId INT NOT NULL,
-    SesionId INT NOT NULL,
-    FOREIGN KEY (ReservaId) REFERENCES Reservas(Id),
-    FOREIGN KEY (ButacaId) REFERENCES Butacas(Id),
-    FOREIGN KEY (SesionId) REFERENCES Sesiones(Id)
-);
-```
-
-### Relaciones
-```
-Usuarios ??????
-              ???< Reservas >???? Sesiones ????< Peliculas
-              ?                    ?
-ReservasButacas                   ????? Salas ????< Butacas
-```
-
----
-
-## ?? Flujo de Navegaci�n
-
-### Diagrama de Flujo
-```
-    [App.xaml.cs]
-         ?
-         ??> [CarteleraWindow] ?????????????????????????
-                 ?                                     ?
-                 ??> [Clic en Pel�cula]                ?
-                 ?        ?                            ?
-                 ?        ??> [SeleccionSesionWindow]  ?
-                 ?                 ?                   ?
-                 ?                 ??> [Usuario no autenticado?]
-                 ?                          ?           ?
-                 ?                          ?? S� ?> [LoginWindow]
-                 ?                          ?              ?
-                 ?                          ?              ??> [RegistroWindow]
-                 ?                          ?              ?
-                 ?                          ?? No ??????????
-                 ?                                     ?
-                 ?                    [SeleccionButacasWindow]
-                 ?                                     ?
-                 ?                    [Confirmar Reserva] ? BD
-                 ?
-                 ??> [Bot�n Perfil] ???????> [PerfilUsuarioWindow]
-                 ?                                   ?
-                 ?                                   ??> [Tab Informaci�n]
-                 ?                                   ?    - Datos usuario
-                 ?                                   ?    - Cambiar password
-                 ?                                   ?
-                 ?                                   ??> [Tab Mis Reservas]
-                 ?                                        - Lista de reservas
-                 ?
-                 ??> [Bot�n Cuenta]
-                          ?
-                          ??> [Autenticado] ? Cerrar Sesi�n
-                          ??> [No Autenticado] ? [LoginWindow]
-```
-
-### Flujo de Reserva Completa
-
-1. **Usuario ve Cartelera** (`CarteleraWindow`)
-2. **Selecciona Pel�cula** ? Abre `SeleccionSesionWindow`
-3. **Elige Fecha en Calendario** ? Carga sesiones disponibles
-4. **Selecciona Sesi�n** ? Verifica autenticaci�n
-   - Si no autenticado ? `LoginWindow` o continuar como invitado (pero debe autenticar para reservar)
-5. **Abre Selecci�n de Butacas** (`SeleccionButacasWindow`)
-   - Carga butacas de la sala
-   - Marca butacas ocupadas
-6. **Selecciona Butacas** ? Actualiza resumen en tiempo real
-7. **Confirma Reserva** ? Muestra di�logo de confirmaci�n
-8. **Procesa Pago (simulado)** ? Guarda en BD
-9. **Muestra Confirmaci�n** con c�digo de reserva
-10. **Cierra y vuelve a Cartelera**
-
----
-
-## ?? Caracter�sticas de Seguridad
-
-### Implementadas
-? **Validaci�n de Inputs**
-- Validaci�n de email con Regex
-- Validaci�n de longitud de contrase�a (m�nimo 6)
-- Validaci�n de campos requeridos
-- Validaci�n de formato de tel�fono
-
-? **Manejo de Errores**
-- Try-catch en operaciones de BD
-- Mensajes descriptivos al usuario
-- Logging en Debug para desarrollo
-- Manejo de excepciones no controladas en App.xaml.cs
-
-? **Transacciones de Base de Datos**
-- Uso de transacciones en `CrearReservaAsync()`
-- Rollback autom�tico en caso de error
-
-? **Control de Estados**
-- Validaci�n de autenticaci�n antes de operaciones cr�ticas
-- Verificaci�n de disponibilidad de butacas
-- Estados de reserva (Pendiente, Confirmada, Cancelada)
-
-? **Integridad de Datos**
-- Foreign Keys en base de datos
-- Validaci�n de datos antes de insertar
-- C�digos de reserva �nicos
-
-### ?? Pendientes para Producci�n
-- ? **Hash de Contrase�as**: Actualmente en texto plano
-- ? **Inyecci�n SQL**: Usar par�metros (ya implementado) pero agregar m�s validaci�n
-- ? **Encriptaci�n de Conexi�n**: Configurar SSL para MySQL
-- ? **Autorizaci�n**: Roles de usuario (admin, cliente)
-- ? **Tokens de Sesi�n**: Implementar sistema de tokens JWT
-- ? **Protecci�n CSRF**: Para operaciones cr�ticas
-- ? **Logging Profesional**: Implementar sistema de logs (Serilog, NLog)
-- ? **Auditor�a**: Registrar acciones de usuarios
-
----
-
-## ?? Dependencias
-
-### NuGet Packages
-
-#### 1. **MySql.Data** (v9.5.0)
-- **Prop�sito**: Conector oficial de MySQL para .NET
-- **Uso**: Toda la comunicaci�n con base de datos
-- **Clases principales**:
-  - `MySqlConnection`: Conexi�n a BD
-  - `MySqlCommand`: Ejecuci�n de queries
-  - `MySqlDataReader`: Lectura de resultados
-  - `MySqlTransaction`: Manejo de transacciones
-
-#### 2. **DotNetEnv** (v3.1.1)
-- **Prop�sito**: Carga de variables de entorno desde archivo `.env`
-- **Uso**: Configuraci�n de cadena de conexi�n
-- **M�todo**: `Env.Load()`
-- **Ventaja**: Mantener credenciales fuera del c�digo fuente
-
-### Archivo .env
-```env
-DATABASE=server=localhost;database=cinema_db;user=root;password=tu_password;
-```
-
-### Framework Dependencies
-- **.NET 10.0**: Framework principal
-- **WPF (Windows Presentation Foundation)**: Framework de UI
-- **System.Text.RegularExpressions**: Validaci�n de email
-- **System.Globalization**: Formato de moneda
-- **System.Threading**: Gesti�n de cultura
-
----
-
-## ?? Caracter�sticas de UI/UX
-
-### Estilos de Butacas
-La aplicaci�n implementa estilos visuales distintos para cada tipo de butaca:
-
-1. **Normal** (Verde): Butacas est�ndar
-2. **VIP** (Dorado): Butacas premium
-3. **Discapacitado** (Azul): Butacas accesibles
-4. **Ocupada** (Rojo): Ya reservadas
-5. **Seleccionada** (Naranja): Elegidas por usuario
-
-### Efecto de Perspectiva
-La visualizaci�n de la sala incluye efecto de perspectiva:
-- Butacas traseras m�s peque�as
-- Espaciado lateral para simular cono
-- Tama�o din�mico basado en la fila
-- Efecto visual similar a sala real
-
-### Feedback al Usuario
-- **Loading Spinners**: Durante operaciones as�ncronas
-- **Mensajes de Confirmaci�n**: Antes de acciones importantes
-- **Mensajes de Error**: Descriptivos y claros
-- **Mensajes de �xito**: Con iconos verdes
-- **Estados Vac�os**: "No hay pel�culas", "No hay sesiones", etc.
-
-### Navegaci�n Intuitiva
-- Breadcrumbs visuales en t�tulos
-- Botones de retroceso claros
-- Di�logos modales para flujos secundarios
-- Actualizaci�n autom�tica de UI tras cambios
-
----
-
-## ?? Mejoras Futuras Recomendadas
-
-### Funcionalidad
-- [ ] Pago real integrado (Stripe, PayPal)
-- [ ] Env�o de emails de confirmaci�n
-- [ ] Notificaciones push
-- [ ] Cancelaci�n de reservas
-- [ ] Sistema de descuentos/cupones
-- [ ] Puntos de fidelidad
-- [ ] Rese�as y calificaciones de pel�culas
-- [ ] Trailer de pel�culas
-- [ ] Selecci�n de snacks/bebidas
-- [ ] Generaci�n de PDF con entradas
-
-### T�cnico
-- [ ] Implementar patr�n MVVM completo
-- [ ] Unit Tests
-- [ ] Integration Tests
-- [ ] Migrations de base de datos
-- [ ] Caching con Redis
-- [ ] API REST separada
-- [ ] Aplicaci�n m�vil (Xamarin/MAUI)
-- [ ] WebSocket para actualizaci�n real-time de butacas
-- [ ] Docker containers
-- [ ] CI/CD pipeline
-
-### Seguridad
-- [ ] BCrypt para passwords
-- [ ] JWT para sesiones
-- [ ] Rate limiting
-- [ ] CAPTCHA en registro
-- [ ] 2FA (Two-Factor Authentication)
-- [ ] Encriptaci�n end-to-end
-
-### Performance
-- [ ] Lazy Loading de im�genes
-- [ ] Paginaci�n de resultados
-- [ ] Connection pooling
-- [ ] �ndices en base de datos
-- [ ] Compresi�n de respuestas
-- [ ] CDN para im�genes
-
----
-
-## ?? Soporte y Contacto
-
-### Informaci�n del Proyecto
-- **Nombre**: Sistema de Reserva de Cine
-- **Versi�n**: 1.0.0
-- **Framework**: .NET 10.0
-- **Tipo**: Aplicaci�n WPF Desktop
-
-### Estructura de Archivos Clave
-```
-?? App.xaml.cs                   - Punto de entrada
-?? ServicioBaseDeDatos.cs        - L�gica de datos
-?? ServicioSesion.cs             - Gesti�n de sesi�n
-?? .env                          - Configuraci�n (NO subir a git)
-?? cinema_database_mysql.sql     - Script de BD
-```
-
-### Comandos �tiles
-
-**Compilar proyecto:**
-```bash
-dotnet build
-```
-
-**Ejecutar aplicaci�n:**
-```bash
-dotnet run
-```
-
-**Restaurar paquetes:**
-```bash
-dotnet restore
-```
-
-**Publicar aplicaci�n:**
-```bash
-dotnet publish -c Release
-```
-
----
-
-## ?? Notas Finales
-
-Este documento cubre la arquitectura completa del sistema de reserva de cine. Cada m�todo ha sido documentado con:
-- Firma del m�todo
-- Descripci�n de funcionalidad
-- Par�metros y tipos
-- Valores de retorno
-- Flujo de ejecuci�n
-- Uso en el sistema
-
-### Convenciones de C�digo
-- **Nombres de clases**: PascalCase
-- **Nombres de m�todos**: PascalCase
-- **Variables privadas**: _camelCase con guion bajo
-- **Variables locales**: camelCase
-- **Async methods**: Sufijo "Async"
-- **Eventos**: Prefijo "On" o sufijo "_Event"
-
-### Buenas Pr�cticas Aplicadas
-? Programaci�n as�ncrona con async/await
-? Uso de using para dispose de recursos
-? Try-catch en operaciones cr�ticas
-? Validaci�n de inputs del usuario
-? Separaci�n de responsabilidades
-? Transacciones de BD para consistencia
-? Comentarios en c�digo complejo
-
----
-
-**�ltima actualizaci�n:** 2024
-**Documentado por:** GitHub Copilot
-**Versi�n del documento:** 1.0
-
----
+1. Usuario en CarteleraWindow (sin autenticar)
+   │
+   ├─► Puede ver cartelera de películas
+   │   └─► Click en "Ver Horarios"
+   │       └─► Abre SeleccionSesionWindow
+   │           ├─► Ve información de película
+   │           ├─► Ve calendario y sesiones
+   │           │
+   │           └─► Intenta seleccionar sesión
+   │               └─► Sistema detecta que NO está autenticado
+   │                   └─► Muestra LoginWindow
+   │                       │
+   │                       ├─► Opción 1: Inicia sesión
+   │                       │   └─► Continúa con reserva
+   │                       │
+   │                       ├─► Opción 2: Se registra
+   │                       │   └─► Continúa con reserva
+   │                       │
+   │                       └─► Opción 3: Cancela
+   │                           └─► Vuelve a SeleccionSesionWindow
+   │                       └─► Cerrando LoginWindow
+   │                           └─► Sin autenticación, limitaciones activas
+   │
+   └─► Limitaciones del invitado:
+       ├─► ✗ No puede hacer reservas
+       ├─► ✗ No puede acceder a perfil
+       └─► ✓ Puede ver cartelera e información
