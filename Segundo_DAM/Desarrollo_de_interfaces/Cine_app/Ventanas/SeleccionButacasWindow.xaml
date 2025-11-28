@@ -1,9 +1,11 @@
 ﻿<Window x:Class="Cine_app.Views.SeleccionButacasWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Seleccionar Butacas - Cinema" Height="750" Width="1100"
+        Title="Seleccionar Butacas - Cinema" Height="850" Width="1300"
         WindowStartupLocation="CenterScreen"
-        ResizeMode="CanResize">
+        ResizeMode="CanResize"
+        MinHeight="700"
+        MinWidth="1000">
     <Window.Resources>
         <!-- Estilo para butaca normal -->
         <Style x:Key="ButacaNormalStyle" TargetType="Button">
@@ -236,7 +238,7 @@
                     <TextBlock Text="Precio por butaca:" 
                               FontWeight="SemiBold"/>
                     <TextBlock x:Name="txtPrecioUnitario" 
-                              Text="€0.00"
+                              Text="0,00€"
                               FontSize="16"
                               Margin="0,5,0,10"/>
 
@@ -246,7 +248,7 @@
                               FontWeight="Bold"
                               FontSize="18"/>
                     <TextBlock x:Name="txtTotal" 
-                              Text="€0.00"
+                              Text="0,00€"
                               FontSize="24"
                               FontWeight="Bold"
                               Foreground="#e94560"

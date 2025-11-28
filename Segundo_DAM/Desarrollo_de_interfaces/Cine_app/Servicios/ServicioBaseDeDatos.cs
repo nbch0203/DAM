@@ -198,6 +198,23 @@ namespace Cine_app.Services
             return null;
         }
 
+        public async Task<bool> ExisteUsuarioAsync(string email)
+        {
+            string sql = "SELECT COUNT(*) FROM Usuarios WHERE Email = @Email";
+
+            using (var conn = new MySqlConnection(connectionString))
+            {
+                await conn.OpenAsync();
+                using (var cmd = new MySqlCommand(sql, conn))
+                {
+                    cmd.Parameters.AddWithValue("@Email", email);
+                    
+                    var resultado = await cmd.ExecuteScalarAsync();
+                    return Convert.ToInt32(resultado) > 0;
+                }
+            }
+        }
+
         public async Task<bool> RegistrarUsuarioAsync(Usuario usuario)
         {
             string sql = @"
@@ -224,6 +241,165 @@ namespace Cine_app.Services
         }
 
         // ============ RESERVAS ============
+        public async Task<List<Reserva>> ObtenerReservasPorUsuarioAsync(int usuarioId)
+        {
+            var reservas = new List<Reserva>();
+            
+            try
+            {
+                string sql = @"
+                    SELECT r.*, 
+                           p.Titulo, p.ImagenUrl, p.Duracion,
+                           s.FechaHora, s.PeliculaId,
+                           sal.Nombre as SalaNombre
+                    FROM Reservas r
+                    INNER JOIN Sesiones s ON r.SesionId = s.Id
+                    INNER JOIN Peliculas p ON s.PeliculaId = p.Id
+                    INNER JOIN Salas sal ON s.SalaId = sal.Id
+                    WHERE r.UsuarioId = @UsuarioId
+                    AND r.Estado IN ('Pendiente', 'Confirmada')
+                    ORDER BY s.FechaHora DESC";
+
+                using (var conn = new MySqlConnection(connectionString))
+                {
+                    await conn.OpenAsync();
+                    using (var cmd = new MySqlCommand(sql, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@UsuarioId", usuarioId);
+                        
+                        using (var reader = await cmd.ExecuteReaderAsync())
+                        {
+                            while (await reader.ReadAsync())
+                            {
+                                try
+                                {
+                                    var reserva = new Reserva
+                                    {
+                                        Id = reader.GetInt32("Id"),
+                                        UsuarioId = reader.GetInt32("UsuarioId"),
+                                        SesionId = reader.GetInt32("SesionId"),
+                                        FechaReserva = reader.GetDateTime("FechaReserva"),
+                                        Total = reader.GetDecimal("Total"),
+                                        Estado = reader.GetString("Estado"),
+                                        CodigoReserva = reader.IsDBNull(reader.GetOrdinal("CodigoReserva")) 
+                                            ? null 
+                                            : reader.GetString("CodigoReserva"),
+                                        Sesion = new Sesion
+                                        {
+                                            Id = reader.GetInt32("SesionId"),
+                                            FechaHora = reader.GetDateTime("FechaHora"),
+                                            PeliculaId = reader.GetInt32("PeliculaId"),
+                                            Pelicula = new Pelicula
+                                            {
+                                                Titulo = reader.GetString("Titulo"),
+                                                ImagenUrl = reader.IsDBNull(reader.GetOrdinal("ImagenUrl")) 
+                                                    ? null 
+                                                    : reader.GetString("ImagenUrl"),
+                                                Duracion = reader.IsDBNull(reader.GetOrdinal("Duracion")) 
+                                                    ? null 
+                                                    : reader.GetInt32("Duracion")
+                                            },
+                                            Sala = new Sala
+                                            {
+                                                Nombre = reader.GetString("SalaNombre")
+                                            }
+                                        },
+                                        Butacas = new List<ReservaButaca>()
+                                    };
+                                    reservas.Add(reserva);
+                                }
+                                catch (Exception ex)
+                                {
+                                    // Log el error pero continúa con las siguientes reservas
+                                    System.Diagnostics.Debug.WriteLine($"Error al leer reserva: {ex.Message}");
+                                }
+                            }
+                        }
+                    }
+                }
+
+                // Cargar butacas de cada reserva (con conexiones independientes)
+                foreach (var reserva in reservas)
+                {
+                    try
+                    {
+                        reserva.Butacas = await ObtenerButacasDeReservaAsync(reserva.Id);
+                    }
+                    catch (Exception ex)
+                    {
+                        System.Diagnostics.Debug.WriteLine($"Error al cargar butacas para reserva {reserva.Id}: {ex.Message}");
+                        reserva.Butacas = new List<ReservaButaca>();
+                    }
+                }
+
+                return reservas;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Error en ObtenerReservasPorUsuarioAsync: {ex.Message}", ex);
+            }
+        }
+
+        private async Task<List<ReservaButaca>> ObtenerButacasDeReservaAsync(int reservaId)
+        {
+            var butacas = new List<ReservaButaca>();
+            string sql = @"
+                SELECT rb.*, b.Fila, b.Columna, b.Tipo
+                FROM ReservasButacas rb
+                INNER JOIN Butacas b ON rb.ButacaId = b.Id
+                WHERE rb.ReservaId = @ReservaId
+                ORDER BY b.Fila, b.Columna";
+
+            using (var conn = new MySqlConnection(connectionString))
+            {
+                await conn.OpenAsync();
+                using (var cmd = new MySqlCommand(sql, conn))
+                {
+                    cmd.Parameters.AddWithValue("@ReservaId", reservaId);
+                    using (var reader = await cmd.ExecuteReaderAsync())
+                    {
+                        while (await reader.ReadAsync())
+                        {
+                            butacas.Add(new ReservaButaca
+                            {
+                                Id = reader.GetInt32("Id"),
+                                ReservaId = reader.GetInt32("ReservaId"),
+                                ButacaId = reader.GetInt32("ButacaId"),
+                                SesionId = reader.GetInt32("SesionId"),
+                                Butaca = new Butaca
+                                {
+                                    Id = reader.GetInt32("ButacaId"),
+                                    Fila = reader.GetInt32("Fila"),
+                                    Columna = reader.GetInt32("Columna"),
+                                    Tipo = reader.GetString("Tipo")
+                                }
+                            });
+                        }
+                    }
+                }
+            }
+
+            return butacas;
+        }
+
+        public async Task<bool> ActualizarPasswordAsync(int usuarioId, string nuevaPassword)
+        {
+            string sql = "UPDATE Usuarios SET Password = @Password WHERE Id = @Id";
+
+            using (var conn = new MySqlConnection(connectionString))
+            {
+                await conn.OpenAsync();
+                using (var cmd = new MySqlCommand(sql, conn))
+                {
+                    cmd.Parameters.AddWithValue("@Id", usuarioId);
+                    cmd.Parameters.AddWithValue("@Password", nuevaPassword);
+
+                    int result = await cmd.ExecuteNonQueryAsync();
+                    return result > 0;
+                }
+            }
+        }
+
         public async Task<int> CrearReservaAsync(Reserva reserva, List<int> butacaIds)
         {
             using (var conn = new MySqlConnection(connectionString))

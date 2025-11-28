@@ -31,8 +31,8 @@ namespace Cine_app.Views
         private void CargarInformacion()
         {
             txtTituloPelicula.Text = _pelicula.Titulo;
-            txtInfoSesion.Text = $"{_sesion.FechaHora:dddd, dd MMMM yyyy - HH:mm} • {_sesion.Sala?.Nombre} • €{_sesion.Precio:F2}";
-            txtPrecioUnitario.Text = $"€{_sesion.Precio:F2}";
+            txtInfoSesion.Text = $"{_sesion.FechaHora:dddd, dd MMMM yyyy - HH:mm} • {_sesion.Sala?.Nombre} • {_sesion.Precio:F2}€";
+            txtPrecioUnitario.Text = $"{_sesion.Precio:F2}€";
         }
 
         private async Task CargarButacas()
@@ -78,24 +78,35 @@ namespace Cine_app.Views
 
             for (int fila = 1; fila <= filas; fila++)
             {
+                // Calcular espaciado lateral para efecto de cono
+                // Las filas traseras (números mayores) tienen menos espaciado
+                double factorCono = 1.0 - ((double)(fila - 1) / filas * 0.5); // 0.5 a 1.0
+                int espaciadoLateral = (int)((filas - fila) * 15 * factorCono);
+
                 var panelFila = new StackPanel
                 {
                     Orientation = Orientation.Horizontal,
                     HorizontalAlignment = HorizontalAlignment.Center,
-                    Margin = new Thickness(0, 2, 0, 2)
+                    Margin = new Thickness(espaciadoLateral, 3, espaciadoLateral, 3)
                 };
 
                 // Etiqueta de fila
                 var lblFila = new TextBlock
                 {
                     Text = $"{(char)('A' + fila - 1)}",
-                    Width = 30,
+                    Width = 35,
                     FontWeight = FontWeights.Bold,
+                    FontSize = 14,
                     VerticalAlignment = VerticalAlignment.Center,
                     HorizontalAlignment = HorizontalAlignment.Center,
                     Foreground = new SolidColorBrush(Color.FromRgb(0x66, 0x66, 0x66))
                 };
                 panelFila.Children.Add(lblFila);
+
+                // Calcular tamaño de butaca según la fila (perspectiva)
+                double factorTamanio = 0.7 + ((double)fila / filas * 0.3); // 0.7 a 1.0
+                int anchoButaca = (int)(45 * factorTamanio);
+                int altoButaca = (int)(45 * factorTamanio);
 
                 for (int columna = 1; columna <= columnas; columna++)
                 {
@@ -103,10 +114,23 @@ namespace Cine_app.Views
 
                     if (butaca != null)
                     {
-                        var btnButaca = CrearBotonButaca(butaca);
+                        var btnButaca = CrearBotonButaca(butaca, anchoButaca, altoButaca);
                         panelFila.Children.Add(btnButaca);
                     }
                 }
+
+                // Agregar etiqueta de fila también al final
+                var lblFilaDerecha = new TextBlock
+                {
+                    Text = $"{(char)('A' + fila - 1)}",
+                    Width = 35,
+                    FontWeight = FontWeights.Bold,
+                    FontSize = 14,
+                    VerticalAlignment = VerticalAlignment.Center,
+                    HorizontalAlignment = HorizontalAlignment.Center,
+                    Foreground = new SolidColorBrush(Color.FromRgb(0x66, 0x66, 0x66))
+                };
+                panelFila.Children.Add(lblFilaDerecha);
 
                 panelPrincipal.Children.Add(panelFila);
             }
@@ -114,17 +138,17 @@ namespace Cine_app.Views
             itemsButacas.ItemsSource = new[] { panelPrincipal };
         }
 
-        private Button CrearBotonButaca(Butaca butaca)
+        private Button CrearBotonButaca(Butaca butaca, int ancho, int alto)
         {
             var btn = new Button
             {
                 Content = butaca.Columna.ToString(),
                 Tag = butaca,
-                Width = 45,
-                Height = 45,
-                Margin = new Thickness(3),
+                Width = ancho,
+                Height = alto,
+                Margin = new Thickness(2),
                 FontWeight = FontWeights.Bold,
-                FontSize = 12
+                FontSize = 11
             };
 
             // Verificar si la butaca está ocupada
@@ -196,7 +220,7 @@ namespace Cine_app.Views
             {
                 txtButacasSeleccionadas.Text = "Ninguna";
                 txtCantidad.Text = "0 butacas";
-                txtTotal.Text = "€0.00";
+                txtTotal.Text = "0,00€";
                 btnConfirmarReserva.IsEnabled = false;
             }
             else
@@ -213,7 +237,7 @@ namespace Cine_app.Views
 
                 // Total
                 decimal total = _butacasSeleccionadas.Count * _sesion.Precio;
-                txtTotal.Text = $"€{total:F2}";
+                txtTotal.Text = $"{total:F2}€";
 
                 btnConfirmarReserva.IsEnabled = true;
             }

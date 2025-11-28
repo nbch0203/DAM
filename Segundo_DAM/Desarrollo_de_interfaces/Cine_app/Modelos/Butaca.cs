@@ -38,4 +38,13 @@
         // Propiedades de navegación
         public Butaca? Butaca { get; set; }
     }
+
+    // Clase para el binding de reservas en la UI
+    public class ReservaViewModel
+    {
+        public Sesion Sesion { get; set; } = new();
+        public decimal Total { get; set; }
+        public string CodigoReserva { get; set; } = string.Empty;
+        public string Butacas { get; set; } = string.Empty;
+    }
 }

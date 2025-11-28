@@ -77,12 +77,35 @@
                 </StackPanel>
 
                 <StackPanel Grid.Column="1" Orientation="Horizontal">
-                    <TextBlock x:Name="txtUsuario" 
-                              Text="Invitado" 
+                    <Button x:Name="btnPerfilUsuario" 
+                            Click="BtnPerfilUsuario_Click"
+                            Background="Transparent"
+                            BorderThickness="0"
+                            Padding="0"
+                            Margin="0,0,20,0"
+                            Cursor="Hand"
+                            Visibility="Collapsed">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="&#x1F464; " 
+                                      FontSize="20" 
+                                      Foreground="White"
+                                      VerticalAlignment="Center"/>
+                            <TextBlock x:Name="txtUsuario" 
+                                      Text="Invitado" 
+                                      FontSize="16" 
+                                      Foreground="White"
+                                      VerticalAlignment="Center"
+                                      TextDecorations="Underline"/>
+                        </StackPanel>
+                    </Button>
+
+                    <TextBlock x:Name="txtUsuarioInvitado" 
+                              Text="👤 Invitado" 
                               FontSize="16" 
                               Foreground="White"
                               VerticalAlignment="Center"
-                              Margin="0,0,20,0"/>
+                              Margin="0,0,20,0"
+                              Visibility="Visible"/>
 
                     <Button x:Name="btnCuentaAccion" 
                             Content="Iniciar Sesión" 

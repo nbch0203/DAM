@@ -187,8 +187,8 @@
                                                     <Run Text="{Binding Sala.Nombre}" FontWeight="SemiBold"/>
                                                 </TextBlock>
                                                 <TextBlock FontSize="16" Foreground="#e94560" FontWeight="Bold" Margin="0,5,0,0">
-                                                    <Run Text="{Binding Precio, StringFormat='{}{0:C}'}"/>
-                                                    <Run Text=" / butaca" FontSize="12" FontWeight="Normal"/>
+                                                    <Run Text="{Binding Precio, StringFormat='{}{0:F2}'}"/>
+                                                    <Run Text="€ / butaca" FontSize="12" FontWeight="Normal"/>
                                                 </TextBlock>
                                             </StackPanel>
 

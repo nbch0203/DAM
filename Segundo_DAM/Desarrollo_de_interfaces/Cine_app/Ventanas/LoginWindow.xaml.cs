@@ -79,8 +79,22 @@ namespace Cine_app.Views
 
         private void BtnRegistro_Click(object sender, RoutedEventArgs e)
         {
-            // TODO: Implementar ventana de registro
-            MostrarError("Función de registro en desarrollo");
+            // Abrir ventana de registro
+            var registroWindow = new RegistroWindow();
+            bool? resultado = registroWindow.ShowDialog();
+
+            // Si el registro fue exitoso, mostrar mensaje
+            if (resultado == true)
+            {
+                txtError.Text = "✓ Registro completado. Por favor, inicie sesión con sus credenciales.";
+                txtError.Foreground = System.Windows.Media.Brushes.Green;
+                txtError.Visibility = Visibility.Visible;
+                
+                // Limpiar campos
+                txtEmail.Text = "";
+                txtPassword.Password = "";
+                txtEmail.Focus();
+            }
         }
 
         private void BtnInvitado_Click(object sender, RoutedEventArgs e)

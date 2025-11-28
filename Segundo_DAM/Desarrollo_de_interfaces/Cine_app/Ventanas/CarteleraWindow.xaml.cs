@@ -29,12 +29,15 @@ namespace Cine_app.Views
             if (ServicioSesion.Instance.EstaAutenticado)
             {
                 var usuario = ServicioSesion.Instance.UsuarioActual;
-                txtUsuario.Text = $"👤 {usuario?.Nombre}";
+                txtUsuario.Text = usuario?.Nombre ?? "Usuario";
+                btnPerfilUsuario.Visibility = Visibility.Visible;
+                txtUsuarioInvitado.Visibility = Visibility.Collapsed;
                 btnCuentaAccion.Content = "Cerrar Sesión";
             }
             else
             {
-                txtUsuario.Text = "👤 Invitado";
+                btnPerfilUsuario.Visibility = Visibility.Collapsed;
+                txtUsuarioInvitado.Visibility = Visibility.Visible;
                 btnCuentaAccion.Content = "Iniciar Sesión";
             }
         }
@@ -125,6 +128,15 @@ namespace Cine_app.Views
                 var loginWindow = new LoginWindow();
                 loginWindow.ShowDialog();
                 ActualizarEstadoUsuario();
+            }
+        }
+
+        private void BtnPerfilUsuario_Click(object sender, RoutedEventArgs e)
+        {
+            if (ServicioSesion.Instance.EstaAutenticado)
+            {
+                var perfilWindow = new PerfilUsuarioWindow();
+                perfilWindow.ShowDialog();
             }
         }
     }
