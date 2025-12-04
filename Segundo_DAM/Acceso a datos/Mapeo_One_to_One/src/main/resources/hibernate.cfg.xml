@@ -6,11 +6,10 @@
   <property name="hibernate.connection.driver_class">oracle.jdbc.driver.OracleDriver</property>
   <property name="hibernate.connection.password">password</property>
   <property name="hibernate.connection.url">jdbc:oracle:thin:@localhost:1521:xe</property>
-  <property name="hibernate.connection.username">C##PERSONA</property>
-  <property name="hibernate.dialect">org.hibernate.dialect.OracleDialect</property>
+  <property name="hibernate.connection.username">C##OneToOne</property>
+  <property name="hibernate.dialect">Oracle</property>
   <property name="hibernate.show_sql">true</property>
   <property name="hibernate.format_sql">true</property>
   <property name="hibernate.hbm2ddl.auto">update</property>
-  <mapping class="Ejemplo_Hibernate.Ejemplo_Hibernate.Departamento"/>
  </session-factory>
 </hibernate-configuration>

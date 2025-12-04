@@ -11,7 +11,7 @@ public class ProductoDAOImpl implements ProductoDAO{
 	
 	private SessionFactory factory;
 
-	public Operaciones() {
+	public void Operaciones() {
 
 		factory = HibernateUtil.getSessionFactory();
 	}
@@ -86,6 +86,12 @@ public class ProductoDAOImpl implements ProductoDAO{
 	public ProductoDAO buscarProducto(Long id) {
 		
 		return null;
+	}
+
+	@Override
+	public void insertar(ProductoDAOImpl producto) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

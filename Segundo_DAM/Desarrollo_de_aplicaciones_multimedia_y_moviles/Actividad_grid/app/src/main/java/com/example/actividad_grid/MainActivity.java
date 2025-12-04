@@ -15,6 +15,7 @@ public class MainActivity extends AppCompatActivity {
     // Nixon Bolivar Cruz Hidalgo
 
 
+
     Button btnEmpezar, btnLimpiar, btnRojo, btnVerde, btnAzul, btnMarron, btnAmarillo, btnNaranja, btnNegro;
 
     // Mapa para guardar los colores originales de los botones.
