@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+                                         "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+	<session-factory name="">
+		<!-- Configuración de conexión a Oracle Database -->
+		<property name="hibernate.connection.driver_class">oracle.jdbc.driver.OracleDriver</property>
+		<property name="hibernate.connection.password">password</property>
+		<property name="hibernate.connection.url">jdbc:oracle:thin:@localhost:1521:xe</property>
+		<property name="hibernate.connection.username">C##TestExamen</property>
+
+		<!-- Dialecto de Oracle -->
+		<property name="hibernate.dialect">org.hibernate.dialect.OracleDialect</property>
+		<!-- Mostrar SQL en consola -->
+		<property name="hibernate.show_sql">true</property>
+		<property name="hibernate.format_sql">true</property>
+		<!-- Crear/actualizar esquema automáticamente Opciones: validate | update 
+			| create | create-drop -->
+		<property name="hibernate.hbm2ddl.auto">update</property>
+
+		<!-- Otras configuraciones útiles -->
+		<property name="hibernate.current_session_context_class">thread</property>
+		<property name="hibernate.enable_lazy_load_no_trans">true</property>
+		<!-- Mapeo de entidades (IMPORTANTE: añadir todas las entidades) -->
+		<mapping class="modelos.Profesor" />
+		<mapping class="modelos.Oficina" />
+		<mapping class="modelos.Curso" />
+		<mapping class="modelos.Estudiante" />
+		<mapping class="modelos.Inscripcion" />
+	</session-factory>
+</hibernate-configuration>

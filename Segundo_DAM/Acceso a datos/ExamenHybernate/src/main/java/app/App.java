@@ -534,11 +534,16 @@ public class App {
     private static void inscribirEstudiantes(List<Curso> cursos, List<Estudiante> estudiantes) {
         for (int i = 0; i < estudiantes.size(); i++) {
             Estudiante est = estudiantes.get(i);
-            Curso curso = cursos.get(i % cursos.size());
+            Long cursoId = cursos.get(i % cursos.size()).getId();
             
-            Inscripcion inscripcion = new Inscripcion(est, curso);
-            est.addInscripcion(inscripcion);
-            estudianteService.actualizarEstudiante(est);
+            // Obtener entidades frescas de la BD
+            Estudiante estudianteFresco = estudianteService.obtenerEstudianteConInscripciones(est.getId());
+            Curso cursoFresco = cursoService.obtenerCurso(cursoId);
+            
+            Inscripcion inscripcion = new Inscripcion(estudianteFresco, cursoFresco);
+            estudianteFresco.addInscripcion(inscripcion);
+            
+            estudianteService.actualizarEstudiante(estudianteFresco);
         }
     }
 
