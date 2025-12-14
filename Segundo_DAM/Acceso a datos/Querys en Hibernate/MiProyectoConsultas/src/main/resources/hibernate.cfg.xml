@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+                                         "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+ <session-factory>
+  <property name="hibernate.connection.driver_class">oracle.jdbc.driver.OracleDriver</property>
+  <property name="hibernate.connection.password">password</property>
+  <property name="hibernate.connection.url">jdbc:oracle:thin:@localhost:1521:xe</property>
+  <property name="hibernate.connection.username">C##CONSULTAS</property>
+  <property name="hibernate.dialect">org.hibernate.dialect.OracleDialect</property>
+  <property name="hibernate.show_sql">true</property>
+  <property name="hibernate.format_sql">true</property>
+  
+  <mapping class="clases.Customer"/>
+  <mapping class="clases.Employee"/>
+  <mapping class="clases.Office"/>
+  <mapping class="clases.Order"/>
+  <mapping class="clases.Orderdetail"/>
+  <mapping class="clases.OrderdetailPK"/>
+  <mapping class="clases.Payment"/>
+  <mapping class="clases.PaymentPK"/>
+  <mapping class="clases.Product"/>
+  <mapping class="clases.Productline"/>
+ </session-factory>
+</hibernate-configuration>
