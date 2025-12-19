@@ -6,6 +6,7 @@ package pruebadelrelojdigital;
 
 import org.jdesktop.application.Action;
 
+
 public class PruebadelRelojDigitalAboutBox extends javax.swing.JDialog {
 
     public PruebadelRelojDigitalAboutBox(java.awt.Frame parent) {
