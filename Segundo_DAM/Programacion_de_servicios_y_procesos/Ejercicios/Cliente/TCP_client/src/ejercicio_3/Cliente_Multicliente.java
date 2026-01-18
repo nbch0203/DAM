@@ -40,6 +40,7 @@ public class Cliente_Multicliente {
 		dataOutput.close();
 		socket.close();
 		System.out.println("(Cliente) Conexión cerrada");
+		
 	}
 
 	public static void main(String[] args) {
