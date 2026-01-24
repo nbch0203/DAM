@@ -3,7 +3,12 @@ package relojDI03;
 import java.awt.BorderLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.Color;
+import java.awt.Component;
 
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import javax.swing.BorderFactory;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
@@ -24,8 +29,8 @@ import RelojDigital.RelojDigitalBean;
 
 public class VentanaReloj extends JFrame {
 
-	private DefaultListModel<Alarma> modeloAlarmas;
-	private JList<Alarma> listaAlarmas;
+    private DefaultListModel<Alarma> modeloAlarmas;
+    private JList<Alarma> listaAlarmas;
     private RelojDigitalBean reloj;
     private JTextField txtHora;
     private JTextField txtMinuto;
@@ -34,42 +39,64 @@ public class VentanaReloj extends JFrame {
     private JButton btnAplicar;
     private JButton btnEliminar;
 
+    // Clip para controlar el sonido de la alarma
+    private Clip alarmaClip;
 
     public VentanaReloj() {
         setTitle("Reloj Digital con Alarma");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(400, 250);
+        setSize(430, 260);
         setLocationRelativeTo(null);
         setLayout(new BorderLayout());
 
-        // ===== Reloj =====
+        // ===== Reloj bonito estilo digital =====
         reloj = new RelojDigitalBean();
         reloj.setHorizontalAlignment(SwingConstants.CENTER);
-        reloj.setFont(new Font("Arial", Font.BOLD, 28));
+        reloj.setFont(new Font("Monospaced", Font.BOLD, 25));
+        reloj.setOpaque(true);
+        reloj.setBackground(new Color(20, 20, 20));
+        reloj.setForeground(new Color(0, 255, 128));
+        reloj.setBorder(BorderFactory.createLineBorder(new Color(0, 255, 128), 4, true));
 
         reloj.addAlarmaListener(evt -> {
-        	reproducirSonido();
+            reproducirSonido();
             JOptionPane.showMessageDialog(this, evt.getMsg(), "ALARMA",
                     JOptionPane.INFORMATION_MESSAGE);
-            actualizarAlarmaActiva(); 
+            detenerSonido(); // Detiene el sonido SOLO al pulsar aceptar
+            actualizarAlarmaActiva();
         });
 
         add(reloj, BorderLayout.NORTH);
 
-        // ===== Panel alarma =====
+        // ===== Panel alarma (con fondo blanco y texto negro) =====
         modeloAlarmas = new DefaultListModel<>();
         listaAlarmas = new JList<>(modeloAlarmas);
         listaAlarmas.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        listaAlarmas.setBackground(Color.WHITE);
+        listaAlarmas.setForeground(Color.BLACK);
+        listaAlarmas.setBorder(BorderFactory.createEmptyBorder(4, 4, 4, 4));
 
-        JPanel panelAlarma = new JPanel(new GridLayout(6, 2, 5, 5));
-        panelAlarma.setBorder(BorderFactory.createTitledBorder("Alarma"));
-        
+        JPanel panelAlarma = new JPanel(new GridLayout(6, 2, 6, 7));
+        panelAlarma.setBackground(Color.WHITE);
+        panelAlarma.setBorder(
+            BorderFactory.createCompoundBorder(
+                BorderFactory.createTitledBorder("Alarma"),
+                BorderFactory.createEmptyBorder(14, 12, 14, 12)
+            )
+        );
+
         JScrollPane scrollAlarmas = new JScrollPane(listaAlarmas);
         scrollAlarmas.setBorder(
-            BorderFactory.createTitledBorder("Alarmas activas")
+            BorderFactory.createTitledBorder(
+                BorderFactory.createLineBorder(new Color(0, 255, 128), 2, true),
+                "Alarmas activas"
+            )
         );
-        scrollAlarmas.setPreferredSize(new java.awt.Dimension(150, 0));
+        scrollAlarmas.setPreferredSize(new java.awt.Dimension(160, 0));
+        scrollAlarmas.setBackground(Color.WHITE);
+
         add(scrollAlarmas, BorderLayout.EAST);
+
         listaAlarmas.addListSelectionListener(e -> {
             if (!e.getValueIsAdjusting()) {
                 Alarma a = listaAlarmas.getSelectedValue();
@@ -82,13 +109,26 @@ public class VentanaReloj extends JFrame {
             }
         });
 
-
         txtHora = new JTextField("0");
+        txtHora.setBackground(Color.WHITE);
+        txtHora.setForeground(Color.BLACK);
         txtMinuto = new JTextField("0");
+        txtMinuto.setBackground(Color.WHITE);
+        txtMinuto.setForeground(Color.BLACK);
         txtMensaje = new JTextField("Despierta");
+        txtMensaje.setBackground(Color.WHITE);
+        txtMensaje.setForeground(Color.BLACK);
         chkActiva = new JCheckBox("Activa");
+        chkActiva.setBackground(Color.WHITE);
+        chkActiva.setForeground(Color.BLACK);
         btnAplicar = new JButton("Aplicar alarma");
         btnEliminar = new JButton("Eliminar alarma");
+
+        btnAplicar.setBackground(new Color(240, 240, 240));
+        btnEliminar.setBackground(new Color(240, 240, 240));
+        btnAplicar.setForeground(Color.BLACK);
+        btnEliminar.setForeground(Color.BLACK);
+
         btnEliminar.addActionListener(e -> {
             int idx = listaAlarmas.getSelectedIndex();
             if (idx >= 0) {
@@ -102,12 +142,18 @@ public class VentanaReloj extends JFrame {
             }
         });
 
+        JLabel lblHora = new JLabel("Hora:");
+        lblHora.setForeground(Color.BLACK);
+        JLabel lblMinuto = new JLabel("Minuto:");
+        lblMinuto.setForeground(Color.BLACK);
+        JLabel lblMensaje = new JLabel("Mensaje:");
+        lblMensaje.setForeground(Color.BLACK);
 
-        panelAlarma.add(new JLabel("Hora:"));
+        panelAlarma.add(lblHora);
         panelAlarma.add(txtHora);
-        panelAlarma.add(new JLabel("Minuto:"));
+        panelAlarma.add(lblMinuto);
         panelAlarma.add(txtMinuto);
-        panelAlarma.add(new JLabel("Mensaje:"));
+        panelAlarma.add(lblMensaje);
         panelAlarma.add(txtMensaje);
         panelAlarma.add(new JLabel(""));
         panelAlarma.add(chkActiva);
@@ -116,9 +162,12 @@ public class VentanaReloj extends JFrame {
         panelAlarma.add(new JLabel(""));
         panelAlarma.add(btnEliminar);
 
+        for (Component c : panelAlarma.getComponents()) {
+            if (c instanceof JLabel) c.setForeground(Color.BLACK);
+        }
+
         add(panelAlarma, BorderLayout.CENTER);
 
-        // ===== Acción botón =====
         btnAplicar.addActionListener(e -> aplicarAlarma());
     }
 
@@ -136,10 +185,8 @@ public class VentanaReloj extends JFrame {
             else
                 modeloAlarmas.addElement(alarma);
 
-            // La activa en el reloj (por ahora la primera activa)
             reloj.setMialarma(alarma);
             actualizarAlarmaActiva();
-
 
         } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(this,
@@ -157,25 +204,34 @@ public class VentanaReloj extends JFrame {
                 return;
             }
         }
-        reloj.setMialarma(new Alarma()); // ninguna activa
+        reloj.setMialarma(new Alarma());
     }
 
+    // --- Cambios aquí: sonar/stop sonar ---
     private void reproducirSonido() {
+        detenerSonido(); // Por si hay uno sonando todavía
         try {
-            javax.sound.sampled.AudioInputStream audio =
-                javax.sound.sampled.AudioSystem.getAudioInputStream(
-                    getClass().getResource("/sonidos/alarma.wav")
-                );
-            javax.sound.sampled.Clip clip =
-                javax.sound.sampled.AudioSystem.getClip();
-            clip.open(audio);
-            clip.start();
+            java.net.URL sonidoURL = getClass().getResource("/sonidos/alarma.wav");
+            if (sonidoURL == null) {
+                System.err.println("No se encontró el archivo de sonido: sonidos/alarma.wav");
+                return;
+            }
+            AudioInputStream audio = AudioSystem.getAudioInputStream(sonidoURL);
+            alarmaClip = AudioSystem.getClip();
+            alarmaClip.open(audio);
+            alarmaClip.start();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    
+    private void detenerSonido() {
+        if (alarmaClip != null && alarmaClip.isRunning()) {
+            alarmaClip.stop();
+            alarmaClip.close();
+        }
+    }
+
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> new VentanaReloj().setVisible(true));
     }

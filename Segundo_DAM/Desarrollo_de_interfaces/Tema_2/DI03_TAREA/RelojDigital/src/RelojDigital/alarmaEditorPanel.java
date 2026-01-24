@@ -18,9 +18,10 @@ package RelojDigital;
 public class alarmaEditorPanel extends javax.swing.JPanel {
 
     /** Creates new form alarmaEditorPanel */
-    public alarmaEditorPanel() {
-        initComponents();
-    }
+	public alarmaEditorPanel() {
+	    initComponents();
+	    setPreferredSize(new java.awt.Dimension(600, 300)); 
+	}
 
     /** This method is called from within the constructor to
      * initialize the form.
