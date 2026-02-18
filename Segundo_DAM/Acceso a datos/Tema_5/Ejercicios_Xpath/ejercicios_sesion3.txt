@@ -1,0 +1,160 @@
+package sesion3;
+
+import org.basex.api.client.ClientSession;
+import java.io.IOException;
+import java.util.Scanner;
+
+public class EjerciciosS3 {
+
+    // CONFIGURACIÓN DE CONEXIÓN
+    static final String HOST = "localhost";
+    static final int PUERTO = 1984;
+    static final String USER = "admin";
+    static final String PASS = "admin";
+    static final String DB_NAME = "Clase1"; // Asegúrate de que coincida con tu BD
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        
+        System.out.println("--- EJERCICIOS SESIÓN 3: JAVA + XQUERY ---");
+
+        // Usamos try-with-resources para asegurar que la conexión se cierra siempre
+        try (ClientSession session = new ClientSession(HOST, PUERTO, USER, PASS)) {
+            
+            // 1. Abrimos la base de datos una sola vez al principio
+            session.execute("OPEN " + DB_NAME);
+            System.out.println("Conectado a la base de datos: " + DB_NAME);
+
+            int opcion = -1;
+            while (opcion != 0) {
+                printMenu();
+                opcion = Integer.parseInt(sc.nextLine());
+
+                switch (opcion) {
+                    case 1:
+                        ejercicio1_Filtrar(session);
+                        break;
+                    case 2:
+                        ejercicio2_Insertar(session);
+                        break;
+                    case 3:
+                        ejercicio3_BusquedaDinamica(session, sc);
+                        break;
+                    case 0:
+                        System.out.println("¡Hasta luego!");
+                        break;
+                    default:
+                        System.out.println("Opción no válida.");
+                }
+                System.out.println("\n---------------------------------------------\n");
+            }
+
+        } catch (java.net.ConnectException e) {
+            System.err.println("ERROR CRÍTICO: No se puede conectar al servidor.");
+            System.err.println("¿Tienes abierta la ventana negra de './basexserver'?");
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (NumberFormatException e) {
+            System.out.println("Error: Debes introducir un número.");
+        } finally {
+            sc.close();
+        }
+    }
+
+    // --- MÉTODOS AUXILIARES (MENÚ) ---
+    
+    private static void printMenu() {
+        System.out.println("Elige un ejercicio:");
+        System.out.println("1. Listar libros baratos (< 25€)");
+        System.out.println("2. Insertar un libro nuevo ('Java en 24h')");
+        System.out.println("3. Buscar libros por Autor (Interactivo)");
+        System.out.println("0. Salir");
+        System.out.print("Opción: ");
+    }
+
+
+    /**
+     * EJERCICIO 1: Filtrado y Formato
+     * Muestra título y precio de libros por debajo de 25 euros.
+     */
+    //Presentación más elaborada. &#10; es el salto de linea.
+    private static void ejercicio1_Filtrar(ClientSession session) throws IOException {
+        System.out.println("\n--- EJERCICIO 1: Ficha completa de libros baratos ---");
+        
+        // Usamos '&#10;' que es el código de salto de línea en XQuery
+        String xquery = 
+            "for $l in //libro " +
+            "where $l/precio < 25 " +
+            "return concat(" +
+            "  '------------------------------------', '&#10;', " +
+            "  'ID:        ', $l/@id,        '&#10;', " +
+            "  'Categoría: ', $l/@categoria, '&#10;', " +
+            "  'Título:    ', $l/titulo,     '&#10;', " +
+            "  'Autor:     ', $l/autor,      '&#10;', " +
+            "  'Año:       ', $l/anio,       '&#10;', " +
+            "  'Precio:    ', $l/precio, ' ', $l/precio/@moneda, '&#10;'" +
+            ")";
+
+        String resultado = session.execute("XQUERY " + xquery);
+        System.out.println(resultado);
+    }
+
+    /**
+     * EJERCICIO 2: Inserción de Datos
+     * Inserta un nuevo nodo libro en el XML.
+     */
+    private static void ejercicio2_Insertar(ClientSession session) throws IOException {
+        System.out.println("\n--- EJERCICIO 2: Insertando libro nuevo ---");
+        
+        // 1. Consulta de inserción (OJO: No devuelve texto, solo ejecuta acción)
+        // Usamos 'insert node ... as last into ...' para ponerlo al final.
+        String insertQuery = 
+            "insert node " +
+            "<libro id='L004' categoria='educativo'>" +
+            "  <titulo idioma='es'>Java en 24h</titulo>" +
+            "  <autor>Juan Desarrollador</autor>" +
+            "  <anio>2024</anio>" +
+            "  <precio moneda='EUR'>15.50</precio>" +
+            "</libro> " +
+            "as last into /biblioteca"; //si elegimos dónde ponemos into //expresión XPath
+
+        session.execute("XQUERY " + insertQuery);
+        System.out.println("Libro insertado correctamente.");
+
+        // 2. Comprobación (Leemos para ver que está ahí)
+        System.out.println("   Verificando inserción (Mostrando todos los títulos):");
+        String checkQuery = "for $t in //titulo return $t/text()";
+        System.out.println(session.execute("XQUERY " + checkQuery));
+    }
+
+    /**
+     * EJERCICIO 3: Consulta Dinámica
+     * Pide un autor al usuario y busca sus libros.
+     */
+    private static void ejercicio3_BusquedaDinamica(ClientSession session, Scanner sc) throws IOException {
+        System.out.println("\n--- EJERCICIO 3: Buscador de Autores ---");
+        System.out.print("Introduce el nombre (o parte del nombre) del autor: ");
+        String autorBusqueda = sc.nextLine();
+
+        // Construimos la query concatenando (Cuidado con las comillas simples ' dentro de la query)
+        // contains() hace que funcione como un LIKE en SQL.
+//        String xquery = 
+//            "for $l in //libro " +
+//            "where contains($l/autor, '" + autorBusqueda + "') " +
+//            "return $l";
+
+        //Si quiero concatenar texto nuevo con resultados podemos usar la función concat
+        String xquery = 
+                "for $l in //libro " +
+                "where contains($l/autor, '" + autorBusqueda + "') " +
+                "return concat('Titulo:',$l/titulo)";
+        
+        String resultado = session.execute("XQUERY " + xquery);
+
+        if (resultado.isEmpty()) {
+            System.out.println("No se encontraron libros de ese autor.");
+        } else {
+            System.out.println(resultado);
+        }
+    }
+}

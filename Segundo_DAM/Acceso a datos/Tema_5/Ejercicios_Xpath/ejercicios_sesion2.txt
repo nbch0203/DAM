@@ -1,0 +1,74 @@
+(: =============================================================
+   SOLUCIONES EJERCICIOS XQUERY - SESIÓN 2
+   Entorno: BaseX con colección 'Clase1' 
+   Estructura fundamental: FLWOR (For, Let, Where, Order by, Return) 
+   ============================================================= :)
+
+(: --- BLOQUE A: CONSULTAS BÁSICAS (XPath adaptado a FLWOR) --- :)
+
+(: 1. Títulos de la biblioteca: Obtén solo el texto de los títulos:)
+for $libro in doc("biblioteca.xml")//libro 
+return $libro/titulo/text() 
+
+(: 2. Filtrar por atributo: Modelos en hardware.xml con stock="true":)
+(: Nota: Usamos @ para acceder al atributo:)
+for $comp in doc("hardware.xml")//componente 
+where $comp/@stock = "true" 
+return $comp/modelo 
+
+(: 3. Buscar alumnos: Nombres en dam_notas.xml:)
+for $alumno in doc("dam_notas.xml")//alumno 
+return $alumno/nombre/text() 
+
+
+(: --- BLOQUE B: LÓGICA Y FILTROS --- :)
+
+(: 4. Libros baratos: Título y precio de libros < 20€:)
+for $libro in doc("biblioteca.xml")//libro
+where $libro/precio < 20 
+return <resultado>{$libro/titulo, $libro/precio}</resultado>
+
+(: 5. Potencia de cálculo: Procesadores con > 8 núcleos:)
+for $comp in doc("hardware.xml")//componente
+where $comp/@tipo = "procesador" and $comp/especificaciones/nucleos > 8 
+return $comp/modelo
+
+(: 6. Suspensos en DAM: Asignaturas con nota < 5:)
+for $asig in doc("dam_notas.xml")//asignatura
+where $asig/nota < 5
+return <suspenso>{$asig/nombre, $asig/nota}</suspenso>
+
+
+(: --- BLOQUE C: AVANZADO (ORDENACIÓN Y FORMATO) --- :)
+
+(: 7. Ordenar por precio: De más caro a más barato:)
+for $comp in doc("hardware.xml")//componente
+order by $comp/precio descending 
+return $comp
+
+(: 8. Búsqueda de texto: Autor que contiene "García":)
+for $libro in doc("biblioteca.xml")//libro
+where contains($libro/autor, "García") 
+return $libro
+
+(: 9. Generar HTML: Lista <ul> de títulos:)
+<ul>
+{
+  for $libro in doc("biblioteca.xml")//libro 
+  return <li>{ $libro/titulo/text() }</li> 
+}
+</ul>
+
+(: 10. Cálculo de valor total (Reto): Suma de precios del catálogo:)
+let $precios := doc("hardware.xml")//componente/precio 
+return sum($precios) 
+
+(: para dar valores fijos sin iterar a una variable usamos let, sólo lo ejecuta una vez. Por ejemplo:)
+for $libro in doc("biblioteca.xml")//libro
+let $iva := 0.21
+return $libro/precio * $iva
+
+(:Recuerda, es distinto usar las llaves para indicar que ahí ponga el resultado de una XQuery:)
+for $libro in doc("biblioteca.xml")//libro
+let $iva := 0.21
+return <resul> {$libro/precio/text()} * $iva</resul>
